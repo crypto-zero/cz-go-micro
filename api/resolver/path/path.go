@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/crypto-zero/go-micro/v2/api/resolver"
+	"c-z.dev/go-micro/api/resolver"
 )
 
 type Resolver struct {

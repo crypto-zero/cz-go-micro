@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/config"
-	"github.com/crypto-zero/go-micro/v2/config/source/file"
+	"c-z.dev/go-micro/config"
+	"c-z.dev/go-micro/config/source/file"
 )
 
 func TestConfig(t *testing.T) {

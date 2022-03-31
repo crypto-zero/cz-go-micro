@@ -4,8 +4,9 @@ import (
 	"errors"
 	"sync"
 
+	"c-z.dev/go-micro/server"
+
 	"github.com/google/uuid"
-	"github.com/crypto-zero/go-micro/v2/server"
 )
 
 type MockServer struct {
@@ -16,9 +17,7 @@ type MockServer struct {
 	Subscribers map[string][]server.Subscriber
 }
 
-var (
-	_ server.Server = NewServer()
-)
+var _ server.Server = NewServer()
 
 func newMockServer(opts ...server.Option) *MockServer {
 	var options server.Options

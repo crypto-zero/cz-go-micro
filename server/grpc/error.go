@@ -3,7 +3,8 @@ package grpc
 import (
 	"net/http"
 
-	"github.com/crypto-zero/go-micro/v2/errors"
+	"c-z.dev/go-micro/errors"
+
 	"google.golang.org/grpc/codes"
 )
 

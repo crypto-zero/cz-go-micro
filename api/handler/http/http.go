@@ -8,9 +8,9 @@ import (
 	"net/http/httputil"
 	"net/url"
 
-	"github.com/crypto-zero/go-micro/v2/api"
-	"github.com/crypto-zero/go-micro/v2/api/handler"
-	"github.com/crypto-zero/go-micro/v2/client/selector"
+	"c-z.dev/go-micro/api"
+	"c-z.dev/go-micro/api/handler"
+	"c-z.dev/go-micro/client/selector"
 )
 
 const (

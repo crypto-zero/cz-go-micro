@@ -13,9 +13,10 @@ import (
 	"sync"
 	"time"
 
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/runtime/local/git"
+
 	"github.com/hpcloud/tail"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/runtime/local/git"
 )
 
 // defaultNamespace to use if not provided as an option
@@ -48,7 +49,7 @@ func NewRuntime(opts ...Option) Runtime {
 
 	// make the logs directory
 	path := filepath.Join(os.TempDir(), "micro", "logs")
-	_ = os.MkdirAll(path, 0755)
+	_ = os.MkdirAll(path, 0o755)
 
 	return &runtime{
 		options:    options,
@@ -73,7 +74,7 @@ func (r *runtime) checkoutSourceIfNeeded(s *Service) error {
 		if err != nil {
 			return err
 		}
-		err = os.MkdirAll(path, 0777)
+		err = os.MkdirAll(path, 0o777)
 		if err != nil {
 			return err
 		}
@@ -100,7 +101,7 @@ func (r *runtime) checkoutSourceIfNeeded(s *Service) error {
 
 // modified version of: https://gist.github.com/mimoo/25fc9716e0f1353791f5908f94d6e726
 func uncompress(src string, dst string) error {
-	file, err := os.OpenFile(src, os.O_RDWR|os.O_CREATE, 0666)
+	file, err := os.OpenFile(src, os.O_RDWR|os.O_CREATE, 0o666)
 	defer file.Close()
 	if err != nil {
 		return err
@@ -143,7 +144,7 @@ func uncompress(src string, dst string) error {
 				// @todo think about this:
 				// if we don't nuke the folder, we might end up with files from
 				// the previous decompress.
-				if err := os.MkdirAll(target, 0755); err != nil {
+				if err := os.MkdirAll(target, 0o755); err != nil {
 					return err
 				}
 			}
@@ -359,7 +360,7 @@ func (r *runtime) Create(s *Service, opts ...CreateOption) error {
 	// create new service
 	service := newService(s, options)
 
-	f, err := os.OpenFile(logFile(service.Name), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	f, err := os.OpenFile(logFile(service.Name), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -451,7 +452,6 @@ func (r *runtime) Logs(s *Service, options ...LogsOption) (LogStream, error) {
 				return
 			}
 		}
-
 	}()
 	return ret, nil
 }

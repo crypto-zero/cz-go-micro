@@ -1,7 +1,8 @@
 package grpc
 
 import (
-	"github.com/crypto-zero/go-micro/v2/errors"
+	"c-z.dev/go-micro/errors"
+
 	"google.golang.org/grpc/status"
 )
 

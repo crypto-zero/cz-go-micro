@@ -5,8 +5,9 @@ import (
 	"sync"
 	"time"
 
+	"c-z.dev/go-micro/config/source"
+
 	"github.com/google/uuid"
-	"github.com/crypto-zero/go-micro/v2/config/source"
 )
 
 type memory struct {

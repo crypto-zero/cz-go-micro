@@ -4,16 +4,16 @@ import (
 	"bytes"
 	errs "errors"
 
-	"github.com/crypto-zero/go-micro/v2/codec"
-	raw "github.com/crypto-zero/go-micro/v2/codec/bytes"
-	"github.com/crypto-zero/go-micro/v2/codec/grpc"
-	"github.com/crypto-zero/go-micro/v2/codec/json"
-	"github.com/crypto-zero/go-micro/v2/codec/jsonrpc"
-	"github.com/crypto-zero/go-micro/v2/codec/proto"
-	"github.com/crypto-zero/go-micro/v2/codec/protorpc"
-	"github.com/crypto-zero/go-micro/v2/errors"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/transport"
+	"c-z.dev/go-micro/codec"
+	raw "c-z.dev/go-micro/codec/bytes"
+	"c-z.dev/go-micro/codec/grpc"
+	"c-z.dev/go-micro/codec/json"
+	"c-z.dev/go-micro/codec/jsonrpc"
+	"c-z.dev/go-micro/codec/proto"
+	"c-z.dev/go-micro/codec/protorpc"
+	"c-z.dev/go-micro/errors"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/transport"
 )
 
 const (

@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/client"
+	"c-z.dev/go-micro/client"
 )
 
 // Options contains configuration for the Store

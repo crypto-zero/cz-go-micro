@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package go.api;
-option go_package = "github.com/crypto-zero/go-micro/v2/api/proto";
+option go_package = "c-z.dev/go-micro/api/proto";
 
 message Pair {
 	string key = 1;

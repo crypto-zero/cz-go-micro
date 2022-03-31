@@ -6,8 +6,8 @@ import (
 	"net"
 	"strconv"
 
-	"github.com/crypto-zero/go-micro/v2/client/selector"
-	"github.com/crypto-zero/go-micro/v2/registry"
+	"c-z.dev/go-micro/client/selector"
+	"c-z.dev/go-micro/registry"
 )
 
 type dnsSelector struct {
@@ -15,9 +15,7 @@ type dnsSelector struct {
 	domain  string
 }
 
-var (
-	DefaultDomain = "local"
-)
+var DefaultDomain = "local"
 
 func (d *dnsSelector) Init(opts ...selector.Option) error {
 	for _, o := range opts {

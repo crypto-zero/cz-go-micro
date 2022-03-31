@@ -10,13 +10,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/api"
-	"github.com/crypto-zero/go-micro/v2/api/router"
-	"github.com/crypto-zero/go-micro/v2/api/router/util"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/metadata"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/registry/cache"
+	"c-z.dev/go-micro/api"
+	"c-z.dev/go-micro/api/router"
+	"c-z.dev/go-micro/api/router/util"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/metadata"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/registry/cache"
 )
 
 // endpoint struct, that holds compiled pcre

@@ -8,10 +8,10 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/crypto-zero/go-micro/v2"
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/registry/memory"
-	"github.com/crypto-zero/go-micro/v2/server"
+	"c-z.dev/go-micro"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/registry/memory"
+	"c-z.dev/go-micro/server"
 )
 
 type testHandler struct{}

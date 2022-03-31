@@ -4,14 +4,16 @@ import (
 	"context"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/config/source"
+	"c-z.dev/go-micro/config/source"
 )
 
-type addressKey struct{}
-type prefixKey struct{}
-type stripPrefixKey struct{}
-type authKey struct{}
-type dialTimeoutKey struct{}
+type (
+	addressKey     struct{}
+	prefixKey      struct{}
+	stripPrefixKey struct{}
+	authKey        struct{}
+	dialTimeoutKey struct{}
+)
 
 type authCreds struct {
 	Username string

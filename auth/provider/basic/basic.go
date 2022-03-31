@@ -1,7 +1,7 @@
 package basic
 
 import (
-	"github.com/crypto-zero/go-micro/v2/auth/provider"
+	"c-z.dev/go-micro/auth/provider"
 )
 
 // NewProvider returns an initialised basic provider

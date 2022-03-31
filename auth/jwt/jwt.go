@@ -4,10 +4,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/auth"
-	"github.com/crypto-zero/go-micro/v2/auth/rules"
-	"github.com/crypto-zero/go-micro/v2/auth/token"
-	jwtToken "github.com/crypto-zero/go-micro/v2/auth/token/jwt"
+	"c-z.dev/go-micro/auth"
+	"c-z.dev/go-micro/auth/rules"
+	"c-z.dev/go-micro/auth/token"
+	jwtToken "c-z.dev/go-micro/auth/token/jwt"
 )
 
 // NewAuth returns a new instance of the Auth service

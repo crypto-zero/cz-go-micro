@@ -7,11 +7,11 @@ import (
 	"os/signal"
 	"time"
 
+	"c-z.dev/go-micro/codec"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/registry"
+	signalutil "c-z.dev/go-micro/util/signal"
 	"github.com/google/uuid"
-	"github.com/crypto-zero/go-micro/v2/codec"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	signalutil "github.com/crypto-zero/go-micro/v2/util/signal"
 )
 
 // Server is a simple micro server abstraction

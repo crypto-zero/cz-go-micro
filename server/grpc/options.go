@@ -5,22 +5,25 @@ import (
 	"crypto/tls"
 	"net"
 
-	"github.com/crypto-zero/go-micro/v2/auth"
-	"github.com/crypto-zero/go-micro/v2/broker"
-	"github.com/crypto-zero/go-micro/v2/codec"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/server"
-	"github.com/crypto-zero/go-micro/v2/transport"
+	"c-z.dev/go-micro/auth"
+	"c-z.dev/go-micro/broker"
+	"c-z.dev/go-micro/codec"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/server"
+	"c-z.dev/go-micro/transport"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/encoding"
 )
 
-type codecsKey struct{}
-type grpcOptions struct{}
-type netListener struct{}
-type maxMsgSizeKey struct{}
-type maxConnKey struct{}
-type tlsAuth struct{}
+type (
+	codecsKey     struct{}
+	grpcOptions   struct{}
+	netListener   struct{}
+	maxMsgSizeKey struct{}
+	maxConnKey    struct{}
+	tlsAuth       struct{}
+)
 
 // gRPC Codec to be used to encode/decode requests for a given content type
 func Codec(contentType string, c encoding.Codec) server.Option {

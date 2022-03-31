@@ -4,7 +4,7 @@ package reader
 import (
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/config/source"
+	"c-z.dev/go-micro/config/source"
 )
 
 // Reader is an interface for merging changesets

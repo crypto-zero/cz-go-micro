@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/auth"
-	"github.com/crypto-zero/go-micro/v2/auth/token"
+	"c-z.dev/go-micro/auth"
+	"c-z.dev/go-micro/auth/token"
 )
 
 func TestGenerate(t *testing.T) {
@@ -83,5 +83,4 @@ func TestInspect(t *testing.T) {
 			t.Fatalf("Inspect returned %v error, expected %v", err, token.ErrInvalidToken)
 		}
 	})
-
 }

@@ -7,12 +7,12 @@ import (
 	"runtime/debug"
 	"strings"
 
-	"github.com/crypto-zero/go-micro/v2/broker"
-	"github.com/crypto-zero/go-micro/v2/errors"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/metadata"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/server"
+	"c-z.dev/go-micro/broker"
+	"c-z.dev/go-micro/errors"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/metadata"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/server"
 )
 
 const (
@@ -168,7 +168,6 @@ func validateSubscriber(sub server.Subscriber) error {
 
 func (g *grpcServer) createSubHandler(sb *subscriber, opts server.Options) broker.Handler {
 	return func(p broker.Event) (err error) {
-
 		defer func() {
 			if r := recover(); r != nil {
 				if logger.V(logger.ErrorLevel, logger.DefaultLogger) {

@@ -10,9 +10,9 @@ import (
 	"net/url"
 	"path"
 
-	"github.com/crypto-zero/go-micro/v2/errors"
-	"github.com/crypto-zero/go-micro/v2/proxy"
-	"github.com/crypto-zero/go-micro/v2/server"
+	"c-z.dev/go-micro/errors"
+	"c-z.dev/go-micro/proxy"
+	"c-z.dev/go-micro/server"
 )
 
 // Proxy will proxy rpc requests as http POST requests. It is a server.Proxy

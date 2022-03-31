@@ -3,8 +3,8 @@ package server
 import (
 	"net/http"
 
-	"github.com/crypto-zero/go-micro/v2/codec"
-	"github.com/crypto-zero/go-micro/v2/transport"
+	"c-z.dev/go-micro/codec"
+	"c-z.dev/go-micro/transport"
 )
 
 type rpcResponse struct {

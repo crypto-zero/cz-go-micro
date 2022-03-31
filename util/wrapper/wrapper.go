@@ -5,13 +5,13 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/crypto-zero/go-micro/v2/auth"
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/debug/stats"
-	"github.com/crypto-zero/go-micro/v2/debug/trace"
-	"github.com/crypto-zero/go-micro/v2/errors"
-	"github.com/crypto-zero/go-micro/v2/metadata"
-	"github.com/crypto-zero/go-micro/v2/server"
+	"c-z.dev/go-micro/auth"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/debug/stats"
+	"c-z.dev/go-micro/debug/trace"
+	"c-z.dev/go-micro/errors"
+	"c-z.dev/go-micro/metadata"
+	"c-z.dev/go-micro/server"
 )
 
 type fromServiceWrapper struct {
@@ -21,9 +21,7 @@ type fromServiceWrapper struct {
 	headers metadata.Metadata
 }
 
-var (
-	HeaderPrefix = "Micro-"
-)
+var HeaderPrefix = "Micro-"
 
 func (f *fromServiceWrapper) setHeaders(ctx context.Context) context.Context {
 	// don't overwrite keys

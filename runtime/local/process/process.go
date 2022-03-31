@@ -4,7 +4,7 @@ package process
 import (
 	"io"
 
-	"github.com/crypto-zero/go-micro/v2/runtime/local/build"
+	"c-z.dev/go-micro/runtime/local/build"
 )
 
 // Process manages a running process

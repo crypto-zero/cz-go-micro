@@ -7,11 +7,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/auth"
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/errors"
-	"github.com/crypto-zero/go-micro/v2/metadata"
-	"github.com/crypto-zero/go-micro/v2/server"
+	"c-z.dev/go-micro/auth"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/errors"
+	"c-z.dev/go-micro/metadata"
+	"c-z.dev/go-micro/server"
 )
 
 func TestWrapper(t *testing.T) {

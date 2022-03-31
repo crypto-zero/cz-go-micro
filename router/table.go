@@ -5,8 +5,9 @@ import (
 	"sync"
 	"time"
 
+	"c-z.dev/go-micro/logger"
+
 	"github.com/google/uuid"
-	"github.com/crypto-zero/go-micro/v2/logger"
 )
 
 var (

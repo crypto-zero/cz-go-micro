@@ -5,10 +5,10 @@ import (
 	"net/http"
 )
 
-// Handler represents a HTTP handler that manages a request
+// Handler represents an HTTP handler that manages a request
 type Handler interface {
-	// standard http handler
+	// Handler standard http handler
 	http.Handler
-	// name of handler
+	// String name of handler
 	String() string
 }

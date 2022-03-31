@@ -5,9 +5,9 @@ import (
 	"sync"
 	"testing"
 
-	proto "github.com/crypto-zero/go-micro/v2/debug/service/proto"
-	"github.com/crypto-zero/go-micro/v2/registry/memory"
-	"github.com/crypto-zero/go-micro/v2/util/test"
+	"c-z.dev/go-micro/debug/service/proto"
+	"c-z.dev/go-micro/registry/memory"
+	"c-z.dev/go-micro/util/test"
 )
 
 func TestFunction(t *testing.T) {

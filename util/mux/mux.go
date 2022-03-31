@@ -5,10 +5,10 @@ import (
 	"context"
 	"sync"
 
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/debug/service/handler"
-	"github.com/crypto-zero/go-micro/v2/proxy"
-	"github.com/crypto-zero/go-micro/v2/server"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/debug/service/handler"
+	"c-z.dev/go-micro/proxy"
+	"c-z.dev/go-micro/server"
 )
 
 // Server is a proxy muxer that incudes the use of the DefaultHandler
@@ -19,9 +19,7 @@ type Server struct {
 	Proxy proxy.Proxy
 }
 
-var (
-	once sync.Once
-)
+var once sync.Once
 
 func (s *Server) ProcessMessage(ctx context.Context, msg server.Message) error {
 	if msg.Topic() == s.Name {

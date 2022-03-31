@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/config/source"
-	"github.com/crypto-zero/go-micro/v2/config/source/env"
-	"github.com/crypto-zero/go-micro/v2/config/source/file"
-	"github.com/crypto-zero/go-micro/v2/config/source/memory"
+	"c-z.dev/go-micro/config/source"
+	"c-z.dev/go-micro/config/source/env"
+	"c-z.dev/go-micro/config/source/file"
+	"c-z.dev/go-micro/config/source/memory"
 )
 
 func createFileForIssue18(t *testing.T, content string) *os.File {
@@ -158,7 +158,7 @@ func TestConfigWatcherDirtyOverrite(t *testing.T) {
 	}
 	runtime.Gosched()
 
-	for i, _ := range ss {
+	for i := range ss {
 		k := fmt.Sprintf("key%d", i)
 		v := fmt.Sprintf("val%d", i)
 		equalS(t, conf.Get(k).String(""), v)

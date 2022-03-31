@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/crypto-zero/go-micro/v2/logger"
+	"c-z.dev/go-micro/logger"
 )
 
 // InvalidTemplateError indicates that the path template is not valid.
@@ -49,9 +49,7 @@ func tokenize(path string) (tokens []string, verb string) {
 		field
 		nested
 	)
-	var (
-		st = init
-	)
+	st := init
 	for path != "" {
 		var idx int
 		switch st {

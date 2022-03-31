@@ -1,14 +1,14 @@
 package discord
 
 import (
+	"errors"
 	"fmt"
+	"strings"
 	"sync"
 
-	"errors"
-	"strings"
+	"c-z.dev/go-micro/agent/input"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/crypto-zero/go-micro/v2/agent/input"
 	"github.com/urfave/cli/v2"
 )
 
@@ -113,7 +113,7 @@ func (d *discordInput) Stream() (input.Conn, error) {
 		return nil, errors.New("not running")
 	}
 
-	//Fire-n-forget close just in case...
+	// Fire-n-forget close just in case...
 	d.session.Close()
 
 	conn := newConn(d)

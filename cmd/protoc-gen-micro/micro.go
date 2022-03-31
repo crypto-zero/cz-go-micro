@@ -12,9 +12,9 @@ import (
 
 const (
 	contextPackage = protogen.GoImportPath("context")
-	apiPackage     = protogen.GoImportPath("github.com/crypto-zero/go-micro/v2/api")
-	clientPackage  = protogen.GoImportPath("github.com/crypto-zero/go-micro/v2/client")
-	serverPackage  = protogen.GoImportPath("github.com/crypto-zero/go-micro/v2/server")
+	apiPackage     = protogen.GoImportPath("c-z.dev/go-micro/api")
+	clientPackage  = protogen.GoImportPath("c-z.dev/go-micro/client")
+	serverPackage  = protogen.GoImportPath("c-z.dev/go-micro/server")
 )
 
 // generateFile generates a _.pb.micro.go file containing go-micro service definitions.

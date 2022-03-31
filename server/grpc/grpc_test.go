@@ -5,19 +5,19 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/crypto-zero/go-micro/v2"
-	bmemory "github.com/crypto-zero/go-micro/v2/broker/memory"
-	"github.com/crypto-zero/go-micro/v2/client"
-	gcli "github.com/crypto-zero/go-micro/v2/client/grpc"
-	"github.com/crypto-zero/go-micro/v2/errors"
-	rmemory "github.com/crypto-zero/go-micro/v2/registry/memory"
-	"github.com/crypto-zero/go-micro/v2/server"
-	gsrv "github.com/crypto-zero/go-micro/v2/server/grpc"
-	tgrpc "github.com/crypto-zero/go-micro/v2/transport/grpc"
+	"c-z.dev/go-micro"
+	bmemory "c-z.dev/go-micro/broker/memory"
+	"c-z.dev/go-micro/client"
+	gcli "c-z.dev/go-micro/client/grpc"
+	"c-z.dev/go-micro/errors"
+	rmemory "c-z.dev/go-micro/registry/memory"
+	"c-z.dev/go-micro/server"
+	gsrv "c-z.dev/go-micro/server/grpc"
+	pb "c-z.dev/go-micro/server/grpc/proto"
+	tgrpc "c-z.dev/go-micro/transport/grpc"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"
-
-	pb "github.com/crypto-zero/go-micro/v2/server/grpc/proto"
 )
 
 // server is used to implement helloworld.GreeterServer.
@@ -29,6 +29,7 @@ func (s *testServer) Handle(ctx context.Context, msg *pb.Request) error {
 	s.msgCount++
 	return nil
 }
+
 func (s *testServer) HandleError(ctx context.Context, msg *pb.Request) error {
 	return fmt.Errorf("fake")
 }

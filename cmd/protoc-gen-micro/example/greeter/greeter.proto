@@ -1,6 +1,6 @@
 syntax = "proto3";
 package greeter;
-option go_package = "github.com/crypto-zero/go-micro/cmd/protoc-gen-micro/v2/example/greeter";
+option go_package = "c-z.dev/go-micro/cmd/protoc-gen-micro/example/greeter";
 
 import "person/person.proto";
 

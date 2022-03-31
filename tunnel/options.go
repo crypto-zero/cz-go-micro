@@ -3,10 +3,11 @@ package tunnel
 import (
 	"time"
 
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/transport"
+	"c-z.dev/go-micro/transport/quic"
+
 	"github.com/google/uuid"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/transport"
-	"github.com/crypto-zero/go-micro/v2/transport/quic"
 )
 
 var (

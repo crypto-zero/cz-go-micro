@@ -1,9 +1,10 @@
 package router
 
 import (
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/registry"
+
 	"github.com/google/uuid"
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/registry"
 )
 
 // Options are router options

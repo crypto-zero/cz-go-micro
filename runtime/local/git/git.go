@@ -108,7 +108,7 @@ func (g binaryGitter) Clone(repo string) error {
 	fold = filepath.Join(g.folder, dirifyRepo(repo))
 	cmd := exec.Command("git", "clone", repo, ".")
 
-	err = os.MkdirAll(fold, 0777)
+	err = os.MkdirAll(fold, 0o777)
 	if err != nil {
 		return err
 	}
@@ -201,7 +201,7 @@ func GetRepoRoot(fullPath string) (string, error) {
 	return "", nil
 }
 
-const defaultRepo = "github.com/crypto-zero/services"
+const defaultRepo = "c-z.dev/go-micro/services"
 
 // Source is not just git related @todo move
 type Source struct {
@@ -225,7 +225,7 @@ type Source struct {
 // Name to be passed to RPC call runtime.Create Update Delete
 // eg: `helloworld/api`, `crufter/myrepo/helloworld/api`, `localfolder`
 func (s *Source) RuntimeName() string {
-	if s.Repo == "github.com/crypto-zero/services" || s.Repo == "" {
+	if s.Repo == "c-z.dev/go-micro/services" || s.Repo == "" {
 		return s.Folder
 	}
 	return fmt.Sprintf("%v/%v", strings.ReplaceAll(s.Repo, "github.com/", ""), s.Folder)
@@ -237,7 +237,7 @@ func (s *Source) RuntimeSource() string {
 	if s.Local {
 		return s.FullPath
 	}
-	if s.Repo == "github.com/crypto-zero/services" || s.Repo == "" {
+	if s.Repo == "c-z.dev/go-micro/services" || s.Repo == "" {
 		return s.Folder
 	}
 	return fmt.Sprintf("%v/%v", s.Repo, s.Folder)
@@ -247,7 +247,7 @@ func (s *Source) RuntimeSource() string {
 func ParseSource(source string) (*Source, error) {
 	// If github is not present, we got a shorthand for `micro/services`
 	if !strings.Contains(source, "github.com") {
-		source = "github.com/crypto-zero/services/" + source
+		source = "c-z.dev/go-micro/services/" + source
 	}
 	if !strings.Contains(source, "@") {
 		source += "@latest"

@@ -3,9 +3,10 @@ package etcd
 import (
 	"strings"
 
+	"c-z.dev/go-micro/config/encoder"
+
 	"go.etcd.io/etcd/api/v3/mvccpb"
 	"go.etcd.io/etcd/client/v3"
-	"github.com/crypto-zero/go-micro/v2/config/encoder"
 )
 
 func makeEvMap(e encoder.Encoder, data map[string]interface{}, kv []*clientv3.Event, stripPrefix string) map[string]interface{} {
@@ -14,11 +15,11 @@ func makeEvMap(e encoder.Encoder, data map[string]interface{}, kv []*clientv3.Ev
 	}
 
 	for _, v := range kv {
-		switch mvccpb.Event_EventType(v.Type) {
+		switch v.Type {
 		case mvccpb.DELETE:
-			data = update(e, data, (*mvccpb.KeyValue)(v.Kv), "delete", stripPrefix)
+			data = update(e, data, v.Kv, "delete", stripPrefix)
 		default:
-			data = update(e, data, (*mvccpb.KeyValue)(v.Kv), "insert", stripPrefix)
+			data = update(e, data, v.Kv, "insert", stripPrefix)
 		}
 	}
 

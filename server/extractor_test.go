@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/crypto-zero/go-micro/v2/registry"
+	"c-z.dev/go-micro/registry"
 )
 
 type testHandler struct{}
@@ -61,5 +61,4 @@ func TestExtractEndpoint(t *testing.T) {
 	if endpoints[0].Response.Type != "testResponse" {
 		t.Errorf("Expected testResponse type got %s", endpoints[0].Response.Type)
 	}
-
 }

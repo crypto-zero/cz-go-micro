@@ -4,14 +4,12 @@ package memory
 import (
 	"fmt"
 
-	"github.com/crypto-zero/go-micro/v2/debug/log"
-	"github.com/crypto-zero/go-micro/v2/util/ring"
+	"c-z.dev/go-micro/debug/log"
+	"c-z.dev/go-micro/util/ring"
 )
 
-var (
-	// DefaultSize of the logger buffer
-	DefaultSize = 1024
-)
+// DefaultSize of the logger buffer
+var DefaultSize = 1024
 
 // memoryLog is default micro log
 type memoryLog struct {

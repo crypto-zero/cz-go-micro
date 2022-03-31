@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/crypto-zero/go-micro/v2/broker"
+	"c-z.dev/go-micro/broker"
 )
 
 // Handle registers the handler for the given pattern.

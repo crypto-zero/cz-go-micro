@@ -3,8 +3,8 @@ package selector
 import (
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/registry/cache"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/registry/cache"
 )
 
 type registrySelector struct {

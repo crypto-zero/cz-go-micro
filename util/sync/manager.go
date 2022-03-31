@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/store"
+	"c-z.dev/go-micro/store"
 )
 
 type operation struct {

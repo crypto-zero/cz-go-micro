@@ -6,13 +6,11 @@ import (
 	"sync"
 	"time"
 
-	pb "github.com/crypto-zero/go-micro/v2/network/service/proto"
+	pb "c-z.dev/go-micro/network/service/proto"
 )
 
-var (
-	// MaxDepth defines max depth of peer topology
-	MaxDepth uint = 3
-)
+// MaxDepth defines max depth of peer topology
+var MaxDepth uint = 3
 
 var (
 	// ErrPeerExists is returned when adding a peer which already exists

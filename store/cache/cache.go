@@ -4,8 +4,8 @@ package cache
 import (
 	"fmt"
 
-	"github.com/crypto-zero/go-micro/v2/store"
-	"github.com/crypto-zero/go-micro/v2/store/memory"
+	"c-z.dev/go-micro/store"
+	"c-z.dev/go-micro/store/memory"
 )
 
 type cache struct {

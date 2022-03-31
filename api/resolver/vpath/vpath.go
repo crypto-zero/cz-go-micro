@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/crypto-zero/go-micro/v2/api/resolver"
+	"c-z.dev/go-micro/api/resolver"
 )
 
 func NewResolver(opts ...resolver.Option) resolver.Resolver {
@@ -18,9 +18,7 @@ type Resolver struct {
 	opts resolver.Options
 }
 
-var (
-	re = regexp.MustCompile("^v[0-9]+$")
-)
+var re = regexp.MustCompile("^v[0-9]+$")
 
 func (r *Resolver) Resolve(req *http.Request) (*resolver.Endpoint, error) {
 	if req.URL.Path == "/" {

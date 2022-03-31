@@ -3,7 +3,7 @@ package config
 import (
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/config/reader"
+	"c-z.dev/go-micro/config/reader"
 )
 
 type value struct{}

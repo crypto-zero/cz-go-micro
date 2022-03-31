@@ -6,7 +6,7 @@ import (
 	"io"
 	"io/ioutil"
 
-	"github.com/crypto-zero/go-micro/v2/codec"
+	"c-z.dev/go-micro/codec"
 )
 
 type Codec struct {

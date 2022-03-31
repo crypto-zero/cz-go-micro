@@ -5,8 +5,8 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/crypto-zero/go-micro/v2/codec"
-	"github.com/crypto-zero/go-micro/v2/transport"
+	"c-z.dev/go-micro/codec"
+	"c-z.dev/go-micro/transport"
 )
 
 // testCodec is a dummy codec that only knows how to encode nil bodies

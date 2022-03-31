@@ -7,11 +7,11 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/client/selector"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/router"
-	pb "github.com/crypto-zero/go-micro/v2/router/service/proto"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/client/selector"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/router"
+	pb "c-z.dev/go-micro/router/service/proto"
 )
 
 type routerSelector struct {
@@ -36,8 +36,10 @@ type routerSelector struct {
 	remote bool
 }
 
-type clientKey struct{}
-type routerKey struct{}
+type (
+	clientKey struct{}
+	routerKey struct{}
+)
 
 // getRoutes returns the routes whether they are remote or local
 func (r *routerSelector) getRoutes(service string) ([]router.Route, error) {

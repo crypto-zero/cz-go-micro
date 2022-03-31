@@ -8,7 +8,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	log "github.com/crypto-zero/go-micro/v2/logger"
+	log "c-z.dev/go-micro/logger"
+
 	"github.com/miekg/dns"
 	"golang.org/x/net/ipv4"
 	"golang.org/x/net/ipv6"
@@ -463,7 +464,6 @@ func (s *Server) sendResponse(resp *dns.Msg, from net.Addr) error {
 		conn.WriteToUDP(buf, &net.UDPAddr{IP: backupTarget, Port: addr.Port})
 	}
 	return err
-
 }
 
 func (s *Server) unregister() error {

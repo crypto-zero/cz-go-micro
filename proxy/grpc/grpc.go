@@ -6,11 +6,11 @@ import (
 	"io"
 	"strings"
 
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/client/grpc"
-	"github.com/crypto-zero/go-micro/v2/codec"
-	"github.com/crypto-zero/go-micro/v2/proxy"
-	"github.com/crypto-zero/go-micro/v2/server"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/client/grpc"
+	"c-z.dev/go-micro/codec"
+	"c-z.dev/go-micro/proxy"
+	"c-z.dev/go-micro/server"
 )
 
 // Proxy will transparently proxy requests to the backend.

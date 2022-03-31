@@ -4,10 +4,10 @@ package config
 import (
 	"context"
 
-	"github.com/crypto-zero/go-micro/v2/config/loader"
-	"github.com/crypto-zero/go-micro/v2/config/reader"
-	"github.com/crypto-zero/go-micro/v2/config/source"
-	"github.com/crypto-zero/go-micro/v2/config/source/file"
+	"c-z.dev/go-micro/config/loader"
+	"c-z.dev/go-micro/config/reader"
+	"c-z.dev/go-micro/config/source"
+	"c-z.dev/go-micro/config/source/file"
 )
 
 // Config is an interface abstraction for dynamic configuration
@@ -45,10 +45,8 @@ type Options struct {
 
 type Option func(o *Options)
 
-var (
-	// Default Config Manager
-	DefaultConfig, _ = NewConfig()
-)
+// Default Config Manager
+var DefaultConfig, _ = NewConfig()
 
 // NewConfig returns new config
 func NewConfig(opts ...Option) (Config, error) {

@@ -1,7 +1,7 @@
 package grpc
 
 import (
-	"github.com/crypto-zero/go-micro/v2/codec"
+	"c-z.dev/go-micro/codec"
 )
 
 type rpcResponse struct {

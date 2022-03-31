@@ -5,10 +5,10 @@ import (
 	"context"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/broker"
-	pb "github.com/crypto-zero/go-micro/v2/broker/service/proto"
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/logger"
+	"c-z.dev/go-micro/broker"
+	pb "c-z.dev/go-micro/broker/service/proto"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/logger"
 )
 
 type serviceBroker struct {
@@ -17,9 +17,7 @@ type serviceBroker struct {
 	options broker.Options
 }
 
-var (
-	DefaultName = "go.micro.broker"
-)
+var DefaultName = "go.micro.broker"
 
 func (b *serviceBroker) Address() string {
 	return b.Addrs[0]

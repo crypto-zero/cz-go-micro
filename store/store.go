@@ -1,5 +1,4 @@
 // Package store is an interface for distributed data storage.
-// The design document is located at https://github.com/crypto-zero/development/blob/master/design/store.md
 package store
 
 import (

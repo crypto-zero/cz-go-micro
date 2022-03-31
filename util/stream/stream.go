@@ -5,10 +5,10 @@ import (
 	"context"
 	"sync"
 
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/codec"
-	"github.com/crypto-zero/go-micro/v2/metadata"
-	"github.com/crypto-zero/go-micro/v2/server"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/codec"
+	"c-z.dev/go-micro/metadata"
+	"c-z.dev/go-micro/server"
 )
 
 type Stream interface {

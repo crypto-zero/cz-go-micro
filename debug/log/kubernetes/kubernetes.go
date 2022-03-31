@@ -1,4 +1,4 @@
-// Package kubernetes is a logger implementing (github.com/crypto-zero/go-micro/v2/debug/log).Log
+// Package kubernetes is a logger implementing
 package kubernetes
 
 import (
@@ -10,8 +10,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/debug/log"
-	"github.com/crypto-zero/go-micro/v2/util/kubernetes/client"
+	"c-z.dev/go-micro/debug/log"
+	"c-z.dev/go-micro/util/kubernetes/client"
 )
 
 type klog struct {
@@ -29,7 +29,6 @@ func (k *klog) podLogStream(podName string, stream *kubeStream) {
 		Name: podName,
 		Kind: "pod",
 	}, client.LogParams(p))
-
 	if err != nil {
 		fmt.Fprintf(os.Stderr, err.Error())
 		return
@@ -129,7 +128,6 @@ func (k *klog) Read(options ...log.ReadOption) ([]log.Record, error) {
 			Name: pod,
 			Kind: "pod",
 		}, client.LogParams(logParams))
-
 		if err != nil {
 			return nil, err
 		}

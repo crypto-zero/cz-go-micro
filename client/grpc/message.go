@@ -1,7 +1,7 @@
 package grpc
 
 import (
-	"github.com/crypto-zero/go-micro/v2/client"
+	"c-z.dev/go-micro/client"
 )
 
 type grpcEvent struct {

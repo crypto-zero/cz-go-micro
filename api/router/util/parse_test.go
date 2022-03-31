@@ -8,7 +8,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/crypto-zero/go-micro/v2/logger"
+	"c-z.dev/go-micro/logger"
 )
 
 func TestTokenize(t *testing.T) {
@@ -208,7 +208,8 @@ func TestParseSegments(t *testing.T) {
 				"a", "/", "b", "/", "*", "/", "c",
 				"}", "/",
 				"**",
-				eof},
+				eof,
+			},
 			want: []segment{
 				literal("v1"),
 				variable{

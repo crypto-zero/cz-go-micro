@@ -4,10 +4,10 @@ import (
 	"context"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/client/selector"
+	"c-z.dev/go-micro/client/selector"
 )
 
-// Set the registry cache ttl
+// TTL Set the registry cache ttl
 func TTL(t time.Duration) selector.Option {
 	return func(o *selector.Options) {
 		if o.Context == nil {

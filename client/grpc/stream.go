@@ -5,7 +5,8 @@ import (
 	"io"
 	"sync"
 
-	"github.com/crypto-zero/go-micro/v2/client"
+	"c-z.dev/go-micro/client"
+
 	"google.golang.org/grpc"
 )
 

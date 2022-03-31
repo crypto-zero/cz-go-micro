@@ -4,7 +4,8 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/crypto-zero/go-micro/v2/agent/input"
+	"c-z.dev/go-micro/agent/input"
+
 	"github.com/slack-go/slack"
 	"github.com/urfave/cli/v2"
 )

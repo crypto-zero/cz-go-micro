@@ -7,16 +7,15 @@ import (
 	"net/http"
 	"strings"
 
-	api "github.com/crypto-zero/go-micro/v2/api/proto"
-	"github.com/crypto-zero/go-micro/v2/client/selector"
-	"github.com/crypto-zero/go-micro/v2/registry"
+	api "c-z.dev/go-micro/api/proto"
+	"c-z.dev/go-micro/client/selector"
+	"c-z.dev/go-micro/registry"
+
 	"github.com/oxtoacart/bpool"
 )
 
-var (
-	// need to calculate later to specify useful defaults
-	bufferPool = bpool.NewSizedBufferPool(1024, 8)
-)
+// need to calculate later to specify useful defaults
+var bufferPool = bpool.NewSizedBufferPool(1024, 8)
 
 func requestToProto(r *http.Request) (*api.Request, error) {
 	if err := r.ParseForm(); err != nil {
@@ -34,11 +33,11 @@ func requestToProto(r *http.Request) (*api.Request, error) {
 
 	ct, _, err := mime.ParseMediaType(r.Header.Get("Content-Type"))
 	if err != nil {
-		ct = "text/plain; charset=UTF-8" //default CT is text/plain
+		ct = "text/plain; charset=UTF-8" // default CT is text/plain
 		r.Header.Set("Content-Type", ct)
 	}
 
-	//set the body:
+	// set the body:
 	if r.Body != nil {
 		switch ct {
 		case "application/x-www-form-urlencoded":

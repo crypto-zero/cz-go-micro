@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/crypto-zero/go-micro/v2/network/resolver"
+	"c-z.dev/go-micro/network/resolver"
 )
 
 // Resolver is a HTTP network resolver

@@ -3,18 +3,18 @@ package cmd
 import (
 	"context"
 
-	"github.com/crypto-zero/go-micro/v2/auth"
-	"github.com/crypto-zero/go-micro/v2/broker"
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/client/selector"
-	"github.com/crypto-zero/go-micro/v2/config"
-	"github.com/crypto-zero/go-micro/v2/debug/profile"
-	"github.com/crypto-zero/go-micro/v2/debug/trace"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/runtime"
-	"github.com/crypto-zero/go-micro/v2/server"
-	"github.com/crypto-zero/go-micro/v2/store"
-	"github.com/crypto-zero/go-micro/v2/transport"
+	"c-z.dev/go-micro/auth"
+	"c-z.dev/go-micro/broker"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/client/selector"
+	"c-z.dev/go-micro/config"
+	"c-z.dev/go-micro/debug/profile"
+	"c-z.dev/go-micro/debug/trace"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/runtime"
+	"c-z.dev/go-micro/server"
+	"c-z.dev/go-micro/store"
+	"c-z.dev/go-micro/transport"
 )
 
 type Options struct {

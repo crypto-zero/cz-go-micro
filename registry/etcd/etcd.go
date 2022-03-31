@@ -13,17 +13,15 @@ import (
 	"sync"
 	"time"
 
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/registry"
 	hash "github.com/mitchellh/hashstructure"
 	"go.etcd.io/etcd/api/v3/v3rpc/rpctypes"
 	"go.etcd.io/etcd/client/v3"
 	"go.uber.org/zap"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/registry"
 )
 
-var (
-	prefix = "/micro/registry/"
-)
+var prefix = "/micro/registry/"
 
 type etcdRegistry struct {
 	client  *clientv3.Client

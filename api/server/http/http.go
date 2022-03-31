@@ -8,10 +8,11 @@ import (
 	"os"
 	"sync"
 
+	"c-z.dev/go-micro/api/server"
+	"c-z.dev/go-micro/api/server/cors"
+	"c-z.dev/go-micro/logger"
+
 	"github.com/gorilla/handlers"
-	"github.com/crypto-zero/go-micro/v2/api/server"
-	"github.com/crypto-zero/go-micro/v2/api/server/cors"
-	"github.com/crypto-zero/go-micro/v2/logger"
 )
 
 type httpServer struct {
@@ -97,7 +98,7 @@ func (s *httpServer) Start() error {
 	go func() {
 		if err := http.Serve(l, s.mux); err != nil {
 			// temporary fix
-			//logger.Fatal(err)
+			// logger.Fatal(err)
 		}
 	}()
 

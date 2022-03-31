@@ -3,8 +3,9 @@ package hcl
 import (
 	"encoding/json"
 
+	"c-z.dev/go-micro/config/encoder"
+
 	"github.com/hashicorp/hcl"
-	"github.com/crypto-zero/go-micro/v2/config/encoder"
 )
 
 type hclEncoder struct{}

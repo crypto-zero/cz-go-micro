@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/auth"
-	"github.com/crypto-zero/go-micro/v2/logger"
+	"c-z.dev/go-micro/auth"
+	"c-z.dev/go-micro/logger"
 )
 
 // Generate generates a service account for and continually

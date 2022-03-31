@@ -7,9 +7,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	util "github.com/crypto-zero/go-micro/v2/util/registry"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/registry"
+	util "c-z.dev/go-micro/util/registry"
 )
 
 // Cache is the registry cache interface
@@ -48,9 +48,7 @@ type cache struct {
 	status error
 }
 
-var (
-	DefaultTTL = time.Minute
-)
+var DefaultTTL = time.Minute
 
 func backoff(attempts int) time.Duration {
 	if attempts == 0 {

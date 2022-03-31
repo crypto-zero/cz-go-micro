@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/registry/memory"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/registry/memory"
 )
 
 func TestService(t *testing.T) {
@@ -155,7 +155,6 @@ func TestService(t *testing.T) {
 			t.Errorf("unexpected %s: want true, have false", tt.subject)
 		}
 	}
-
 }
 
 func TestOptions(t *testing.T) {
@@ -296,5 +295,4 @@ func TestTLS(t *testing.T) {
 			t.Logf("service.Run() survived a client request without an error")
 		}
 	}
-
 }

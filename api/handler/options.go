@@ -1,14 +1,12 @@
 package handler
 
 import (
-	"github.com/crypto-zero/go-micro/v2/api/router"
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/client/grpc"
+	"c-z.dev/go-micro/api/router"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/client/grpc"
 )
 
-var (
-	DefaultMaxRecvSize int64 = 1024 * 1024 * 100 // 10Mb
-)
+var DefaultMaxRecvSize int64 = 1024 * 1024 * 100 // 10Mb
 
 type Options struct {
 	MaxRecvSize int64

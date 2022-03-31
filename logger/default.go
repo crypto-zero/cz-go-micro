@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	dlog "github.com/crypto-zero/go-micro/v2/debug/log"
+	dlog "c-z.dev/go-micro/debug/log"
 )
 
 func init() {

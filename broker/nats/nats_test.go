@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/crypto-zero/go-micro/v2/broker"
+	"c-z.dev/go-micro/broker"
+
 	nats "github.com/nats-io/nats.go"
 )
 
@@ -18,21 +19,24 @@ var addrTestCases = []struct {
 		"set broker addresses through a broker.Option in constructor",
 		map[string]string{
 			"nats://192.168.10.1:5222": "192.168.10.1:5222",
-			"nats://10.20.10.0:4222":   "10.20.10.0:4222"},
+			"nats://10.20.10.0:4222":   "10.20.10.0:4222",
+		},
 	},
 	{
 		"brokerInit",
 		"set broker addresses through a broker.Option in broker.Init()",
 		map[string]string{
 			"nats://192.168.10.1:5222": "192.168.10.1:5222",
-			"nats://10.20.10.0:4222":   "10.20.10.0:4222"},
+			"nats://10.20.10.0:4222":   "10.20.10.0:4222",
+		},
 	},
 	{
 		"natsOpts",
 		"set broker addresses through the nats.Option in constructor",
 		map[string]string{
 			"nats://192.168.10.1:5222": "192.168.10.1:5222",
-			"nats://10.20.10.0:4222":   "10.20.10.0:4222"},
+			"nats://10.20.10.0:4222":   "10.20.10.0:4222",
+		},
 	},
 	{
 		"default",
@@ -45,10 +49,8 @@ var addrTestCases = []struct {
 
 // TestInitAddrs tests issue #100. Ensures that if the addrs is set by an option in init it will be used.
 func TestInitAddrs(t *testing.T) {
-
 	for _, tc := range addrTestCases {
 		t.Run(fmt.Sprintf("%s: %s", tc.name, tc.description), func(t *testing.T) {
-
 			var br broker.Broker
 			var addrs []string
 

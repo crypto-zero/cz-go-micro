@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/crypto-zero/go-micro/v2/client/selector"
-	"github.com/crypto-zero/go-micro/v2/errors"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/registry/memory"
+	"c-z.dev/go-micro/client/selector"
+	"c-z.dev/go-micro/errors"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/registry/memory"
 )
 
 func newTestRegistry() registry.Registry {
@@ -59,7 +59,6 @@ func TestCallAddress(t *testing.T) {
 	if !called {
 		t.Fatal("wrapper not called")
 	}
-
 }
 
 func TestCallRetry(t *testing.T) {

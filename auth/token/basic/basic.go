@@ -5,10 +5,11 @@ import (
 	"fmt"
 	"time"
 
+	"c-z.dev/go-micro/auth"
+	"c-z.dev/go-micro/auth/token"
+	"c-z.dev/go-micro/store"
+
 	"github.com/google/uuid"
-	"github.com/crypto-zero/go-micro/v2/auth"
-	"github.com/crypto-zero/go-micro/v2/auth/token"
-	"github.com/crypto-zero/go-micro/v2/store"
 )
 
 // Basic implementation of token provider, backed by the store
@@ -16,10 +17,8 @@ type Basic struct {
 	store store.Store
 }
 
-var (
-	// StorePrefix to isolate tokens
-	StorePrefix = "tokens/"
-)
+// StorePrefix to isolate tokens
+var StorePrefix = "tokens/"
 
 // NewTokenProvider returns an initialized basic provider
 func NewTokenProvider(opts ...token.Option) token.Provider {

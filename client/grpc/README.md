@@ -1,6 +1,6 @@
 # GRPC Client
 
-The grpc client is a [micro.Client](https://godoc.org/github.com/crypto-zero/go-micro/client#Client) compatible client.
+The grpc client is a [micro.Client](https://godoc.org/c-z.dev/go-micro/client#Client) compatible client.
 
 ## Overview
 
@@ -12,8 +12,8 @@ Specify the client to your micro service
 
 ```go
 import (
-	"github.com/crypto-zero/go-micro"
-	"github.com/crypto-zero/go-plugins/client/grpc"
+	"c-z.dev/go-micro"
+	"c-z.dev/go-micro/client/grpc"
 )
 
 func main() {

@@ -5,7 +5,7 @@ import (
 	gosync "sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/sync"
+	"c-z.dev/go-micro/sync"
 )
 
 type memorySync struct {

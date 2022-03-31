@@ -11,13 +11,13 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/crypto-zero/go-micro/v2/broker"
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/client/selector"
-	"github.com/crypto-zero/go-micro/v2/config/cmd"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/server"
-	"github.com/crypto-zero/go-micro/v2/transport"
+	"c-z.dev/go-micro/broker"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/client/selector"
+	"c-z.dev/go-micro/config/cmd"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/server"
+	"c-z.dev/go-micro/transport"
 )
 
 type plugin struct{}
@@ -117,7 +117,7 @@ func (p *plugin) Build(path string, c *Config) error {
 	// remove .go file
 	defer os.Remove(goFile)
 
-	if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil && !os.IsExist(err) {
+	if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil && !os.IsExist(err) {
 		return fmt.Errorf("Failed to create dir %s: %v", filepath.Dir(path), err)
 	}
 	cmd := exec.Command("go", "build", "-buildmode=plugin", "-o", path+".so", goFile)

@@ -15,15 +15,14 @@ import (
 	"sync"
 	"time"
 
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/util/mdns"
+
 	"github.com/google/uuid"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/util/mdns"
 )
 
-var (
-	// use a .micro domain rather than .local
-	mdnsDomain = "micro"
-)
+// use a .micro domain rather than .local
+var mdnsDomain = "micro"
 
 type mdnsTxt struct {
 	Service   string
@@ -127,6 +126,7 @@ func decode(record []string) (*mdnsTxt, error) {
 
 	return txt, nil
 }
+
 func newRegistry(opts ...Option) Registry {
 	options := Options{
 		Context: context.Background(),
@@ -221,7 +221,6 @@ func (m *mdnsRegistry) Register(service *Service, opts ...RegisterOption) error 
 			Endpoints: service.Endpoints,
 			Metadata:  node.Metadata,
 		})
-
 		if err != nil {
 			gerr = err
 			continue
@@ -523,7 +522,6 @@ func (m *mdnsRegistry) Watch(opts ...WatchOption) (Watcher, error) {
 						m.mtx.RUnlock()
 					}
 				}
-
 			}()
 
 			// start listening, blocking call

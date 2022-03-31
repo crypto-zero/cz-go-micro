@@ -5,53 +5,52 @@ import (
 	"testing"
 	"time"
 
+	"c-z.dev/go-micro/broker"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/registry/memory"
+
 	"github.com/google/uuid"
-	"github.com/crypto-zero/go-micro/v2/broker"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/registry/memory"
 )
 
-var (
-	// mock data
-	testData = map[string][]*registry.Service{
-		"foo": {
-			{
-				Name:    "foo",
-				Version: "1.0.0",
-				Nodes: []*registry.Node{
-					{
-						Id:      "foo-1.0.0-123",
-						Address: "localhost:9999",
-					},
-					{
-						Id:      "foo-1.0.0-321",
-						Address: "localhost:9999",
-					},
+// mock data
+var testData = map[string][]*registry.Service{
+	"foo": {
+		{
+			Name:    "foo",
+			Version: "1.0.0",
+			Nodes: []*registry.Node{
+				{
+					Id:      "foo-1.0.0-123",
+					Address: "localhost:9999",
 				},
-			},
-			{
-				Name:    "foo",
-				Version: "1.0.1",
-				Nodes: []*registry.Node{
-					{
-						Id:      "foo-1.0.1-321",
-						Address: "localhost:6666",
-					},
-				},
-			},
-			{
-				Name:    "foo",
-				Version: "1.0.3",
-				Nodes: []*registry.Node{
-					{
-						Id:      "foo-1.0.3-345",
-						Address: "localhost:8888",
-					},
+				{
+					Id:      "foo-1.0.0-321",
+					Address: "localhost:9999",
 				},
 			},
 		},
-	}
-)
+		{
+			Name:    "foo",
+			Version: "1.0.1",
+			Nodes: []*registry.Node{
+				{
+					Id:      "foo-1.0.1-321",
+					Address: "localhost:6666",
+				},
+			},
+		},
+		{
+			Name:    "foo",
+			Version: "1.0.3",
+			Nodes: []*registry.Node{
+				{
+					Id:      "foo-1.0.3-345",
+					Address: "localhost:8888",
+				},
+			},
+		},
+	},
+}
 
 func newTestRegistry() registry.Registry {
 	return memory.NewRegistry(memory.Services(testData))
@@ -347,6 +346,7 @@ func TestConcurrentPubBroker(t *testing.T) {
 func BenchmarkSub1(b *testing.B) {
 	sub(b, 1)
 }
+
 func BenchmarkSub8(b *testing.B) {
 	sub(b, 8)
 }

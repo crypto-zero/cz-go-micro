@@ -7,9 +7,10 @@ import (
 	"strings"
 	"time"
 
+	"c-z.dev/go-micro/config/reader"
+	"c-z.dev/go-micro/config/source"
+
 	simple "github.com/bitly/go-simplejson"
-	"github.com/crypto-zero/go-micro/v2/config/reader"
-	"github.com/crypto-zero/go-micro/v2/config/source"
 )
 
 type jsonValues struct {

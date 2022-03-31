@@ -6,8 +6,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/crypto-zero/go-micro/v2/codec"
-	"github.com/crypto-zero/go-micro/v2/codec/bytes"
+	"c-z.dev/go-micro/codec"
+	"c-z.dev/go-micro/codec/bytes"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/protobuf/encoding/protojson"

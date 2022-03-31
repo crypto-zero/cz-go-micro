@@ -1,4 +1,4 @@
-# Go Micro [![License](https://img.shields.io/:license-apache-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Go.Dev reference](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white&style=flat-square)](https://pkg.go.dev/github.com/crypto-zero/go-micro/v2?tab=doc) [![Travis CI](https://api.travis-ci.org/micro/go-micro.svg?branch=master)](https://travis-ci.org/micro/go-micro) [![Go Report Card](https://goreportcard.com/badge/micro/go-micro)](https://goreportcard.com/report/github.com/crypto-zero/go-micro) 
+# Go Micro [![License](https://img.shields.io/:license-apache-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Go.Dev reference](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white&style=flat-square)](https://pkg.go.dev/c-z.dev/go-micro?tab=doc) [![Travis CI](https://api.travis-ci.org/c-z.dev/go-micro.svg?branch=main)](https://travis-ci.org/c-z.dev/go-micro) [![Go Report Card](https://goreportcard.com/badge/c-z.dev/go-micro)](https://goreportcard.com/report/c-z.dev/go-micro) 
 
 Go Micro is a framework for distributed systems development.
 
@@ -54,7 +54,7 @@ are pluggable and allows Go Micro to be runtime agnostic. You can plugin any und
 To make use of Go Micro
 
 ```golang
-import "github.com/crypto-zero/go-micro/v2"
+import "c-z.dev/go-micro"
 
 // create a new service
 service := micro.NewService(

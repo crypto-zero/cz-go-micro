@@ -4,8 +4,8 @@ package transport
 import (
 	"context"
 
-	"github.com/crypto-zero/go-micro/v2/transport"
-	"github.com/crypto-zero/go-micro/v2/tunnel"
+	"c-z.dev/go-micro/transport"
+	"c-z.dev/go-micro/tunnel"
 )
 
 type tunTransport struct {

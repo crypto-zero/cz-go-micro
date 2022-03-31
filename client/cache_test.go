@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/metadata"
+	"c-z.dev/go-micro/metadata"
 )
 
 func TestCache(t *testing.T) {

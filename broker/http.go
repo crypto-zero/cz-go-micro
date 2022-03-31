@@ -17,14 +17,15 @@ import (
 	"sync"
 	"time"
 
+	"c-z.dev/go-micro/codec/json"
+	merr "c-z.dev/go-micro/errors"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/registry/cache"
+	maddr "c-z.dev/go-micro/util/addr"
+	mnet "c-z.dev/go-micro/util/net"
+	mls "c-z.dev/go-micro/util/tls"
+
 	"github.com/google/uuid"
-	"github.com/crypto-zero/go-micro/v2/codec/json"
-	merr "github.com/crypto-zero/go-micro/v2/errors"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/registry/cache"
-	maddr "github.com/crypto-zero/go-micro/v2/util/addr"
-	mnet "github.com/crypto-zero/go-micro/v2/util/net"
-	mls "github.com/crypto-zero/go-micro/v2/util/tls"
 	"golang.org/x/net/http2"
 )
 
@@ -317,7 +318,7 @@ func (h *httpBroker) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	}
 
 	topic := m.Header["Micro-Topic"]
-	//delete(m.Header, ":topic")
+	// delete(m.Header, ":topic")
 
 	if len(topic) == 0 {
 		errr := merr.InternalServerError("go.micro.broker", "Topic not found")

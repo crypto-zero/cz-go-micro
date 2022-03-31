@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"strings"
 
-	"github.com/crypto-zero/go-micro/v2/codec"
-	"github.com/crypto-zero/go-micro/v2/codec/bytes"
+	"c-z.dev/go-micro/codec"
+	"c-z.dev/go-micro/codec/bytes"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/encoding"

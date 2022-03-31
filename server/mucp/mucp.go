@@ -2,7 +2,7 @@
 package mucp
 
 import (
-	"github.com/crypto-zero/go-micro/v2/server"
+	"c-z.dev/go-micro/server"
 )
 
 // NewServer returns a micro server interface

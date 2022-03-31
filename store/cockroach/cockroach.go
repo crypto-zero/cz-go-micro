@@ -11,8 +11,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/store"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/store"
+
 	"github.com/lib/pq"
 )
 

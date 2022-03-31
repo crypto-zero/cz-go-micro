@@ -4,7 +4,7 @@ import (
 	"context"
 	"io"
 
-	"github.com/crypto-zero/go-micro/v2/client"
+	"c-z.dev/go-micro/client"
 )
 
 type Option func(o *Options)

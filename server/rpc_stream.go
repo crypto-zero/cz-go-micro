@@ -6,7 +6,7 @@ import (
 	"io"
 	"sync"
 
-	"github.com/crypto-zero/go-micro/v2/codec"
+	"c-z.dev/go-micro/codec"
 )
 
 // Implements the Streamer interface

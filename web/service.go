@@ -12,16 +12,17 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	maddr "github.com/crypto-zero/go-micro/v2/util/addr"
-	authutil "github.com/crypto-zero/go-micro/v2/util/auth"
-	"github.com/crypto-zero/go-micro/v2/util/backoff"
-	mhttp "github.com/crypto-zero/go-micro/v2/util/http"
-	mnet "github.com/crypto-zero/go-micro/v2/util/net"
-	signalutil "github.com/crypto-zero/go-micro/v2/util/signal"
-	mls "github.com/crypto-zero/go-micro/v2/util/tls"
+	"c-z.dev/go-micro"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/registry"
+	maddr "c-z.dev/go-micro/util/addr"
+	authutil "c-z.dev/go-micro/util/auth"
+	"c-z.dev/go-micro/util/backoff"
+	mhttp "c-z.dev/go-micro/util/http"
+	mnet "c-z.dev/go-micro/util/net"
+	signalutil "c-z.dev/go-micro/util/signal"
+	mls "c-z.dev/go-micro/util/tls"
+
 	"github.com/urfave/cli/v2"
 )
 
@@ -335,7 +336,6 @@ func (s *service) Handle(pattern string, handler http.Handler) {
 }
 
 func (s *service) HandleFunc(pattern string, handler func(http.ResponseWriter, *http.Request)) {
-
 	var seen bool
 	s.RLock()
 	for _, ep := range s.srv.Endpoints {

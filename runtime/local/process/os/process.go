@@ -2,7 +2,7 @@
 package os
 
 import (
-	"github.com/crypto-zero/go-micro/v2/runtime/local/process"
+	"c-z.dev/go-micro/runtime/local/process"
 )
 
 type Process struct{}

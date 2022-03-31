@@ -3,7 +3,7 @@ package scope
 import (
 	"fmt"
 
-	"github.com/crypto-zero/go-micro/v2/store"
+	"c-z.dev/go-micro/store"
 )
 
 // Scope extends the store, applying a prefix to each request

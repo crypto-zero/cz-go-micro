@@ -4,9 +4,9 @@ import (
 	"context"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/auth/provider"
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/store"
+	"c-z.dev/go-micro/auth/provider"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/store"
 )
 
 func NewOptions(opts ...Option) Options {

@@ -5,11 +5,12 @@ import (
 	"net"
 	"testing"
 
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/client/selector"
-	"github.com/crypto-zero/go-micro/v2/errors"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/registry/memory"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/client/selector"
+	"c-z.dev/go-micro/errors"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/registry/memory"
+
 	pgrpc "google.golang.org/grpc"
 	pb "google.golang.org/grpc/examples/helloworld/helloworld"
 )

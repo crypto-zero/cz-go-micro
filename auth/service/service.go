@@ -5,12 +5,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/auth"
-	"github.com/crypto-zero/go-micro/v2/auth/rules"
-	pb "github.com/crypto-zero/go-micro/v2/auth/service/proto"
-	"github.com/crypto-zero/go-micro/v2/auth/token"
-	"github.com/crypto-zero/go-micro/v2/auth/token/jwt"
-	"github.com/crypto-zero/go-micro/v2/client"
+	"c-z.dev/go-micro/auth"
+	"c-z.dev/go-micro/auth/rules"
+	pb "c-z.dev/go-micro/auth/service/proto"
+	"c-z.dev/go-micro/auth/token"
+	"c-z.dev/go-micro/auth/token/jwt"
+	"c-z.dev/go-micro/client"
 )
 
 // svc is the service implementation of the Auth interface

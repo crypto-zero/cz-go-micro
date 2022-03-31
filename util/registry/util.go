@@ -1,7 +1,7 @@
 package registry
 
 import (
-	"github.com/crypto-zero/go-micro/v2/registry"
+	"c-z.dev/go-micro/registry"
 )
 
 func addNodes(old, neu []*registry.Node) []*registry.Node {

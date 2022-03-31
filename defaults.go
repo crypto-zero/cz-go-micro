@@ -1,16 +1,16 @@
 package micro
 
 import (
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/debug/trace"
-	"github.com/crypto-zero/go-micro/v2/server"
-	"github.com/crypto-zero/go-micro/v2/store"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/debug/trace"
+	"c-z.dev/go-micro/server"
+	"c-z.dev/go-micro/store"
 
 	// set defaults
-	gcli "github.com/crypto-zero/go-micro/v2/client/grpc"
-	memTrace "github.com/crypto-zero/go-micro/v2/debug/trace/memory"
-	gsrv "github.com/crypto-zero/go-micro/v2/server/grpc"
-	memoryStore "github.com/crypto-zero/go-micro/v2/store/memory"
+	gcli "c-z.dev/go-micro/client/grpc"
+	memTrace "c-z.dev/go-micro/debug/trace/memory"
+	gsrv "c-z.dev/go-micro/server/grpc"
+	memoryStore "c-z.dev/go-micro/store/memory"
 )
 
 func init() {

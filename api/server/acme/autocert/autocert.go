@@ -7,8 +7,9 @@ import (
 	"net"
 	"os"
 
-	"github.com/crypto-zero/go-micro/v2/api/server/acme"
-	"github.com/crypto-zero/go-micro/v2/logger"
+	"c-z.dev/go-micro/api/server/acme"
+	"c-z.dev/go-micro/logger"
+
 	"golang.org/x/crypto/acme/autocert"
 )
 
@@ -30,7 +31,7 @@ func (a *autocertProvider) TLSConfig(hosts ...string) (*tls.Config, error) {
 		m.HostPolicy = autocert.HostWhitelist(hosts...)
 	}
 	dir := cacheDir()
-	if err := os.MkdirAll(dir, 0700); err != nil {
+	if err := os.MkdirAll(dir, 0o700); err != nil {
 		if logger.V(logger.InfoLevel, logger.DefaultLogger) {
 			logger.Infof("warning: autocert not using a cache: %v", err)
 		}

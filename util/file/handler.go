@@ -1,16 +1,16 @@
 package file
 
 import (
+	"context"
 	"io"
 	"os"
 	"path/filepath"
 	"sync"
 
-	"github.com/crypto-zero/go-micro/v2/errors"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/server"
-	proto "github.com/crypto-zero/go-micro/v2/util/file/proto"
-	"golang.org/x/net/context"
+	"c-z.dev/go-micro/errors"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/server"
+	"c-z.dev/go-micro/util/file/proto"
 )
 
 // NewHandler is a handler that can be registered with a micro Server
@@ -39,7 +39,7 @@ func (h *handler) Open(ctx context.Context, req *proto.OpenRequest, rsp *proto.O
 	if req.GetTruncate() {
 		flags = flags | os.O_TRUNC
 	}
-	file, err := os.OpenFile(path, flags, 0666)
+	file, err := os.OpenFile(path, flags, 0o666)
 	if err != nil {
 		return errors.InternalServerError("go.micro.server", err.Error())
 	}

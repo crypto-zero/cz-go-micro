@@ -4,7 +4,7 @@ package pool
 import (
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/transport"
+	"c-z.dev/go-micro/transport"
 )
 
 // Pool is an interface for connection pooling

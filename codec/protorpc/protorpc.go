@@ -8,7 +8,8 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/crypto-zero/go-micro/v2/codec"
+	"c-z.dev/go-micro/codec"
+
 	"google.golang.org/protobuf/proto"
 )
 

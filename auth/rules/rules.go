@@ -5,7 +5,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/crypto-zero/go-micro/v2/auth"
+	"c-z.dev/go-micro/auth"
 )
 
 // Verify an account has access to a resource using the rules provided. If the account does not have

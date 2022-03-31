@@ -9,9 +9,9 @@ import (
 	"strings"
 	gosync "sync"
 
+	"c-z.dev/go-micro/sync"
 	client "go.etcd.io/etcd/client/v3"
 	cc "go.etcd.io/etcd/client/v3/concurrency"
-	"github.com/crypto-zero/go-micro/v2/sync"
 )
 
 type etcdSync struct {

@@ -4,8 +4,9 @@ import (
 	"sync"
 	"time"
 
+	"c-z.dev/go-micro/transport"
+
 	"github.com/google/uuid"
-	"github.com/crypto-zero/go-micro/v2/transport"
 )
 
 type pool struct {

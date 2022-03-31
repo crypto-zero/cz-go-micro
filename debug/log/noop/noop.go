@@ -1,7 +1,7 @@
 package noop
 
 import (
-	"github.com/crypto-zero/go-micro/v2/debug/log"
+	"c-z.dev/go-micro/debug/log"
 )
 
 type noop struct{}

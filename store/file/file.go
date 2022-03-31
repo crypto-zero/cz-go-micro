@@ -10,7 +10,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/store"
+	"c-z.dev/go-micro/store"
+
 	bolt "go.etcd.io/bbolt"
 )
 
@@ -91,7 +92,7 @@ func (m *fileStore) init(opts ...store.Option) error {
 	// Ignoring this as the folder might exist.
 	// Reads/Writes updates will return with sensible error messages
 	// about the dir not existing in case this cannot create the path anyway
-	os.MkdirAll(dir, 0700)
+	os.MkdirAll(dir, 0o700)
 
 	return nil
 }
@@ -126,13 +127,13 @@ func (f *fileStore) getDB(database, table string) (*fileHandle, error) {
 	// create the database handle
 	fname := table + ".db"
 	// make the dir
-	os.MkdirAll(dir, 0700)
+	os.MkdirAll(dir, 0o700)
 	// database path
 	dbPath := filepath.Join(dir, fname)
 
 	// create new db handle
 	// Bolt DB only allows one process to open the file R/W so make sure we're doing this under a lock
-	db, err := bolt.Open(dbPath, 0700, &bolt.Options{Timeout: 5 * time.Second})
+	db, err := bolt.Open(dbPath, 0o700, &bolt.Options{Timeout: 5 * time.Second})
 	if err != nil {
 		return nil, err
 	}

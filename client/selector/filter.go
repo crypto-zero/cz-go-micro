@@ -1,7 +1,7 @@
 package selector
 
 import (
-	"github.com/crypto-zero/go-micro/v2/registry"
+	"c-z.dev/go-micro/registry"
 )
 
 // FilterEndpoint is an endpoint based Select Filter which will

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/auth"
+	"c-z.dev/go-micro/auth"
 )
 
 var (

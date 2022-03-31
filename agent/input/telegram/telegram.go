@@ -5,7 +5,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/crypto-zero/go-micro/v2/agent/input"
+	"c-z.dev/go-micro/agent/input"
+
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/urfave/cli/v2"
 )

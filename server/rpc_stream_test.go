@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/codec/json"
-	protoCodec "github.com/crypto-zero/go-micro/v2/codec/proto"
+	"c-z.dev/go-micro/codec/json"
+	protoCodec "c-z.dev/go-micro/codec/proto"
 )
 
 // safeBuffer throws away everything and wont Read data back

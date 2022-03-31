@@ -3,7 +3,7 @@ package file
 import (
 	"strings"
 
-	"github.com/crypto-zero/go-micro/v2/config/encoder"
+	"c-z.dev/go-micro/config/encoder"
 )
 
 func format(p string, e encoder.Encoder) string {

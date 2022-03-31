@@ -6,7 +6,8 @@ import (
 	"net/http"
 	"testing"
 
-	go_api "github.com/crypto-zero/go-micro/v2/api/proto"
+	go_api "c-z.dev/go-micro/api/proto"
+
 	"google.golang.org/protobuf/proto"
 )
 

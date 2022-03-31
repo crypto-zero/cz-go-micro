@@ -10,16 +10,16 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/client/selector"
-	"github.com/crypto-zero/go-micro/v2/codec"
-	"github.com/crypto-zero/go-micro/v2/codec/bytes"
-	"github.com/crypto-zero/go-micro/v2/errors"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/metadata"
-	"github.com/crypto-zero/go-micro/v2/proxy"
-	"github.com/crypto-zero/go-micro/v2/router"
-	"github.com/crypto-zero/go-micro/v2/server"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/client/selector"
+	"c-z.dev/go-micro/codec"
+	"c-z.dev/go-micro/codec/bytes"
+	"c-z.dev/go-micro/errors"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/metadata"
+	"c-z.dev/go-micro/proxy"
+	"c-z.dev/go-micro/router"
+	"c-z.dev/go-micro/server"
 )
 
 // Proxy will transparently proxy requests to an endpoint.

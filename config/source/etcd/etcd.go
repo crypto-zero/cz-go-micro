@@ -6,9 +6,10 @@ import (
 	"net"
 	"time"
 
+	"c-z.dev/go-micro/config/source"
+
 	"go.etcd.io/etcd/api/v3/mvccpb"
 	cetcd "go.etcd.io/etcd/client/v3"
-	"github.com/crypto-zero/go-micro/v2/config/source"
 )
 
 // Currently a single etcd reader
@@ -20,9 +21,7 @@ type etcd struct {
 	cerr        error
 }
 
-var (
-	DefaultPrefix = "/micro/config/"
-)
+var DefaultPrefix = "/micro/config/"
 
 func (c *etcd) Read() (*source.ChangeSet, error) {
 	if c.cerr != nil {

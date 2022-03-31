@@ -2,11 +2,11 @@
 package mucp
 
 import (
-	"github.com/crypto-zero/go-micro/v2/client"
-	cmucp "github.com/crypto-zero/go-micro/v2/client/mucp"
-	"github.com/crypto-zero/go-micro/v2/server"
-	smucp "github.com/crypto-zero/go-micro/v2/server/mucp"
-	"github.com/crypto-zero/go-micro/v2/service"
+	"c-z.dev/go-micro/client"
+	cmucp "c-z.dev/go-micro/client/mucp"
+	"c-z.dev/go-micro/server"
+	smucp "c-z.dev/go-micro/server/mucp"
+	"c-z.dev/go-micro/service"
 )
 
 type mucpService struct {

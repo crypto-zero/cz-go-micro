@@ -4,7 +4,7 @@ package router
 import (
 	"net/http"
 
-	"github.com/crypto-zero/go-micro/v2/api"
+	"c-z.dev/go-micro/api"
 )
 
 // Router is used to determine an endpoint for a request

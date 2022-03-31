@@ -1,13 +1,12 @@
 package auth
 
 import (
+	"c-z.dev/go-micro/auth/provider/basic"
+
 	"github.com/google/uuid"
-	"github.com/crypto-zero/go-micro/v2/auth/provider/basic"
 )
 
-var (
-	DefaultAuth = NewAuth()
-)
+var DefaultAuth = NewAuth()
 
 func NewAuth(opts ...Option) Auth {
 	options := Options{

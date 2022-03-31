@@ -8,10 +8,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/runtime/local/build"
-	"github.com/crypto-zero/go-micro/v2/runtime/local/process"
-	proc "github.com/crypto-zero/go-micro/v2/runtime/local/process/os"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/runtime/local/build"
+	"c-z.dev/go-micro/runtime/local/process"
+	proc "c-z.dev/go-micro/runtime/local/process/os"
 )
 
 type service struct {
@@ -150,7 +150,6 @@ func (s *service) Status(status string, err error) {
 		return
 	}
 	s.Metadata["error"] = err.Error()
-
 }
 
 // Stop stops the service

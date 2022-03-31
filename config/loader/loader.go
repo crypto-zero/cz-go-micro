@@ -4,8 +4,8 @@ package loader
 import (
 	"context"
 
-	"github.com/crypto-zero/go-micro/v2/config/reader"
-	"github.com/crypto-zero/go-micro/v2/config/source"
+	"c-z.dev/go-micro/config/reader"
+	"c-z.dev/go-micro/config/source"
 )
 
 // Loader manages loading sources

@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/registry/memory"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/registry/memory"
 )
 
 func TestRoundTripper(t *testing.T) {
@@ -78,5 +78,4 @@ func TestRoundTripper(t *testing.T) {
 	if string(b) != "hello world" {
 		t.Fatal("response is", string(b))
 	}
-
 }

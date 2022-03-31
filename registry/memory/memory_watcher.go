@@ -3,7 +3,7 @@ package memory
 import (
 	"errors"
 
-	"github.com/crypto-zero/go-micro/v2/registry"
+	"c-z.dev/go-micro/registry"
 )
 
 type memoryWatcher struct {

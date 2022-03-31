@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/crypto-zero/go-micro/v2/config/source"
+	"c-z.dev/go-micro/config/source"
 )
 
 type file struct {
@@ -13,9 +13,7 @@ type file struct {
 	opts source.Options
 }
 
-var (
-	DefaultPath = "config.json"
-)
+var DefaultPath = "config.json"
 
 func (f *file) Read() (*source.ChangeSet, error) {
 	fh, err := os.Open(f.path)

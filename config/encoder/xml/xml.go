@@ -3,7 +3,7 @@ package xml
 import (
 	"encoding/xml"
 
-	"github.com/crypto-zero/go-micro/v2/config/encoder"
+	"c-z.dev/go-micro/config/encoder"
 )
 
 type xmlEncoder struct{}

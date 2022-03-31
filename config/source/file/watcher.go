@@ -1,12 +1,11 @@
-//+build !linux
-
 package file
 
 import (
 	"os"
 
+	"c-z.dev/go-micro/config/source"
+
 	"github.com/fsnotify/fsnotify"
-	"github.com/crypto-zero/go-micro/v2/config/source"
 )
 
 type watcher struct {

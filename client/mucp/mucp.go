@@ -2,7 +2,7 @@
 package mucp
 
 import (
-	"github.com/crypto-zero/go-micro/v2/client"
+	"c-z.dev/go-micro/client"
 )
 
 // NewClient returns a new micro client interface

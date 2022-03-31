@@ -14,15 +14,13 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/server"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/server"
 )
 
-var (
-	// Precompute the reflect type for error. Can't use error directly
-	// because Typeof takes an empty interface value. This is annoying.
-	typeOfError = reflect.TypeOf((*error)(nil)).Elem()
-)
+// Precompute the reflect type for error. Can't use error directly
+// because Typeof takes an empty interface value. This is annoying.
+var typeOfError = reflect.TypeOf((*error)(nil)).Elem()
 
 type methodType struct {
 	method      reflect.Method

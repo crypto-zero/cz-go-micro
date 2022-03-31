@@ -2,8 +2,8 @@
 package service
 
 import (
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/server"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/server"
 )
 
 // Service is an interface for a micro service

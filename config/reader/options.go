@@ -1,12 +1,12 @@
 package reader
 
 import (
-	"github.com/crypto-zero/go-micro/v2/config/encoder"
-	"github.com/crypto-zero/go-micro/v2/config/encoder/hcl"
-	"github.com/crypto-zero/go-micro/v2/config/encoder/json"
-	"github.com/crypto-zero/go-micro/v2/config/encoder/toml"
-	"github.com/crypto-zero/go-micro/v2/config/encoder/xml"
-	"github.com/crypto-zero/go-micro/v2/config/encoder/yaml"
+	"c-z.dev/go-micro/config/encoder"
+	"c-z.dev/go-micro/config/encoder/hcl"
+	"c-z.dev/go-micro/config/encoder/json"
+	"c-z.dev/go-micro/config/encoder/toml"
+	"c-z.dev/go-micro/config/encoder/xml"
+	"c-z.dev/go-micro/config/encoder/yaml"
 )
 
 type Options struct {

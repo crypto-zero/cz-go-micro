@@ -11,14 +11,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gobwas/ws/wsflate"
+	"c-z.dev/go-micro/api"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/client/selector"
+	raw "c-z.dev/go-micro/codec/bytes"
+	"c-z.dev/go-micro/logger"
 
-	"github.com/crypto-zero/go-micro/v2/api"
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/client/selector"
-	raw "github.com/crypto-zero/go-micro/v2/codec/bytes"
-	"github.com/crypto-zero/go-micro/v2/logger"
 	"github.com/gobwas/ws"
+	"github.com/gobwas/ws/wsflate"
 	"github.com/gobwas/ws/wsutil"
 )
 
@@ -65,7 +65,8 @@ func serveWebsocket(ctx context.Context, w http.ResponseWriter, r *http.Request,
 	e := wsflate.Extension{
 		Parameters: wsflate.DefaultParameters,
 	}
-	upgrader := ws.HTTPUpgrader{Timeout: 5 * time.Second,
+	upgrader := ws.HTTPUpgrader{
+		Timeout: 5 * time.Second,
 		Protocol: func(proto string) bool {
 			if strings.Contains(proto, "binary") {
 				return true

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	pb "github.com/crypto-zero/go-micro/v2/network/service/proto"
+	pb "c-z.dev/go-micro/network/service/proto"
 )
 
 var (
@@ -68,6 +68,7 @@ func TestNodeAddress(t *testing.T) {
 		t.Errorf("Expected address: %s, found: %s", testNodeAddress, node.Address())
 	}
 }
+
 func TestNodeNetwork(t *testing.T) {
 	node := testSetup()
 	if node.Network().Name() != testNodeNetName {

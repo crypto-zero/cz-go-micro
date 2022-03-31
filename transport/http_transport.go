@@ -13,10 +13,11 @@ import (
 	"sync"
 	"time"
 
-	maddr "github.com/crypto-zero/go-micro/v2/util/addr"
-	"github.com/crypto-zero/go-micro/v2/util/buf"
-	mnet "github.com/crypto-zero/go-micro/v2/util/net"
-	mls "github.com/crypto-zero/go-micro/v2/util/tls"
+	maddr "c-z.dev/go-micro/util/addr"
+	"c-z.dev/go-micro/util/buf"
+	mnet "c-z.dev/go-micro/util/net"
+	mls "c-z.dev/go-micro/util/tls"
+
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 )

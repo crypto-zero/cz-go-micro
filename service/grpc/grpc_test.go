@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/registry/memory"
-	"github.com/crypto-zero/go-micro/v2/service"
-	hello "github.com/crypto-zero/go-micro/v2/service/grpc/proto"
-	mls "github.com/crypto-zero/go-micro/v2/util/tls"
+	"c-z.dev/go-micro/registry/memory"
+	"c-z.dev/go-micro/service"
+	hello "c-z.dev/go-micro/service/grpc/proto"
+	mls "c-z.dev/go-micro/util/tls"
 )
 
 type testHandler struct{}

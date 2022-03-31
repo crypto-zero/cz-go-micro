@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/debug/profile"
+	"c-z.dev/go-micro/debug/profile"
 )
 
 type profiler struct {

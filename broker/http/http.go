@@ -2,7 +2,7 @@
 package http
 
 import (
-	"github.com/crypto-zero/go-micro/v2/broker"
+	"c-z.dev/go-micro/broker"
 )
 
 // NewBroker returns a new http broker

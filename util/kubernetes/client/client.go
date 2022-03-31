@@ -13,8 +13,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/util/kubernetes/api"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/util/kubernetes/api"
 )
 
 var (
@@ -75,9 +75,7 @@ func (c *client) Create(r *Resource, opts ...CreateOption) error {
 		Error()
 }
 
-var (
-	nameRegex = regexp.MustCompile("[^a-zA-Z0-9]+")
-)
+var nameRegex = regexp.MustCompile("[^a-zA-Z0-9]+")
 
 // SerializeResourceName removes all spacial chars from a string so it
 // can be used as a k8s resource name

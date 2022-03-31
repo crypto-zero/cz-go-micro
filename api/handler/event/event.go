@@ -10,16 +10,15 @@ import (
 	"strings"
 	"time"
 
+	"c-z.dev/go-micro/api/handler"
+	proto "c-z.dev/go-micro/api/proto"
+	"c-z.dev/go-micro/util/ctx"
+
 	"github.com/google/uuid"
-	"github.com/crypto-zero/go-micro/v2/api/handler"
-	proto "github.com/crypto-zero/go-micro/v2/api/proto"
-	"github.com/crypto-zero/go-micro/v2/util/ctx"
 	"github.com/oxtoacart/bpool"
 )
 
-var (
-	bufferPool = bpool.NewSizedBufferPool(1024, 8)
-)
+var bufferPool = bpool.NewSizedBufferPool(1024, 8)
 
 type event struct {
 	opts handler.Options

@@ -4,13 +4,13 @@ package api
 import (
 	"net/http"
 
-	goapi "github.com/crypto-zero/go-micro/v2/api"
-	"github.com/crypto-zero/go-micro/v2/api/handler"
-	api "github.com/crypto-zero/go-micro/v2/api/proto"
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/client/selector"
-	"github.com/crypto-zero/go-micro/v2/errors"
-	"github.com/crypto-zero/go-micro/v2/util/ctx"
+	goapi "c-z.dev/go-micro/api"
+	"c-z.dev/go-micro/api/handler"
+	api "c-z.dev/go-micro/api/proto"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/client/selector"
+	"c-z.dev/go-micro/errors"
+	"c-z.dev/go-micro/util/ctx"
 )
 
 type apiHandler struct {

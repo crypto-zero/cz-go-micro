@@ -3,7 +3,7 @@ package sync
 import (
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/store"
+	"c-z.dev/go-micro/store"
 )
 
 // Options represents Sync options

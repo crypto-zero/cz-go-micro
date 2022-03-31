@@ -9,23 +9,23 @@ import (
 	"strconv"
 	"strings"
 
+	"c-z.dev/go-micro/api"
+	"c-z.dev/go-micro/api/handler"
+	"c-z.dev/go-micro/api/internal/proto"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/client/selector"
+	"c-z.dev/go-micro/codec"
+	"c-z.dev/go-micro/codec/jsonrpc"
+	"c-z.dev/go-micro/codec/protorpc"
+	"c-z.dev/go-micro/errors"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/metadata"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/util/ctx"
+	"c-z.dev/go-micro/util/qson"
+
 	jsonpatch "github.com/evanphx/json-patch/v5"
 	"github.com/oxtoacart/bpool"
-
-	"github.com/crypto-zero/go-micro/v2/api"
-	"github.com/crypto-zero/go-micro/v2/api/handler"
-	"github.com/crypto-zero/go-micro/v2/api/internal/proto"
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/client/selector"
-	"github.com/crypto-zero/go-micro/v2/codec"
-	"github.com/crypto-zero/go-micro/v2/codec/jsonrpc"
-	"github.com/crypto-zero/go-micro/v2/codec/protorpc"
-	"github.com/crypto-zero/go-micro/v2/errors"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/metadata"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/util/ctx"
-	"github.com/crypto-zero/go-micro/v2/util/qson"
 )
 
 const (
@@ -123,7 +123,7 @@ func (h *rpcHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	md["Host"] = r.Host
 	md["Method"] = r.Method
 	// get canonical headers
-	for k, _ := range r.Header {
+	for k := range r.Header {
 		// may be need to get all values for key like r.Header.Values() provide in go 1.14
 		md[textproto.CanonicalMIMEHeaderKey(k)] = r.Header.Get(k)
 	}
@@ -506,7 +506,6 @@ func writeResponse(w http.ResponseWriter, r *http.Request, rsp []byte) {
 			logger.Error(err)
 		}
 	}
-
 }
 
 func NewHandler(opts ...handler.Option) handler.Handler {

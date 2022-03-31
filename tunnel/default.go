@@ -7,9 +7,10 @@ import (
 	"sync"
 	"time"
 
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/transport"
+
 	"github.com/google/uuid"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/transport"
 )
 
 var (
@@ -121,7 +122,6 @@ func (t *tun) listChannels() []string {
 
 // newSession creates a new session and saves it
 func (t *tun) newSession(channel, sessionId string) (*session, bool, error) {
-
 	// new session
 	s := &session{
 		tunnel:  t.id,

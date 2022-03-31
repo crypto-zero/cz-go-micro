@@ -7,9 +7,10 @@ import (
 	"net"
 	"time"
 
+	"c-z.dev/go-micro/api/server/acme"
+	"c-z.dev/go-micro/logger"
+
 	"github.com/caddyserver/certmagic"
-	"github.com/crypto-zero/go-micro/v2/api/server/acme"
-	"github.com/crypto-zero/go-micro/v2/logger"
 )
 
 type certmagicProvider struct {

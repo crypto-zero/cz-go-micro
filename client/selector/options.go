@@ -3,7 +3,7 @@ package selector
 import (
 	"context"
 
-	"github.com/crypto-zero/go-micro/v2/registry"
+	"c-z.dev/go-micro/registry"
 )
 
 type Options struct {

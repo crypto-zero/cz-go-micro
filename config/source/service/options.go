@@ -3,12 +3,14 @@ package service
 import (
 	"context"
 
-	"github.com/crypto-zero/go-micro/v2/config/source"
+	"c-z.dev/go-micro/config/source"
 )
 
-type serviceNameKey struct{}
-type namespaceKey struct{}
-type pathKey struct{}
+type (
+	serviceNameKey struct{}
+	namespaceKey   struct{}
+	pathKey        struct{}
+)
 
 func ServiceName(name string) source.Option {
 	return func(o *source.Options) {

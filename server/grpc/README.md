@@ -1,6 +1,6 @@
 # GRPC Server
 
-The grpc server is a [micro.Server](https://godoc.org/github.com/crypto-zero/go-micro/server#Server) compatible server.
+The grpc server is a [micro.Server](https://godoc.org/c-z.dev/go-micro/server#Server) compatible server.
 
 ## Overview
 
@@ -13,8 +13,8 @@ Specify the server to your micro service
 
 ```go
 import (
-        "github.com/crypto-zero/go-micro"
-        "github.com/crypto-zero/go-plugins/server/grpc"
+        "c-z.dev/go-micro"
+        "c-z.dev/go-micro/server/grpc"
 )
 
 func main() {

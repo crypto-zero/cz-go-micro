@@ -3,7 +3,7 @@ package rules
 import (
 	"testing"
 
-	"github.com/crypto-zero/go-micro/v2/auth"
+	"c-z.dev/go-micro/auth"
 )
 
 func TestVerify(t *testing.T) {
@@ -44,7 +44,7 @@ func TestVerify(t *testing.T) {
 			Account:  &auth.Account{},
 			Resource: srvResource,
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope:    "",
 					Resource: catchallResource,
 				},
@@ -54,7 +54,7 @@ func TestVerify(t *testing.T) {
 			Name:     "CatchallPublicNoAccount",
 			Resource: srvResource,
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope:    "",
 					Resource: catchallResource,
 				},
@@ -65,7 +65,7 @@ func TestVerify(t *testing.T) {
 			Account:  &auth.Account{},
 			Resource: srvResource,
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope:    "*",
 					Resource: catchallResource,
 				},
@@ -75,7 +75,7 @@ func TestVerify(t *testing.T) {
 			Name:     "CatchallPrivateNoAccount",
 			Resource: srvResource,
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope:    "*",
 					Resource: catchallResource,
 				},
@@ -87,7 +87,7 @@ func TestVerify(t *testing.T) {
 			Resource: srvResource,
 			Account:  &auth.Account{},
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope: "*",
 					Resource: &auth.Resource{
 						Type:     srvResource.Type,
@@ -102,7 +102,7 @@ func TestVerify(t *testing.T) {
 			Resource: srvResource,
 			Account:  &auth.Account{},
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope: "*",
 					Resource: &auth.Resource{
 						Type:     srvResource.Type,
@@ -120,7 +120,7 @@ func TestVerify(t *testing.T) {
 				Scopes: []string{"neededscope"},
 			},
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope:    "neededscope",
 					Resource: srvResource,
 				},
@@ -133,7 +133,7 @@ func TestVerify(t *testing.T) {
 				Scopes: []string{"neededscope"},
 			},
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope:    "invalidscope",
 					Resource: srvResource,
 				},
@@ -145,7 +145,7 @@ func TestVerify(t *testing.T) {
 			Resource: srvResource,
 			Account:  &auth.Account{},
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope:    "*",
 					Resource: catchallResource,
 					Access:   auth.AccessDenied,
@@ -158,7 +158,7 @@ func TestVerify(t *testing.T) {
 			Resource: srvResource,
 			Account:  &auth.Account{},
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope:    "*",
 					Resource: catchallResource,
 					Access:   auth.AccessDenied,
@@ -171,13 +171,13 @@ func TestVerify(t *testing.T) {
 			Resource: srvResource,
 			Account:  &auth.Account{},
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope:    "*",
 					Resource: catchallResource,
 					Access:   auth.AccessGranted,
 					Priority: 1,
 				},
-				&auth.Rule{
+				{
 					Scope:    "*",
 					Resource: catchallResource,
 					Access:   auth.AccessDenied,
@@ -190,13 +190,13 @@ func TestVerify(t *testing.T) {
 			Resource: srvResource,
 			Account:  &auth.Account{},
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope:    "*",
 					Resource: catchallResource,
 					Access:   auth.AccessGranted,
 					Priority: 0,
 				},
-				&auth.Rule{
+				{
 					Scope:    "*",
 					Resource: catchallResource,
 					Access:   auth.AccessDenied,
@@ -210,7 +210,7 @@ func TestVerify(t *testing.T) {
 			Resource: webResource,
 			Account:  &auth.Account{},
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope:    "*",
 					Resource: webResource,
 				},
@@ -221,7 +221,7 @@ func TestVerify(t *testing.T) {
 			Resource: webResource,
 			Account:  &auth.Account{},
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope: "*",
 					Resource: &auth.Resource{
 						Type:     webResource.Type,
@@ -237,7 +237,7 @@ func TestVerify(t *testing.T) {
 			Resource: webResource,
 			Account:  &auth.Account{},
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope: "*",
 					Resource: &auth.Resource{
 						Type:     webResource.Type,
@@ -252,7 +252,7 @@ func TestVerify(t *testing.T) {
 			Resource: webResource,
 			Account:  &auth.Account{},
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope: "*",
 					Resource: &auth.Resource{
 						Type:     webResource.Type,
@@ -267,7 +267,7 @@ func TestVerify(t *testing.T) {
 			Resource: webResource,
 			Account:  &auth.Account{},
 			Rules: []*auth.Rule{
-				&auth.Rule{
+				{
 					Scope: "*",
 					Resource: &auth.Resource{
 						Type:     webResource.Type,

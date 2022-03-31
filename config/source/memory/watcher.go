@@ -1,7 +1,7 @@
 package memory
 
 import (
-	"github.com/crypto-zero/go-micro/v2/config/source"
+	"c-z.dev/go-micro/config/source"
 )
 
 type watcher struct {

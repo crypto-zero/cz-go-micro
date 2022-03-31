@@ -7,9 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/web"
+	"c-z.dev/go-micro"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/web"
+
 	"github.com/urfave/cli/v2"
 )
 
@@ -48,8 +49,8 @@ func testFunc() {
 		web.Context(ctx),
 		web.HandleSignal(false),
 	)
-	//s.Init()
-	//w.Init()
+	// s.Init()
+	// w.Init()
 
 	var wg sync.WaitGroup
 	wg.Add(2)

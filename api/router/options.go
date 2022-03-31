@@ -1,9 +1,9 @@
 package router
 
 import (
-	"github.com/crypto-zero/go-micro/v2/api/resolver"
-	"github.com/crypto-zero/go-micro/v2/api/resolver/vpath"
-	"github.com/crypto-zero/go-micro/v2/registry"
+	"c-z.dev/go-micro/api/resolver"
+	"c-z.dev/go-micro/api/resolver/vpath"
+	"c-z.dev/go-micro/registry"
 )
 
 type Options struct {

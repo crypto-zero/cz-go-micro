@@ -4,11 +4,12 @@ import (
 	"errors"
 	"time"
 
+	"c-z.dev/go-micro/config/encoder"
+	"c-z.dev/go-micro/config/encoder/json"
+	"c-z.dev/go-micro/config/reader"
+	"c-z.dev/go-micro/config/source"
+
 	"github.com/imdario/mergo"
-	"github.com/crypto-zero/go-micro/v2/config/encoder"
-	"github.com/crypto-zero/go-micro/v2/config/encoder/json"
-	"github.com/crypto-zero/go-micro/v2/config/reader"
-	"github.com/crypto-zero/go-micro/v2/config/source"
 )
 
 type jsonReader struct {

@@ -5,7 +5,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/metadata"
+	"c-z.dev/go-micro/metadata"
 )
 
 // Tracer is an interface for distributed tracing
@@ -76,9 +76,7 @@ func ToContext(ctx context.Context, traceID, parentSpanID string) context.Contex
 	}, true)
 }
 
-var (
-	DefaultTracer Tracer = new(noop)
-)
+var DefaultTracer Tracer = new(noop)
 
 type noop struct{}
 

@@ -7,7 +7,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/agent/input"
+	"c-z.dev/go-micro/agent/input"
+
 	"github.com/slack-go/slack"
 )
 

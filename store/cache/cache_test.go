@@ -4,8 +4,9 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/crypto-zero/go-micro/v2/store"
-	"github.com/crypto-zero/go-micro/v2/store/memory"
+	"c-z.dev/go-micro/store"
+	"c-z.dev/go-micro/store/memory"
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -95,5 +96,4 @@ func TestCache(t *testing.T) {
 	assert.Nil(err)
 	assert.Len(l2result, 1)
 	assert.Equal(r1, l2result[0], "Write didn't make it all the way through to l2")
-
 }

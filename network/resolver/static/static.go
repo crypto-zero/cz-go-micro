@@ -2,7 +2,7 @@
 package registry
 
 import (
-	"github.com/crypto-zero/go-micro/v2/network/resolver"
+	"c-z.dev/go-micro/network/resolver"
 )
 
 // Resolver returns a static list of nodes. In the event the node list

@@ -5,10 +5,11 @@ import (
 	"os"
 	"testing"
 
-	"github.com/crypto-zero/go-micro/v2"
-	"github.com/crypto-zero/go-micro/v2/config"
-	"github.com/crypto-zero/go-micro/v2/config/cmd"
-	"github.com/crypto-zero/go-micro/v2/config/source"
+	"c-z.dev/go-micro"
+	"c-z.dev/go-micro/config"
+	"c-z.dev/go-micro/config/cmd"
+	"c-z.dev/go-micro/config/source"
+
 	"github.com/urfave/cli/v2"
 )
 

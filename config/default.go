@@ -5,11 +5,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/config/loader"
-	"github.com/crypto-zero/go-micro/v2/config/loader/memory"
-	"github.com/crypto-zero/go-micro/v2/config/reader"
-	"github.com/crypto-zero/go-micro/v2/config/reader/json"
-	"github.com/crypto-zero/go-micro/v2/config/source"
+	"c-z.dev/go-micro/config/loader"
+	"c-z.dev/go-micro/config/loader/memory"
+	"c-z.dev/go-micro/config/reader"
+	"c-z.dev/go-micro/config/reader/json"
+	"c-z.dev/go-micro/config/source"
 )
 
 type config struct {

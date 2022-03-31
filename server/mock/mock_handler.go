@@ -1,8 +1,8 @@
 package mock
 
 import (
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/server"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/server"
 )
 
 type MockHandler struct {

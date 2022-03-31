@@ -6,75 +6,73 @@ import (
 	"testing"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/registry"
+	"c-z.dev/go-micro/registry"
 )
 
-var (
-	testData = map[string][]*registry.Service{
-		"foo": {
-			{
-				Name:    "foo",
-				Version: "1.0.0",
-				Nodes: []*registry.Node{
-					{
-						Id:      "foo-1.0.0-123",
-						Address: "localhost:9999",
-					},
-					{
-						Id:      "foo-1.0.0-321",
-						Address: "localhost:9999",
-					},
+var testData = map[string][]*registry.Service{
+	"foo": {
+		{
+			Name:    "foo",
+			Version: "1.0.0",
+			Nodes: []*registry.Node{
+				{
+					Id:      "foo-1.0.0-123",
+					Address: "localhost:9999",
 				},
-			},
-			{
-				Name:    "foo",
-				Version: "1.0.1",
-				Nodes: []*registry.Node{
-					{
-						Id:      "foo-1.0.1-321",
-						Address: "localhost:6666",
-					},
-				},
-			},
-			{
-				Name:    "foo",
-				Version: "1.0.3",
-				Nodes: []*registry.Node{
-					{
-						Id:      "foo-1.0.3-345",
-						Address: "localhost:8888",
-					},
+				{
+					Id:      "foo-1.0.0-321",
+					Address: "localhost:9999",
 				},
 			},
 		},
-		"bar": {
-			{
-				Name:    "bar",
-				Version: "default",
-				Nodes: []*registry.Node{
-					{
-						Id:      "bar-1.0.0-123",
-						Address: "localhost:9999",
-					},
-					{
-						Id:      "bar-1.0.0-321",
-						Address: "localhost:9999",
-					},
-				},
-			},
-			{
-				Name:    "bar",
-				Version: "latest",
-				Nodes: []*registry.Node{
-					{
-						Id:      "bar-1.0.1-321",
-						Address: "localhost:6666",
-					},
+		{
+			Name:    "foo",
+			Version: "1.0.1",
+			Nodes: []*registry.Node{
+				{
+					Id:      "foo-1.0.1-321",
+					Address: "localhost:6666",
 				},
 			},
 		},
-	}
-)
+		{
+			Name:    "foo",
+			Version: "1.0.3",
+			Nodes: []*registry.Node{
+				{
+					Id:      "foo-1.0.3-345",
+					Address: "localhost:8888",
+				},
+			},
+		},
+	},
+	"bar": {
+		{
+			Name:    "bar",
+			Version: "default",
+			Nodes: []*registry.Node{
+				{
+					Id:      "bar-1.0.0-123",
+					Address: "localhost:9999",
+				},
+				{
+					Id:      "bar-1.0.0-321",
+					Address: "localhost:9999",
+				},
+			},
+		},
+		{
+			Name:    "bar",
+			Version: "latest",
+			Nodes: []*registry.Node{
+				{
+					Id:      "bar-1.0.1-321",
+					Address: "localhost:6666",
+				},
+			},
+		},
+	},
+}
 
 func TestMemoryRegistry(t *testing.T) {
 	m := NewRegistry()

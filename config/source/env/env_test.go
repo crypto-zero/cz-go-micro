@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/config/source"
+	"c-z.dev/go-micro/config/source"
 )
 
 func TestEnv_Read(t *testing.T) {
@@ -50,7 +50,7 @@ func TestEnvvar_Prefixes(t *testing.T) {
 	os.Setenv("VAULT_ADDR", "vault:1337")
 	os.Setenv("MICRO_REGISTRY", "mdns")
 
-	var prefixtests = []struct {
+	prefixtests := []struct {
 		prefixOpts   []source.Option
 		expectedKeys []string
 	}{

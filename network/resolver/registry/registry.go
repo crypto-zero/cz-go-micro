@@ -2,8 +2,8 @@
 package registry
 
 import (
-	"github.com/crypto-zero/go-micro/v2/network/resolver"
-	"github.com/crypto-zero/go-micro/v2/registry"
+	"c-z.dev/go-micro/network/resolver"
+	"c-z.dev/go-micro/registry"
 )
 
 // Resolver is a registry network resolver

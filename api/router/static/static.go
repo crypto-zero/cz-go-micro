@@ -8,13 +8,13 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/crypto-zero/go-micro/v2/api"
-	"github.com/crypto-zero/go-micro/v2/api/router"
-	"github.com/crypto-zero/go-micro/v2/api/router/util"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/metadata"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	rutil "github.com/crypto-zero/go-micro/v2/util/registry"
+	"c-z.dev/go-micro/api"
+	"c-z.dev/go-micro/api/router"
+	"c-z.dev/go-micro/api/router/util"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/metadata"
+	"c-z.dev/go-micro/registry"
+	rutil "c-z.dev/go-micro/util/registry"
 )
 
 type endpoint struct {
@@ -350,7 +350,7 @@ func NewRouter(opts ...router.Option) *staticRouter {
 		opts: options,
 		eps:  make(map[string]*endpoint),
 	}
-	//go r.watch()
-	//go r.refresh()
+	// go r.watch()
+	// go r.refresh()
 	return r
 }

@@ -2,8 +2,8 @@
 package proxy
 
 import (
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/router"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/router"
 )
 
 type Options struct {

@@ -5,12 +5,12 @@ import (
 	"context"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/debug/log"
-	proto "github.com/crypto-zero/go-micro/v2/debug/service/proto"
-	"github.com/crypto-zero/go-micro/v2/debug/stats"
-	"github.com/crypto-zero/go-micro/v2/debug/trace"
-	"github.com/crypto-zero/go-micro/v2/server"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/debug/log"
+	"c-z.dev/go-micro/debug/service/proto"
+	"c-z.dev/go-micro/debug/stats"
+	"c-z.dev/go-micro/debug/trace"
+	"c-z.dev/go-micro/server"
 )
 
 // NewHandler returns an instance of the Debug Handler

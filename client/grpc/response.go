@@ -3,8 +3,9 @@ package grpc
 import (
 	"strings"
 
-	"github.com/crypto-zero/go-micro/v2/codec"
-	"github.com/crypto-zero/go-micro/v2/codec/bytes"
+	"c-z.dev/go-micro/codec"
+	"c-z.dev/go-micro/codec/bytes"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/encoding"
 )
@@ -16,12 +17,12 @@ type response struct {
 	gcodec codec.Codec
 }
 
-// Read the response
+// Codec read the response
 func (r *response) Codec() codec.Reader {
 	return r.gcodec
 }
 
-// read the header
+// Header read the header
 func (r *response) Header() map[string]string {
 	md, err := r.stream.Header()
 	if err != nil {
@@ -34,7 +35,7 @@ func (r *response) Header() map[string]string {
 	return hdr
 }
 
-// Read the undecoded response
+// Read the undecided response
 func (r *response) Read() ([]byte, error) {
 	f := &bytes.Frame{}
 	if err := r.gcodec.ReadBody(f); err != nil {

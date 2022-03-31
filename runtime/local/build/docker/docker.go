@@ -8,9 +8,10 @@ import (
 	"os"
 	"path/filepath"
 
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/runtime/local/build"
+
 	docker "github.com/fsouza/go-dockerclient"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/runtime/local/build"
 )
 
 type Builder struct {

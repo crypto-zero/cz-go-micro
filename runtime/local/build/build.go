@@ -2,7 +2,7 @@
 package build
 
 import (
-	"github.com/crypto-zero/go-micro/v2/runtime/local/source"
+	"c-z.dev/go-micro/runtime/local/source"
 )
 
 // Builder builds binaries

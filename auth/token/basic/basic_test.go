@@ -3,9 +3,9 @@ package basic
 import (
 	"testing"
 
-	"github.com/crypto-zero/go-micro/v2/auth"
-	"github.com/crypto-zero/go-micro/v2/auth/token"
-	"github.com/crypto-zero/go-micro/v2/store/memory"
+	"c-z.dev/go-micro/auth"
+	"c-z.dev/go-micro/auth/token"
+	"c-z.dev/go-micro/store/memory"
 )
 
 func TestGenerate(t *testing.T) {

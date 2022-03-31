@@ -1,9 +1,9 @@
 package config
 
 import (
-	"github.com/crypto-zero/go-micro/v2/config/loader"
-	"github.com/crypto-zero/go-micro/v2/config/reader"
-	"github.com/crypto-zero/go-micro/v2/config/source"
+	"c-z.dev/go-micro/config/loader"
+	"c-z.dev/go-micro/config/reader"
+	"c-z.dev/go-micro/config/source"
 )
 
 // WithLoader sets the loader for manager config

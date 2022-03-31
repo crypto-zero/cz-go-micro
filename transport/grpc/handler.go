@@ -3,10 +3,11 @@ package grpc
 import (
 	"runtime/debug"
 
-	"github.com/crypto-zero/go-micro/v2/errors"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/transport"
-	pb "github.com/crypto-zero/go-micro/v2/transport/grpc/proto"
+	"c-z.dev/go-micro/errors"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/transport"
+	pb "c-z.dev/go-micro/transport/grpc/proto"
+
 	"google.golang.org/grpc/peer"
 )
 

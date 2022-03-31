@@ -8,9 +8,10 @@ import (
 	"sync"
 	"time"
 
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/registry"
+
 	"github.com/google/uuid"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/registry"
 )
 
 var (
@@ -529,7 +530,6 @@ func (r *router) Advertise() (<-chan *Advert, error) {
 	}()
 
 	return advertChan, nil
-
 }
 
 // Process updates the routing table using the advertised values

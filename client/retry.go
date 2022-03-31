@@ -3,7 +3,7 @@ package client
 import (
 	"context"
 
-	"github.com/crypto-zero/go-micro/v2/errors"
+	"c-z.dev/go-micro/errors"
 )
 
 // note that returning either false or a non-nil error will result in the call not being retried

@@ -10,9 +10,10 @@ import (
 	"strings"
 	"time"
 
+	"c-z.dev/go-micro/store"
+	"c-z.dev/go-micro/sync"
+
 	"github.com/caddyserver/certmagic"
-	"github.com/crypto-zero/go-micro/v2/store"
-	"github.com/crypto-zero/go-micro/v2/sync"
 )
 
 // File represents a "File" that will be stored in store.Store - the contents and last modified time

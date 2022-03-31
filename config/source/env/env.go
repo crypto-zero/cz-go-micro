@@ -6,13 +6,12 @@ import (
 	"strings"
 	"time"
 
+	"c-z.dev/go-micro/config/source"
+
 	"github.com/imdario/mergo"
-	"github.com/crypto-zero/go-micro/v2/config/source"
 )
 
-var (
-	DefaultPrefixes = []string{}
-)
+var DefaultPrefixes = []string{}
 
 type env struct {
 	prefixes         []string

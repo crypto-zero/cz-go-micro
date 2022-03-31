@@ -8,11 +8,11 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/errors"
-	"github.com/crypto-zero/go-micro/v2/metadata"
-	"github.com/crypto-zero/go-micro/v2/store"
-	pb "github.com/crypto-zero/go-micro/v2/store/service/proto"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/errors"
+	"c-z.dev/go-micro/metadata"
+	"c-z.dev/go-micro/store"
+	pb "c-z.dev/go-micro/store/service/proto"
 )
 
 type serviceStore struct {
@@ -192,7 +192,8 @@ func (s *serviceStore) Write(record *store.Record, opts ...store.WriteOption) er
 			Expiry:   int64(record.Expiry.Seconds()),
 			Metadata: metadata,
 		},
-		Options: writeOpts}, client.WithAddress(s.Nodes...))
+		Options: writeOpts,
+	}, client.WithAddress(s.Nodes...))
 	if err != nil && errors.Equal(err, errors.NotFound("", "")) {
 		return store.ErrNotFound
 	}

@@ -4,7 +4,7 @@ package socket
 import (
 	"io"
 
-	"github.com/crypto-zero/go-micro/v2/transport"
+	"c-z.dev/go-micro/transport"
 )
 
 // Socket is our pseudo socket for transport.Socket

@@ -3,7 +3,7 @@ package micro
 import (
 	"context"
 
-	"github.com/crypto-zero/go-micro/v2/client"
+	"c-z.dev/go-micro/client"
 )
 
 type event struct {

@@ -10,9 +10,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/transport"
-	maddr "github.com/crypto-zero/go-micro/v2/util/addr"
-	mnet "github.com/crypto-zero/go-micro/v2/util/net"
+	"c-z.dev/go-micro/transport"
+	maddr "c-z.dev/go-micro/util/addr"
+	mnet "c-z.dev/go-micro/util/net"
 )
 
 type memorySocket struct {

@@ -1,11 +1,10 @@
 package plugin
 
-var (
-	tmpl = `
+var tmpl = `
 package main
 
 import (
-	"github.com/crypto-zero/go-micro/v2/plugin"
+	"c-z.dev/go-micro/plugin"
 
 	"{{.Path}}"
 )
@@ -17,4 +16,3 @@ var Plugin = plugin.Config{
 	NewFunc: {{.Name}}.{{.NewFunc}},
 }
 `
-)

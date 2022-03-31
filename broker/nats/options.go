@@ -1,12 +1,15 @@
 package nats
 
 import (
-	"github.com/crypto-zero/go-micro/v2/broker"
-	nats "github.com/nats-io/nats.go"
+	"c-z.dev/go-micro/broker"
+
+	"github.com/nats-io/nats.go"
 )
 
-type optionsKey struct{}
-type drainConnectionKey struct{}
+type (
+	optionsKey         struct{}
+	drainConnectionKey struct{}
+)
 
 // Options accepts nats.Options
 func Options(opts nats.Options) broker.Option {

@@ -4,8 +4,8 @@ package micro
 import (
 	"context"
 
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/server"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/server"
 )
 
 type serviceKey struct{}
@@ -73,9 +73,7 @@ type Publisher = Event
 
 type Option func(*Options)
 
-var (
-	HeaderPrefix = "Micro-"
-)
+var HeaderPrefix = "Micro-"
 
 // NewService creates and returns a new Service based on the packages within.
 func NewService(opts ...Option) Service {

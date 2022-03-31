@@ -2,7 +2,7 @@
 package registry
 
 import (
-	"github.com/crypto-zero/go-micro/v2/client/selector"
+	"c-z.dev/go-micro/client/selector"
 )
 
 // NewSelector returns a new registry selector

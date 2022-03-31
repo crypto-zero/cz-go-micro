@@ -1,4 +1,4 @@
-// Package kubernetes taken from https://github.com/crypto-zero/go-micro/blob/master/debug/log/kubernetes/kubernetes.go
+// Package kubernetes taken
 // There are some modifications compared to the other files as
 // this package doesn't provide write functionality.
 // With the write functionality gone, structured logs also go away.
@@ -9,9 +9,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/runtime"
-	"github.com/crypto-zero/go-micro/v2/util/kubernetes/client"
-	"github.com/crypto-zero/go-micro/v2/util/log"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/runtime"
+	"c-z.dev/go-micro/util/kubernetes/client"
 )
 
 type klog struct {
@@ -34,7 +34,6 @@ func (k *klog) podLogStream(podName string, stream *kubeStream) error {
 		Name: podName,
 		Kind: "pod",
 	}, opts...)
-
 	if err != nil {
 		stream.err = err
 		stream.Stop()
@@ -107,9 +106,9 @@ func (k *klog) Read() ([]runtime.LogRecord, error) {
 	for _, pod := range pods {
 		logParams := make(map[string]string)
 
-		//if !opts.Since.Equal(time.Time{}) {
+		// if !opts.Since.Equal(time.Time{}) {
 		//	logParams["sinceSeconds"] = strconv.Itoa(int(time.Since(opts.Since).Seconds()))
-		//}
+		// }
 
 		if k.options.Count != 0 {
 			logParams["tailLines"] = strconv.Itoa(int(k.options.Count))
@@ -128,7 +127,6 @@ func (k *klog) Read() ([]runtime.LogRecord, error) {
 			Name: pod,
 			Kind: "pod",
 		}, opts...)
-
 		if err != nil {
 			return nil, err
 		}
@@ -168,7 +166,7 @@ func (k *klog) Stream() (runtime.LogStream, error) {
 		go func(podName string) {
 			err := k.podLogStream(podName, stream)
 			if err != nil {
-				log.Errorf("Error streaming from pod: %v", err)
+				logger.Errorf("Error streaming from pod: %v", err)
 			}
 		}(pod)
 	}

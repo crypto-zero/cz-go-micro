@@ -6,9 +6,9 @@ import (
 	"sync"
 	"time"
 
-	log "github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/runtime"
-	"github.com/crypto-zero/go-micro/v2/util/kubernetes/client"
+	log "c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/runtime"
+	"c-z.dev/go-micro/util/kubernetes/client"
 )
 
 // action to take on runtime service
@@ -275,7 +275,6 @@ func (k *kubernetes) run(events <-chan runtime.Event) {
 					Kind:  "deployment",
 					Value: deployed,
 				}, client.GetLabels(labels))
-
 				if err != nil {
 					if log.V(log.DebugLevel, log.DefaultLogger) {
 						log.Debugf("Runtime update failed to get service %s: %v", event.Service, err)

@@ -4,9 +4,10 @@ import (
 	"context"
 	"time"
 
+	"c-z.dev/go-micro/debug/trace"
+	"c-z.dev/go-micro/util/ring"
+
 	"github.com/google/uuid"
-	"github.com/crypto-zero/go-micro/v2/debug/trace"
-	"github.com/crypto-zero/go-micro/v2/util/ring"
 )
 
 type Tracer struct {

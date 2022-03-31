@@ -6,12 +6,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/auth"
-	"github.com/crypto-zero/go-micro/v2/broker"
-	"github.com/crypto-zero/go-micro/v2/codec"
-	"github.com/crypto-zero/go-micro/v2/debug/trace"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/transport"
+	"c-z.dev/go-micro/auth"
+	"c-z.dev/go-micro/broker"
+	"c-z.dev/go-micro/codec"
+	"c-z.dev/go-micro/debug/trace"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/transport"
 )
 
 type Options struct {

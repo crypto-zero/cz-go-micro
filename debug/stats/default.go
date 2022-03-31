@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/util/ring"
+	"c-z.dev/go-micro/util/ring"
 )
 
 type stats struct {

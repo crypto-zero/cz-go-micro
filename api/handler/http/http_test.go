@@ -6,13 +6,13 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/crypto-zero/go-micro/v2/api/handler"
-	"github.com/crypto-zero/go-micro/v2/api/resolver"
-	"github.com/crypto-zero/go-micro/v2/api/resolver/vpath"
-	"github.com/crypto-zero/go-micro/v2/api/router"
-	regRouter "github.com/crypto-zero/go-micro/v2/api/router/registry"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/registry/memory"
+	"c-z.dev/go-micro/api/handler"
+	"c-z.dev/go-micro/api/resolver"
+	"c-z.dev/go-micro/api/resolver/vpath"
+	"c-z.dev/go-micro/api/router"
+	regRouter "c-z.dev/go-micro/api/router/registry"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/registry/memory"
 )
 
 func testHttp(t *testing.T, path, service, ns string) {

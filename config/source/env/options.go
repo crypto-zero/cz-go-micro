@@ -2,14 +2,15 @@ package env
 
 import (
 	"context"
-
 	"strings"
 
-	"github.com/crypto-zero/go-micro/v2/config/source"
+	"c-z.dev/go-micro/config/source"
 )
 
-type strippedPrefixKey struct{}
-type prefixKey struct{}
+type (
+	strippedPrefixKey struct{}
+	prefixKey         struct{}
+)
 
 // WithStrippedPrefix sets the environment variable prefixes to scope to.
 // These prefixes will be removed from the actual config entries.

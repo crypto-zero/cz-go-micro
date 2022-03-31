@@ -14,31 +14,31 @@ func TestParseSource(t *testing.T) {
 		{
 			source: "helloworld",
 			expected: &Source{
-				Repo:   "github.com/crypto-zero/services",
+				Repo:   "c-z.dev/go-micro/services",
 				Folder: "helloworld",
 				Ref:    "latest",
 			},
 		},
 		{
-			source: "github.com/crypto-zero/services/helloworld",
+			source: "c-z.dev/go-micro/services/helloworld",
 			expected: &Source{
-				Repo:   "github.com/crypto-zero/services",
+				Repo:   "c-z.dev/go-micro/services",
 				Folder: "helloworld",
 				Ref:    "latest",
 			},
 		},
 		{
-			source: "github.com/crypto-zero/services/helloworld@v1.12.1",
+			source: "c-z.dev/go-micro/services/helloworld@v1.12.1",
 			expected: &Source{
-				Repo:   "github.com/crypto-zero/services",
+				Repo:   "c-z.dev/go-micro/services",
 				Folder: "helloworld",
 				Ref:    "v1.12.1",
 			},
 		},
 		{
-			source: "github.com/crypto-zero/services/helloworld@branchname",
+			source: "c-z.dev/go-micro/services/helloworld@branchname",
 			expected: &Source{
-				Repo:   "github.com/crypto-zero/services",
+				Repo:   "c-z.dev/go-micro/services",
 				Folder: "helloworld",
 				Ref:    "branchname",
 			},

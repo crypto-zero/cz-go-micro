@@ -7,9 +7,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/router"
-	pb "github.com/crypto-zero/go-micro/v2/router/service/proto"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/router"
+	pb "c-z.dev/go-micro/router/service/proto"
 )
 
 type svc struct {
@@ -229,7 +229,6 @@ func (s *svc) Lookup(q ...router.QueryOption) ([]router.Route, error) {
 			Network: query.Network,
 		},
 	}, s.callOpts...)
-
 	// errored out
 	if err != nil {
 		return nil, err

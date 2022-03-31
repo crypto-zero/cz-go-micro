@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/crypto-zero/go-micro/v2/auth/provider"
+	"c-z.dev/go-micro/auth/provider"
 )
 
 // NewProvider returns an initialised oauth provider

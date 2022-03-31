@@ -3,8 +3,9 @@ package static
 
 import (
 	"context"
-	"github.com/crypto-zero/go-micro/v2/client/selector"
-	"github.com/crypto-zero/go-micro/v2/registry"
+
+	"c-z.dev/go-micro/client/selector"
+	"c-z.dev/go-micro/registry"
 )
 
 type staticAddressOption struct{}

@@ -8,7 +8,8 @@ import (
 	"io"
 	"strings"
 
-	"github.com/crypto-zero/go-micro/v2/codec"
+	"c-z.dev/go-micro/codec"
+
 	"google.golang.org/protobuf/proto"
 )
 
@@ -89,7 +90,7 @@ func (c *Codec) Write(m *codec.Message, b interface{}) error {
 		m.Header[":authority"] = m.Target
 		m.Header["content-type"] = c.ContentType
 	case codec.Response:
-		m.Header["Trailer"] = "grpc-status" //, grpc-message"
+		m.Header["Trailer"] = "grpc-status" // , grpc-message"
 		m.Header["content-type"] = c.ContentType
 		m.Header[":status"] = "200"
 		m.Header["grpc-status"] = "0"

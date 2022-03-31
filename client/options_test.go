@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/transport"
+	"c-z.dev/go-micro/transport"
 )
 
 func TestCallOptions(t *testing.T) {

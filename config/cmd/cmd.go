@@ -7,80 +7,80 @@ import (
 	"strings"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/auth"
-	"github.com/crypto-zero/go-micro/v2/auth/provider"
-	"github.com/crypto-zero/go-micro/v2/broker"
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/client/grpc"
-	"github.com/crypto-zero/go-micro/v2/client/selector"
-	"github.com/crypto-zero/go-micro/v2/config"
-	configSrc "github.com/crypto-zero/go-micro/v2/config/source"
-	configSrv "github.com/crypto-zero/go-micro/v2/config/source/service"
-	"github.com/crypto-zero/go-micro/v2/debug/profile"
-	"github.com/crypto-zero/go-micro/v2/debug/profile/http"
-	"github.com/crypto-zero/go-micro/v2/debug/profile/pprof"
-	"github.com/crypto-zero/go-micro/v2/debug/trace"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	registrySrv "github.com/crypto-zero/go-micro/v2/registry/service"
-	"github.com/crypto-zero/go-micro/v2/runtime"
-	"github.com/crypto-zero/go-micro/v2/server"
-	"github.com/crypto-zero/go-micro/v2/store"
-	"github.com/crypto-zero/go-micro/v2/transport"
-	authutil "github.com/crypto-zero/go-micro/v2/util/auth"
-	"github.com/crypto-zero/go-micro/v2/util/wrapper"
+	"c-z.dev/go-micro/auth"
+	"c-z.dev/go-micro/auth/provider"
+	"c-z.dev/go-micro/broker"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/client/grpc"
+	"c-z.dev/go-micro/client/selector"
+	"c-z.dev/go-micro/config"
+	configSrc "c-z.dev/go-micro/config/source"
+	configSrv "c-z.dev/go-micro/config/source/service"
+	"c-z.dev/go-micro/debug/profile"
+	"c-z.dev/go-micro/debug/profile/http"
+	"c-z.dev/go-micro/debug/profile/pprof"
+	"c-z.dev/go-micro/debug/trace"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/registry"
+	registrySrv "c-z.dev/go-micro/registry/service"
+	"c-z.dev/go-micro/runtime"
+	"c-z.dev/go-micro/server"
+	"c-z.dev/go-micro/store"
+	"c-z.dev/go-micro/transport"
+	authutil "c-z.dev/go-micro/util/auth"
+	"c-z.dev/go-micro/util/wrapper"
 
 	// clients
-	cgrpc "github.com/crypto-zero/go-micro/v2/client/grpc"
-	cmucp "github.com/crypto-zero/go-micro/v2/client/mucp"
+	cgrpc "c-z.dev/go-micro/client/grpc"
+	cmucp "c-z.dev/go-micro/client/mucp"
 
 	// servers
 	"github.com/urfave/cli/v2"
 
-	sgrpc "github.com/crypto-zero/go-micro/v2/server/grpc"
-	smucp "github.com/crypto-zero/go-micro/v2/server/mucp"
+	sgrpc "c-z.dev/go-micro/server/grpc"
+	smucp "c-z.dev/go-micro/server/mucp"
 
 	// brokers
-	brokerHttp "github.com/crypto-zero/go-micro/v2/broker/http"
-	"github.com/crypto-zero/go-micro/v2/broker/memory"
-	"github.com/crypto-zero/go-micro/v2/broker/nats"
-	brokerSrv "github.com/crypto-zero/go-micro/v2/broker/service"
+	brokerHttp "c-z.dev/go-micro/broker/http"
+	"c-z.dev/go-micro/broker/memory"
+	"c-z.dev/go-micro/broker/nats"
+	brokerSrv "c-z.dev/go-micro/broker/service"
 
 	// registries
-	"github.com/crypto-zero/go-micro/v2/registry/etcd"
-	"github.com/crypto-zero/go-micro/v2/registry/mdns"
-	rmem "github.com/crypto-zero/go-micro/v2/registry/memory"
-	regSrv "github.com/crypto-zero/go-micro/v2/registry/service"
+	"c-z.dev/go-micro/registry/etcd"
+	"c-z.dev/go-micro/registry/mdns"
+	rmem "c-z.dev/go-micro/registry/memory"
+	regSrv "c-z.dev/go-micro/registry/service"
 
 	// runtimes
-	kRuntime "github.com/crypto-zero/go-micro/v2/runtime/kubernetes"
-	lRuntime "github.com/crypto-zero/go-micro/v2/runtime/local"
-	srvRuntime "github.com/crypto-zero/go-micro/v2/runtime/service"
+	kRuntime "c-z.dev/go-micro/runtime/kubernetes"
+	lRuntime "c-z.dev/go-micro/runtime/local"
+	srvRuntime "c-z.dev/go-micro/runtime/service"
 
 	// selectors
-	"github.com/crypto-zero/go-micro/v2/client/selector/dns"
-	"github.com/crypto-zero/go-micro/v2/client/selector/router"
-	"github.com/crypto-zero/go-micro/v2/client/selector/static"
+	"c-z.dev/go-micro/client/selector/dns"
+	"c-z.dev/go-micro/client/selector/router"
+	"c-z.dev/go-micro/client/selector/static"
 
 	// transports
-	thttp "github.com/crypto-zero/go-micro/v2/transport/http"
-	tmem "github.com/crypto-zero/go-micro/v2/transport/memory"
+	thttp "c-z.dev/go-micro/transport/http"
+	tmem "c-z.dev/go-micro/transport/memory"
 
 	// stores
-	memStore "github.com/crypto-zero/go-micro/v2/store/memory"
-	svcStore "github.com/crypto-zero/go-micro/v2/store/service"
+	memStore "c-z.dev/go-micro/store/memory"
+	svcStore "c-z.dev/go-micro/store/service"
 
 	// tracers
-	// jTracer "github.com/crypto-zero/go-micro/v2/debug/trace/jaeger"
-	memTracer "github.com/crypto-zero/go-micro/v2/debug/trace/memory"
+	// jTracer "c-z.dev/go-micro/debug/trace/jaeger"
+	memTracer "c-z.dev/go-micro/debug/trace/memory"
 
 	// auth
-	jwtAuth "github.com/crypto-zero/go-micro/v2/auth/jwt"
-	svcAuth "github.com/crypto-zero/go-micro/v2/auth/service"
+	jwtAuth "c-z.dev/go-micro/auth/jwt"
+	svcAuth "c-z.dev/go-micro/auth/service"
 
 	// auth providers
-	"github.com/crypto-zero/go-micro/v2/auth/provider/basic"
-	"github.com/crypto-zero/go-micro/v2/auth/provider/oauth"
+	"c-z.dev/go-micro/auth/provider/basic"
+	"c-z.dev/go-micro/auth/provider/oauth"
 )
 
 type Cmd interface {
@@ -211,9 +211,9 @@ var (
 		},
 		&cli.StringFlag{
 			Name:    "runtime_source",
-			Usage:   "Runtime source for building and running services e.g github.com/crypto-zero/service",
+			Usage:   "Runtime source for building and running services",
 			EnvVars: []string{"MICRO_RUNTIME_SOURCE"},
-			Value:   "github.com/crypto-zero/services",
+			Value:   "c-z.dev/go-micro/services",
 		},
 		&cli.StringFlag{
 			Name:    "selector",

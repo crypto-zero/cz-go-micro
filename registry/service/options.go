@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/registry"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/registry"
 )
 
 type clientKey struct{}

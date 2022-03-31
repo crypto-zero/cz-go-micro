@@ -4,7 +4,7 @@ package proxy
 import (
 	"context"
 
-	"github.com/crypto-zero/go-micro/v2/server"
+	"c-z.dev/go-micro/server"
 )
 
 // Proxy can be used as a proxy server for go-micro services
@@ -17,6 +17,4 @@ type Proxy interface {
 	String() string
 }
 
-var (
-	DefaultEndpoint = "localhost:9090"
-)
+var DefaultEndpoint = "localhost:9090"

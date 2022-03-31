@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/crypto-zero/go-micro/v2/transport"
+	"c-z.dev/go-micro/transport"
 )
 
 func TestMemoryTransport(t *testing.T) {
@@ -61,7 +61,6 @@ func TestMemoryTransport(t *testing.T) {
 			t.Logf("Client Received %s", string(m.Body))
 		}
 	}
-
 }
 
 func TestListener(t *testing.T) {

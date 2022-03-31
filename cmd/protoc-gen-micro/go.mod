@@ -1,4 +1,4 @@
-module github.com/crypto-zero/go-micro/cmd/protoc-gen-micro/v2
+module c-z.dev/go-micro/cmd/protoc-gen-micro
 
 go 1.18
 

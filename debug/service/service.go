@@ -3,8 +3,8 @@ package service
 import (
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/debug"
-	"github.com/crypto-zero/go-micro/v2/debug/log"
+	"c-z.dev/go-micro/debug"
+	"c-z.dev/go-micro/debug/log"
 )
 
 type serviceLog struct {

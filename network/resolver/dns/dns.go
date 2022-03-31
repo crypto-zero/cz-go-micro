@@ -5,7 +5,8 @@ import (
 	"context"
 	"net"
 
-	"github.com/crypto-zero/go-micro/v2/network/resolver"
+	"c-z.dev/go-micro/network/resolver"
+
 	"github.com/miekg/dns"
 )
 

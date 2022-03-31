@@ -11,14 +11,14 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/broker"
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/client/selector"
-	raw "github.com/crypto-zero/go-micro/v2/codec/bytes"
-	"github.com/crypto-zero/go-micro/v2/errors"
-	"github.com/crypto-zero/go-micro/v2/metadata"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	pnet "github.com/crypto-zero/go-micro/v2/util/net"
+	"c-z.dev/go-micro/broker"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/client/selector"
+	raw "c-z.dev/go-micro/codec/bytes"
+	"c-z.dev/go-micro/errors"
+	"c-z.dev/go-micro/metadata"
+	"c-z.dev/go-micro/registry"
+	pnet "c-z.dev/go-micro/util/net"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -156,7 +156,8 @@ func (g *grpcClient) call(ctx context.Context, node *registry.Node, req client.R
 	go func() {
 		grpcCallOptions := []grpc.CallOption{
 			grpc.ForceCodec(cf),
-			grpc.CallContentSubtype(cf.Name())}
+			grpc.CallContentSubtype(cf.Name()),
+		}
 		if opts := g.getGrpcCallOptions(); opts != nil {
 			grpcCallOptions = append(grpcCallOptions, opts...)
 		}

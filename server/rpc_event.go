@@ -1,8 +1,8 @@
 package server
 
 import (
-	"github.com/crypto-zero/go-micro/v2/broker"
-	"github.com/crypto-zero/go-micro/v2/transport"
+	"c-z.dev/go-micro/broker"
+	"c-z.dev/go-micro/transport"
 )
 
 // event is a broker event we handle on the server transport

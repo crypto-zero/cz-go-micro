@@ -7,7 +7,7 @@ import (
 	"net/http/pprof"
 	"sync"
 
-	"github.com/crypto-zero/go-micro/v2/debug/profile"
+	"c-z.dev/go-micro/debug/profile"
 )
 
 type httpProfile struct {
@@ -16,9 +16,7 @@ type httpProfile struct {
 	server  *http.Server
 }
 
-var (
-	DefaultAddress = ":6060"
-)
+var DefaultAddress = ":6060"
 
 // Start the profiler
 func (h *httpProfile) Start() error {

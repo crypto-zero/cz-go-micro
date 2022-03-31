@@ -9,8 +9,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/crypto-zero/go-micro/v2/client"
-	proto "github.com/crypto-zero/go-micro/v2/util/file/proto"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/util/file/proto"
 )
 
 // Client is the client interface to access files
@@ -93,7 +93,8 @@ func (c *fc) Write(sessionId, offset int64, data []byte) error {
 	_, err := c.c.Write(context.TODO(), &proto.WriteRequest{
 		Id:     sessionId,
 		Offset: offset,
-		Data:   data})
+		Data:   data,
+	})
 	return err
 }
 
@@ -155,7 +156,7 @@ func (c *fc) DownloadAt(filename, saveFile string, blockId int) error {
 
 	log.Printf("Download %s in %d blocks\n", filename, blocks-blockId)
 
-	file, err := os.OpenFile(saveFile, os.O_CREATE|os.O_WRONLY, 0666)
+	file, err := os.OpenFile(saveFile, os.O_CREATE|os.O_WRONLY, 0o666)
 	if err != nil {
 		return err
 	}

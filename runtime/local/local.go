@@ -2,7 +2,7 @@
 package local
 
 import (
-	"github.com/crypto-zero/go-micro/v2/runtime"
+	"c-z.dev/go-micro/runtime"
 )
 
 // NewRuntime returns a new local runtime

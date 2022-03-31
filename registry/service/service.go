@@ -5,17 +5,15 @@ import (
 	"context"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/client/grpc"
-	"github.com/crypto-zero/go-micro/v2/errors"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	pb "github.com/crypto-zero/go-micro/v2/registry/service/proto"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/client/grpc"
+	"c-z.dev/go-micro/errors"
+	"c-z.dev/go-micro/registry"
+	pb "c-z.dev/go-micro/registry/service/proto"
 )
 
-var (
-	// The default service name
-	DefaultService = "go.micro.registry"
-)
+// The default service name
+var DefaultService = "go.micro.registry"
 
 type serviceRegistry struct {
 	opts registry.Options
@@ -168,7 +166,6 @@ func (s *serviceRegistry) Watch(opts ...registry.WatchOption) (registry.Watcher,
 	stream, err := s.client.Watch(options.Context, &pb.WatchRequest{
 		Service: options.Service,
 	}, s.callOpts()...)
-
 	if err != nil {
 		return nil, err
 	}

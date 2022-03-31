@@ -5,10 +5,11 @@ import (
 	"strings"
 	"sync"
 
+	"c-z.dev/go-micro/agent/input"
+	"c-z.dev/go-micro/logger"
+
 	"github.com/forestgiant/sliceutil"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"github.com/crypto-zero/go-micro/v2/agent/input"
-	"github.com/crypto-zero/go-micro/v2/logger"
 )
 
 type telegramConn struct {
@@ -97,7 +98,6 @@ func (tc *telegramConn) Send(event *input.Event) error {
 	}
 
 	_, err := tc.input.api.Send(msgConfig)
-
 	if err != nil {
 		// probably it could be because of nested HTML tags -- telegram doesn't allow nested tags
 		if logger.V(logger.ErrorLevel, logger.DefaultLogger) {

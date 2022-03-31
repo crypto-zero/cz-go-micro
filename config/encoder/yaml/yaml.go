@@ -1,8 +1,9 @@
 package yaml
 
 import (
+	"c-z.dev/go-micro/config/encoder"
+
 	"github.com/ghodss/yaml"
-	"github.com/crypto-zero/go-micro/v2/config/encoder"
 )
 
 type yamlEncoder struct{}

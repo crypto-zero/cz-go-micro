@@ -1,4 +1,4 @@
-module github.com/crypto-zero/go-micro/v2
+module c-z.dev/go-micro
 
 go 1.18
 

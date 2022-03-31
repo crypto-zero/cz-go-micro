@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/crypto-zero/go-micro/v2/registry/memory"
+	"c-z.dev/go-micro/registry/memory"
 )
 
 func TestRegistrySelector(t *testing.T) {

@@ -3,9 +3,9 @@ package service
 import (
 	"context"
 
-	"github.com/crypto-zero/go-micro/v2/client"
-	"github.com/crypto-zero/go-micro/v2/router"
-	pb "github.com/crypto-zero/go-micro/v2/router/service/proto"
+	"c-z.dev/go-micro/client"
+	"c-z.dev/go-micro/router"
+	pb "c-z.dev/go-micro/router/service/proto"
 )
 
 type table struct {
@@ -101,7 +101,6 @@ func (t *table) Query(q ...router.QueryOption) ([]router.Route, error) {
 			Network: query.Network,
 		},
 	}, t.callOpts...)
-
 	// errored out
 	if err != nil {
 		return nil, err

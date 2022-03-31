@@ -8,9 +8,9 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/crypto-zero/go-micro/v2/client/selector"
-	"github.com/crypto-zero/go-micro/v2/metadata"
-	"github.com/crypto-zero/go-micro/v2/registry"
+	"c-z.dev/go-micro/client/selector"
+	"c-z.dev/go-micro/metadata"
+	"c-z.dev/go-micro/registry"
 )
 
 // Write sets the status and body on a http ResponseWriter

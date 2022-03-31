@@ -12,17 +12,17 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crypto-zero/go-micro/v2/broker"
-	"github.com/crypto-zero/go-micro/v2/codec"
-	raw "github.com/crypto-zero/go-micro/v2/codec/bytes"
-	"github.com/crypto-zero/go-micro/v2/logger"
-	"github.com/crypto-zero/go-micro/v2/metadata"
-	"github.com/crypto-zero/go-micro/v2/registry"
-	"github.com/crypto-zero/go-micro/v2/transport"
-	"github.com/crypto-zero/go-micro/v2/util/addr"
-	"github.com/crypto-zero/go-micro/v2/util/backoff"
-	mnet "github.com/crypto-zero/go-micro/v2/util/net"
-	"github.com/crypto-zero/go-micro/v2/util/socket"
+	"c-z.dev/go-micro/broker"
+	"c-z.dev/go-micro/codec"
+	raw "c-z.dev/go-micro/codec/bytes"
+	"c-z.dev/go-micro/logger"
+	"c-z.dev/go-micro/metadata"
+	"c-z.dev/go-micro/registry"
+	"c-z.dev/go-micro/transport"
+	"c-z.dev/go-micro/util/addr"
+	"c-z.dev/go-micro/util/backoff"
+	mnet "c-z.dev/go-micro/util/net"
+	"c-z.dev/go-micro/util/socket"
 )
 
 type rpcServer struct {
