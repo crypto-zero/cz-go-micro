@@ -19,31 +19,31 @@ var _ context.Context
 var _ client.Option
 var _ server.Option
 
-// NewApiEndpoints API Endpoints for Api service
-func NewApiEndpoints() []*api.Endpoint {
+// NewAPIEndpoints API Endpoints for API service
+func NewAPIEndpoints() []*api.Endpoint {
 	return []*api.Endpoint{}
 }
 
-// ApiService is the client API for Api service.
-type ApiService interface {
+// APIService is the client API for API service.
+type APIService interface {
 	Register(ctx context.Context, in *Endpoint, opts ...client.CallOption) (*EmptyResponse, error)
 	Deregister(ctx context.Context, in *Endpoint, opts ...client.CallOption) (*EmptyResponse, error)
 }
 
-type apiService struct {
+type aPIService struct {
 	c    client.Client
 	name string
 }
 
-func NewApiService(name string, c client.Client) ApiService {
-	return &apiService{
+func NewAPIService(name string, c client.Client) APIService {
+	return &aPIService{
 		c:    c,
 		name: name,
 	}
 }
 
-func (c *apiService) Register(ctx context.Context, in *Endpoint, opts ...client.CallOption) (*EmptyResponse, error) {
-	req := c.c.NewRequest(c.name, "Api.Register", in)
+func (c *aPIService) Register(ctx context.Context, in *Endpoint, opts ...client.CallOption) (*EmptyResponse, error) {
+	req := c.c.NewRequest(c.name, "API.Register", in)
 	out := new(EmptyResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -52,8 +52,8 @@ func (c *apiService) Register(ctx context.Context, in *Endpoint, opts ...client.
 	return out, nil
 }
 
-func (c *apiService) Deregister(ctx context.Context, in *Endpoint, opts ...client.CallOption) (*EmptyResponse, error) {
-	req := c.c.NewRequest(c.name, "Api.Deregister", in)
+func (c *aPIService) Deregister(ctx context.Context, in *Endpoint, opts ...client.CallOption) (*EmptyResponse, error) {
+	req := c.c.NewRequest(c.name, "API.Deregister", in)
 	out := new(EmptyResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -62,32 +62,32 @@ func (c *apiService) Deregister(ctx context.Context, in *Endpoint, opts ...clien
 	return out, nil
 }
 
-// ApiHandler is the server API for Api service.
-type ApiHandler interface {
+// APIHandler is the server API for API service.
+type APIHandler interface {
 	Register(context.Context, *Endpoint, *EmptyResponse) error
 	Deregister(context.Context, *Endpoint, *EmptyResponse) error
 }
 
-func RegisterApiHandler(s server.Server, hdlr ApiHandler, opts ...server.HandlerOption) error {
-	type api interface {
+func RegisterAPIHandler(s server.Server, hdlr APIHandler, opts ...server.HandlerOption) error {
+	type aPI interface {
 		Register(ctx context.Context, in *Endpoint, out *EmptyResponse) error
 		Deregister(ctx context.Context, in *Endpoint, out *EmptyResponse) error
 	}
-	type Api struct {
-		api
+	type API struct {
+		aPI
 	}
-	h := &apiHandler{hdlr}
-	return s.Handle(s.NewHandler(&Api{h}, opts...))
+	h := &aPIHandler{hdlr}
+	return s.Handle(s.NewHandler(&API{h}, opts...))
 }
 
-type apiHandler struct {
-	ApiHandler
+type aPIHandler struct {
+	APIHandler
 }
 
-func (h *apiHandler) Register(ctx context.Context, in *Endpoint, out *EmptyResponse) error {
-	return h.ApiHandler.Register(ctx, in, out)
+func (h *aPIHandler) Register(ctx context.Context, in *Endpoint, out *EmptyResponse) error {
+	return h.APIHandler.Register(ctx, in, out)
 }
 
-func (h *apiHandler) Deregister(ctx context.Context, in *Endpoint, out *EmptyResponse) error {
-	return h.ApiHandler.Deregister(ctx, in, out)
+func (h *aPIHandler) Deregister(ctx context.Context, in *Endpoint, out *EmptyResponse) error {
+	return h.APIHandler.Deregister(ctx, in, out)
 }

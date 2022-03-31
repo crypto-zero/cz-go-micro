@@ -9,7 +9,7 @@ import (
 	"c-z.dev/go-micro/server"
 )
 
-type Api interface {
+type API interface {
 	// Initialise options
 	Init(...Option) error
 	// Get the options

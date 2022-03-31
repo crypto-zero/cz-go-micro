@@ -3,7 +3,7 @@ syntax = "proto3";
 package go.micro.api;
 option go_package = "c-z.dev/go-micro/api/service/proto";
 
-service Api {
+service API {
   rpc Register(Endpoint) returns (EmptyResponse) {};
   rpc Deregister(Endpoint) returns (EmptyResponse) {};
 }
