@@ -48,7 +48,7 @@ func TestDelete(t *testing.T) {
 		t.Errorf("error adding route: %s", err)
 	}
 
-	// should fail to delete non-existant route
+	// should fail to delete non-existent route
 	prevSvc := route.Service
 	route.Service = "randDest"
 
