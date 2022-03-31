@@ -201,8 +201,6 @@ func GetRepoRoot(fullPath string) (string, error) {
 	return "", nil
 }
 
-const defaultRepo = "c-z.dev/go-micro/services"
-
 // Source is not just git related @todo move
 type Source struct {
 	// is it a local folder intended for a local runtime?
@@ -225,7 +223,7 @@ type Source struct {
 // Name to be passed to RPC call runtime.Create Update Delete
 // eg: `helloworld/api`, `crufter/myrepo/helloworld/api`, `localfolder`
 func (s *Source) RuntimeName() string {
-	if s.Repo == "c-z.dev/go-micro/services" || s.Repo == "" {
+	if s.Repo == "" {
 		return s.Folder
 	}
 	return fmt.Sprintf("%v/%v", strings.ReplaceAll(s.Repo, "github.com/", ""), s.Folder)
@@ -237,7 +235,7 @@ func (s *Source) RuntimeSource() string {
 	if s.Local {
 		return s.FullPath
 	}
-	if s.Repo == "c-z.dev/go-micro/services" || s.Repo == "" {
+	if s.Repo == "" {
 		return s.Folder
 	}
 	return fmt.Sprintf("%v/%v", s.Repo, s.Folder)
@@ -245,10 +243,6 @@ func (s *Source) RuntimeSource() string {
 
 // ParseSource parses a `micro run/update/kill` source.
 func ParseSource(source string) (*Source, error) {
-	// If github is not present, we got a shorthand for `micro/services`
-	if !strings.Contains(source, "github.com") {
-		source = "c-z.dev/go-micro/services/" + source
-	}
 	if !strings.Contains(source, "@") {
 		source += "@latest"
 	}
