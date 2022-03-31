@@ -3,7 +3,9 @@ package metadata
 
 import (
 	"context"
-	"strings"
+
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 type metadataKey struct{}
@@ -21,7 +23,7 @@ func (md Metadata) Get(key string) (string, bool) {
 	}
 
 	// attempt to get lower case
-	val, ok = md[strings.Title(key)]
+	val, ok = md[cases.Title(language.English).String(key)]
 	return val, ok
 }
 
@@ -33,7 +35,7 @@ func (md Metadata) Delete(key string) {
 	// delete key as-is
 	delete(md, key)
 	// delete also Title key
-	delete(md, strings.Title(key))
+	delete(md, cases.Title(language.English).String(key))
 }
 
 // Copy makes a copy of the metadata
@@ -77,7 +79,7 @@ func Get(ctx context.Context, key string) (string, bool) {
 	}
 
 	// attempt to get lower case
-	val, ok = md[strings.Title(key)]
+	val, ok = md[cases.Title(language.English).String(key)]
 
 	return val, ok
 }
@@ -92,7 +94,7 @@ func FromContext(ctx context.Context) (Metadata, bool) {
 	// capitalise all values
 	newMD := make(Metadata, len(md))
 	for k, v := range md {
-		newMD[strings.Title(k)] = v
+		newMD[cases.Title(language.English).String(k)] = v
 	}
 
 	return newMD, ok
