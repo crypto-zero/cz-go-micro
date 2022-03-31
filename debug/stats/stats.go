@@ -11,7 +11,7 @@ type Stats interface {
 	Record(error) error
 }
 
-// A runtime stat
+// Stat a runtime stat
 type Stat struct {
 	// Timestamp of recording
 	Timestamp int64
@@ -31,6 +31,4 @@ type Stat struct {
 	Errors uint64
 }
 
-var (
-	DefaultStats = NewStats()
-)
+var DefaultStats = NewStats()

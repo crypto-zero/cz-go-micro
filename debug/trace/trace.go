@@ -49,8 +49,8 @@ type Span struct {
 }
 
 const (
-	traceIDKey = "Micro-Trace-Id"
-	spanIDKey  = "Micro-Span-Id"
+	traceIDKey = "Micro-Trace-ID"
+	spanIDKey  = "Micro-Span-ID"
 )
 
 // FromContext returns a span from context

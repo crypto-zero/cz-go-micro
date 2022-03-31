@@ -6,13 +6,11 @@ type Profile interface {
 	Start() error
 	// Stop the profiler
 	Stop() error
-	// Name of the profiler
+	// String name of the profiler
 	String() string
 }
 
-var (
-	DefaultProfile Profile = new(noop)
-)
+var DefaultProfile Profile = new(noop)
 
 type noop struct{}
 
