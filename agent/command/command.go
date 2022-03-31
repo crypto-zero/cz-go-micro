@@ -1,22 +1,20 @@
 // Package command is an interface for defining bot commands
 package command
 
-var (
-	// Commmands keyed by golang/regexp patterns
-	// regexp.Match(key, input) is used to match
-	Commands = map[string]Command{}
-)
+// Commands keyed by golang/regexp patterns
+// regexp.Match(key, input) is used to match
+var Commands = map[string]Command{}
 
 // Command is the interface for specific named
 // commands executed via plugins or the bot.
 type Command interface {
-	// Executes the command with args passed in
+	// Exec the command with args passed in
 	Exec(args ...string) ([]byte, error)
 	// Usage of the command
 	Usage() string
 	// Description of the command
 	Description() string
-	// Name of the command
+	// String name of the command
 	String() string
 }
 

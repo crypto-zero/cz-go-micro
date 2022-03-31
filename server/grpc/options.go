@@ -78,7 +78,7 @@ func newOptions(opt ...server.Option) server.Options {
 		Transport: transport.DefaultTransport,
 		Address:   server.DefaultAddress,
 		Name:      server.DefaultName,
-		Id:        server.DefaultId,
+		Id:        server.DefaultID,
 		Version:   server.DefaultVersion,
 	}
 

@@ -4,6 +4,7 @@ import (
 	"sync"
 
 	"c-z.dev/go-micro/util/ring"
+
 	"github.com/google/uuid"
 )
 

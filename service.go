@@ -61,7 +61,7 @@ func (s *service) Name() string {
 	return s.opts.Server.Options().Name
 }
 
-// Init initialises options. Additionally it calls cmd.Init
+// Init initialises options. Additionally, it calls cmd.Init
 // which parses command line flags. cmd.Init is only called
 // on first Init.
 func (s *service) Init(opts ...Option) {
@@ -71,7 +71,7 @@ func (s *service) Init(opts ...Option) {
 	}
 
 	s.once.Do(func() {
-		// setup the plugins
+		// set up the plugins
 		for _, p := range strings.Split(os.Getenv("MICRO_PLUGIN"), ",") {
 			if len(p) == 0 {
 				continue
