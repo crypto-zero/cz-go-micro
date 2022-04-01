@@ -14,15 +14,15 @@ import (
 )
 
 // autoCertACME is the ACME provider from golang.org/x/crypto/acme/autocert
-type autocertProvider struct{}
+type autoCertProvider struct{}
 
 // Listen implements acme.Provider
-func (a *autocertProvider) Listen(hosts ...string) (net.Listener, error) {
+func (a *autoCertProvider) Listen(hosts ...string) (net.Listener, error) {
 	return autocert.NewListener(hosts...), nil
 }
 
 // TLSConfig returns a new tls config
-func (a *autocertProvider) TLSConfig(hosts ...string) (*tls.Config, error) {
+func (a *autoCertProvider) TLSConfig(hosts ...string) (*tls.Config, error) {
 	// create a new manager
 	m := &autocert.Manager{
 		Prompt: autocert.AcceptTOS,
@@ -41,7 +41,7 @@ func (a *autocertProvider) TLSConfig(hosts ...string) (*tls.Config, error) {
 	return m.TLSConfig(), nil
 }
 
-// New returns an autocert acme.Provider
+// NewProvider new returns an autocert acme.Provider
 func NewProvider() acme.Provider {
-	return &autocertProvider{}
+	return &autoCertProvider{}
 }

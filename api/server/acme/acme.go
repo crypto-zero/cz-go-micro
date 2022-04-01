@@ -7,11 +7,9 @@ import (
 	"net"
 )
 
-var (
-	// ErrProviderNotImplemented can be returned when attempting to
-	// instantiate an unimplemented provider
-	ErrProviderNotImplemented = errors.New("Provider not implemented")
-)
+// ErrProviderNotImplemented can be returned when attempting to
+// instantiate an unimplemented provider
+var ErrProviderNotImplemented = errors.New("provider not implemented")
 
 // Provider is a ACME provider interface
 type Provider interface {
