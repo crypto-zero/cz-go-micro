@@ -7,8 +7,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/davecgh/go-spew/spew"
+
 	"c-z.dev/go-micro/store"
-	"github.com/kr/pretty"
 )
 
 func TestSQL(t *testing.T) {
@@ -45,7 +46,7 @@ func TestSQL(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	} else {
-		t.Logf("%# v\n", pretty.Formatter(keys))
+		t.Logf("%#v\n", spew.Sdump(keys))
 	}
 
 	err = sqlStore.Write(
@@ -93,7 +94,7 @@ func TestSQL(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	t.Logf("%# v\n", pretty.Formatter(records))
+	t.Logf("%#v\n", spew.Sdump(records))
 	if string(records[0].Value) != "bar" {
 		t.Error("Expected bar, got ", string(records[0].Value))
 	}

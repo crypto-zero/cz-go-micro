@@ -6,8 +6,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/davecgh/go-spew/spew"
+
 	"c-z.dev/go-micro/store"
-	"github.com/kr/pretty"
 )
 
 func TestMemoryReInit(t *testing.T) {
@@ -44,7 +45,7 @@ func TestMemoryNamespacePrefix(t *testing.T) {
 
 func basictest(s store.Store, t *testing.T) {
 	if len(os.Getenv("IN_TRAVIS_CI")) == 0 {
-		t.Logf("Testing store %s, with options %# v\n", s.String(), pretty.Formatter(s.Options()))
+		t.Logf("Testing store %s, with options %#v\n", s.String(), spew.Sdump(s.Options()))
 	}
 	// Read and Write an expiring Record
 	if err := s.Write(&store.Record{
@@ -69,7 +70,7 @@ func basictest(s store.Store, t *testing.T) {
 	}
 	time.Sleep(time.Millisecond * 200)
 	if _, err := s.Read("Hello"); err != store.ErrNotFound {
-		t.Errorf("Expected %# v, got %# v", store.ErrNotFound, err)
+		t.Errorf("Expected %#v, got %#v", store.ErrNotFound, err)
 	}
 
 	// Write 3 records with various expiry and get with prefix
@@ -91,49 +92,49 @@ func basictest(s store.Store, t *testing.T) {
 	}
 	for _, r := range records {
 		if err := s.Write(r); err != nil {
-			t.Errorf("Couldn't write k: %s, v: %# v (%s)", r.Key, pretty.Formatter(r.Value), err)
+			t.Errorf("Couldn't write k: %s, v: %#v (%s)", r.Key, spew.Sdump(r.Value), err)
 		}
 	}
 	if results, err := s.Read("foo", store.ReadPrefix()); err != nil {
-		t.Errorf("Couldn't read all \"foo\" keys, got %# v (%s)", pretty.Formatter(results), err)
+		t.Errorf("Couldn't read all \"foo\" keys, got %#v (%s)", spew.Sdump(results), err)
 	} else {
 		if len(results) != 3 {
 			t.Errorf("Expected 3 items, got %d", len(results))
 		}
 		if len(os.Getenv("IN_TRAVIS_CI")) == 0 {
-			t.Logf("Prefix test: %v\n", pretty.Formatter(results))
+			t.Logf("Prefix test: %v\n", spew.Sdump(results))
 		}
 	}
 	time.Sleep(time.Millisecond * 100)
 	if results, err := s.Read("foo", store.ReadPrefix()); err != nil {
-		t.Errorf("Couldn't read all \"foo\" keys, got %# v (%s)", pretty.Formatter(results), err)
+		t.Errorf("Couldn't read all \"foo\" keys, got %#v (%s)", spew.Sdump(results), err)
 	} else {
 		if len(results) != 2 {
 			t.Errorf("Expected 2 items, got %d", len(results))
 		}
 		if len(os.Getenv("IN_TRAVIS_CI")) == 0 {
-			t.Logf("Prefix test: %v\n", pretty.Formatter(results))
+			t.Logf("Prefix test: %v\n", spew.Sdump(results))
 		}
 	}
 	time.Sleep(time.Millisecond * 100)
 	if results, err := s.Read("foo", store.ReadPrefix()); err != nil {
-		t.Errorf("Couldn't read all \"foo\" keys, got %# v (%s)", pretty.Formatter(results), err)
+		t.Errorf("Couldn't read all \"foo\" keys, got %#v (%s)", spew.Sdump(results), err)
 	} else {
 		if len(results) != 1 {
 			t.Errorf("Expected 1 item, got %d", len(results))
 		}
 		if len(os.Getenv("IN_TRAVIS_CI")) == 0 {
-			t.Logf("Prefix test: %# v\n", pretty.Formatter(results))
+			t.Logf("Prefix test: %#v\n", spew.Sdump(results))
 		}
 	}
 	if err := s.Delete("foo", func(d *store.DeleteOptions) {}); err != nil {
 		t.Errorf("Delete failed (%v)", err)
 	}
 	if results, err := s.Read("foo", store.ReadPrefix()); err != nil {
-		t.Errorf("Couldn't read all \"foo\" keys, got %# v (%s)", pretty.Formatter(results), err)
+		t.Errorf("Couldn't read all \"foo\" keys, got %#v (%s)", spew.Sdump(results), err)
 	} else {
 		if len(results) != 0 {
-			t.Errorf("Expected 0 items, got %d (%# v)", len(results), pretty.Formatter(results))
+			t.Errorf("Expected 0 items, got %d (%#v)", len(results), spew.Sdump(results))
 		}
 	}
 
@@ -156,49 +157,49 @@ func basictest(s store.Store, t *testing.T) {
 	}
 	for _, r := range records {
 		if err := s.Write(r); err != nil {
-			t.Errorf("Couldn't write k: %s, v: %# v (%s)", r.Key, pretty.Formatter(r.Value), err)
+			t.Errorf("Couldn't write k: %s, v: %#v (%s)", r.Key, spew.Sdump(r.Value), err)
 		}
 	}
 	if results, err := s.Read("foo", store.ReadSuffix()); err != nil {
-		t.Errorf("Couldn't read all \"foo\" keys, got %# v (%s)", pretty.Formatter(results), err)
+		t.Errorf("Couldn't read all \"foo\" keys, got %#v (%s)", spew.Sdump(results), err)
 	} else {
 		if len(results) != 3 {
 			t.Errorf("Expected 3 items, got %d", len(results))
 		}
 		if len(os.Getenv("IN_TRAVIS_CI")) == 0 {
-			t.Logf("Prefix test: %v\n", pretty.Formatter(results))
+			t.Logf("Prefix test: %v\n", spew.Sdump(results))
 		}
 	}
 	time.Sleep(time.Millisecond * 100)
 	if results, err := s.Read("foo", store.ReadSuffix()); err != nil {
-		t.Errorf("Couldn't read all \"foo\" keys, got %# v (%s)", pretty.Formatter(results), err)
+		t.Errorf("Couldn't read all \"foo\" keys, got %#v (%s)", spew.Sdump(results), err)
 	} else {
 		if len(results) != 2 {
 			t.Errorf("Expected 2 items, got %d", len(results))
 		}
 		if len(os.Getenv("IN_TRAVIS_CI")) == 0 {
-			t.Logf("Prefix test: %v\n", pretty.Formatter(results))
+			t.Logf("Prefix test: %v\n", spew.Sdump(results))
 		}
 	}
 	time.Sleep(time.Millisecond * 100)
 	if results, err := s.Read("foo", store.ReadSuffix()); err != nil {
-		t.Errorf("Couldn't read all \"foo\" keys, got %# v (%s)", pretty.Formatter(results), err)
+		t.Errorf("Couldn't read all \"foo\" keys, got %#v (%s)", spew.Sdump(results), err)
 	} else {
 		if len(results) != 1 {
 			t.Errorf("Expected 1 item, got %d", len(results))
 		}
 		if len(os.Getenv("IN_TRAVIS_CI")) == 0 {
-			t.Logf("Prefix test: %# v\n", pretty.Formatter(results))
+			t.Logf("Prefix test: %#v\n", spew.Sdump(results))
 		}
 	}
 	if err := s.Delete("foo"); err != nil {
 		t.Errorf("Delete failed (%v)", err)
 	}
 	if results, err := s.Read("foo", store.ReadSuffix()); err != nil {
-		t.Errorf("Couldn't read all \"foo\" keys, got %# v (%s)", pretty.Formatter(results), err)
+		t.Errorf("Couldn't read all \"foo\" keys, got %#v (%s)", spew.Sdump(results), err)
 	} else {
 		if len(results) != 0 {
-			t.Errorf("Expected 0 items, got %d (%# v)", len(results), pretty.Formatter(results))
+			t.Errorf("Expected 0 items, got %d (%#v)", len(results), spew.Sdump(results))
 		}
 	}
 
@@ -226,7 +227,7 @@ func basictest(s store.Store, t *testing.T) {
 		t.Error(err)
 	} else {
 		if len(results) != 1 {
-			t.Errorf("Expected 1 results, got %d: %# v", len(results), pretty.Formatter(results))
+			t.Errorf("Expected 1 results, got %d: %#v", len(results), spew.Sdump(results))
 		}
 	}
 	time.Sleep(time.Millisecond * 100)

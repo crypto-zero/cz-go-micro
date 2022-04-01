@@ -10,7 +10,6 @@ import (
 
 	"c-z.dev/go-micro/store"
 	"github.com/davecgh/go-spew/spew"
-	"github.com/kr/pretty"
 )
 
 func cleanup(db string, s store.Store) {
@@ -101,7 +100,7 @@ func fileTest(s store.Store, t *testing.T) {
 
 	for _, r := range records {
 		if err := s.Write(r); err != nil {
-			t.Errorf("Couldn't write k: %s, v: %# v (%s)", r.Key, pretty.Formatter(r.Value), err)
+			t.Errorf("Couldn't write k: %s, v: %#v (%s)", r.Key, spew.Sdump(r.Value), err)
 		}
 	}
 
@@ -156,7 +155,7 @@ func fileTest(s store.Store, t *testing.T) {
 	}
 	for _, r := range records {
 		if err := s.Write(r); err != nil {
-			t.Errorf("Couldn't write k: %s, v: %# v (%s)", r.Key, pretty.Formatter(r.Value), err)
+			t.Errorf("Couldn't write k: %s, v: %#v (%s)", r.Key, spew.Sdump(r.Value), err)
 		}
 	}
 	if results, err := s.Read("foo", store.ReadSuffix()); err != nil {
