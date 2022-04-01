@@ -9,13 +9,11 @@ require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/ef-ds/deque v1.0.4
 	github.com/evanphx/json-patch/v5 v5.6.0
-	github.com/forestgiant/sliceutil v0.0.0-20160425183142-94783f95db6c
 	github.com/fsnotify/fsnotify v1.5.1
 	github.com/fsouza/go-dockerclient v1.7.10
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-acme/lego/v3 v3.9.0
 	github.com/go-git/go-git/v5 v5.4.2
-	github.com/go-telegram-bot-api/telegram-bot-api/v5 v5.5.1
 	github.com/gobwas/ws v1.1.0
 	github.com/golang-jwt/jwt/v4 v4.4.1
 	github.com/google/uuid v1.3.0
