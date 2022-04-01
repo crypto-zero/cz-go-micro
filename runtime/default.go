@@ -188,7 +188,7 @@ func (r *runtime) Init(opts ...Option) error {
 	return nil
 }
 
-// run runs the runtime management loop
+// run the runtime management loop
 func (r *runtime) run(events <-chan Event) {
 	t := time.NewTicker(time.Second * 5)
 	defer t.Stop()
