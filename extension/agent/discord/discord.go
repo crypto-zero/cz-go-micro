@@ -24,7 +24,7 @@ type discordInput struct {
 	token     string
 	whitelist []string
 	prefix    string
-	prefixfn  func(string) (string, bool)
+	prefixFn  func(string) (string, bool)
 	botID     string
 
 	session *discordgo.Session
@@ -98,7 +98,7 @@ func (d *discordInput) Start() error {
 	}
 
 	d.botID = u.ID
-	d.prefixfn = CheckPrefixFactory(fmt.Sprintf("<@%s> ", d.botID), fmt.Sprintf("<@!%s> ", d.botID), d.prefix)
+	d.prefixFn = CheckPrefixFactory(fmt.Sprintf("<@%s> ", d.botID), fmt.Sprintf("<@!%s> ", d.botID), d.prefix)
 
 	d.exit = make(chan struct{})
 	d.running = true

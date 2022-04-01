@@ -5,7 +5,6 @@ go 1.18
 require (
 	github.com/BurntSushi/toml v1.0.0
 	github.com/bitly/go-simplejson v0.5.1-0.20200416141419-39a59b1b2866
-	github.com/bwmarrin/discordgo v0.24.0
 	github.com/caddyserver/certmagic v0.16.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/ef-ds/deque v1.0.4
@@ -41,6 +40,7 @@ require (
 	go.uber.org/zap v1.21.0
 	golang.org/x/crypto v0.0.0-20220321153916-2c7772ba3064
 	golang.org/x/net v0.0.0-20220325170049-de3da57026de
+	golang.org/x/text v0.3.7
 	google.golang.org/genproto v0.0.0-20220329172620-7be39ac1afc7
 	google.golang.org/grpc v1.45.0
 	google.golang.org/grpc/examples v0.0.0-20220330220137-99aae3442dbe
@@ -108,7 +108,6 @@ require (
 	go.uber.org/multierr v1.6.0 // indirect
 	golang.org/x/mod v0.4.2 // indirect
 	golang.org/x/sys v0.0.0-20220111092808-5a964db01320 // indirect
-	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/tools v0.1.6-0.20210726203631-07bc1bf47fb2 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	gopkg.in/fsnotify.v1 v1.4.7 // indirect
