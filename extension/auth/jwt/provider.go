@@ -10,29 +10,29 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 )
 
-// authClaims to be encoded in the JWT
+// authClaims to be encoded in the jwtTokenProvider
 type authClaims struct {
 	Type     string            `json:"type"`
 	Scopes   []string          `json:"scopes"`
 	Metadata map[string]string `json:"metadata"`
 
-	jwt.StandardClaims
+	jwt.RegisteredClaims
 }
 
-// JWT implementation of token provider
-type JWT struct {
+// jwtTokenProvider implementation of token provider
+type jwtTokenProvider struct {
 	opts token.Options
 }
 
 // NewTokenProvider returns an initialized basic provider
 func NewTokenProvider(opts ...token.Option) token.Provider {
-	return &JWT{
+	return &jwtTokenProvider{
 		opts: token.NewOptions(opts...),
 	}
 }
 
-// Generate a new JWT
-func (j *JWT) Generate(acc *auth.Account, opts ...token.GenerateOption) (*token.Token, error) {
+// Generate a new jwtTokenProvider
+func (j *jwtTokenProvider) Generate(acc *auth.Account, opts ...token.GenerateOption) (*token.Token, error) {
 	// decode the private key
 	priv, err := base64.StdEncoding.DecodeString(j.opts.PrivateKey)
 	if err != nil {
@@ -48,13 +48,13 @@ func (j *JWT) Generate(acc *auth.Account, opts ...token.GenerateOption) (*token.
 	// parse the options
 	options := token.NewGenerateOptions(opts...)
 
-	// generate the JWT
+	// generate the jwtTokenProvider
 	expiry := time.Now().Add(options.Expiry)
 	t := jwt.NewWithClaims(jwt.SigningMethodRS256, authClaims{
-		acc.Type, acc.Scopes, acc.Metadata, jwt.StandardClaims{
+		acc.Type, acc.Scopes, acc.Metadata, jwt.RegisteredClaims{
 			Subject:   acc.ID,
 			Issuer:    acc.Issuer,
-			ExpiresAt: expiry.Unix(),
+			ExpiresAt: jwt.NewNumericDate(expiry),
 		},
 	})
 	tok, err := t.SignedString(key)
@@ -70,8 +70,8 @@ func (j *JWT) Generate(acc *auth.Account, opts ...token.GenerateOption) (*token.
 	}, nil
 }
 
-// Inspect a JWT
-func (j *JWT) Inspect(t string) (*auth.Account, error) {
+// Inspect a jwtTokenProvider
+func (j *jwtTokenProvider) Inspect(t string) (*auth.Account, error) {
 	// decode the public key
 	pub, err := base64.StdEncoding.DecodeString(j.opts.PublicKey)
 	if err != nil {
@@ -105,7 +105,7 @@ func (j *JWT) Inspect(t string) (*auth.Account, error) {
 	}, nil
 }
 
-// String returns JWT
-func (j *JWT) String() string {
+// String returns jwtTokenProvider
+func (j *jwtTokenProvider) String() string {
 	return "jwt"
 }

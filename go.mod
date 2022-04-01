@@ -9,12 +9,10 @@ require (
 	github.com/evanphx/json-patch/v5 v5.6.0
 	github.com/fsnotify/fsnotify v1.5.1
 	github.com/gobwas/ws v1.1.0
-	github.com/golang-jwt/jwt/v4 v4.4.1
 	github.com/google/uuid v1.3.0
 	github.com/gorilla/handlers v1.5.1
 	github.com/imdario/mergo v0.3.12
 	github.com/kr/pretty v0.3.0
-	github.com/lib/pq v1.10.4
 	github.com/lucas-clemente/quic-go v0.26.0
 	github.com/miekg/dns v1.1.47
 	github.com/mitchellh/hashstructure v1.1.0
