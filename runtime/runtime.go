@@ -69,7 +69,7 @@ const (
 	Delete
 )
 
-// String returns human readable event type
+// String returns human-readable event type
 func (t EventType) String() string {
 	switch t {
 	case Create:
@@ -107,4 +107,46 @@ type Service struct {
 	Source string
 	// Metadata stores metadata
 	Metadata map[string]string
+}
+
+type emptyRuntime struct{}
+
+func (e emptyRuntime) Init(option ...Option) error {
+	return nil
+}
+
+func (e emptyRuntime) Create(service *Service, option ...CreateOption) error {
+	return nil
+}
+
+func (e emptyRuntime) Read(option ...ReadOption) ([]*Service, error) {
+	return nil, nil
+}
+
+func (e emptyRuntime) Update(service *Service, option ...UpdateOption) error {
+	return nil
+}
+
+func (e emptyRuntime) Delete(service *Service, option ...DeleteOption) error {
+	return nil
+}
+
+func (e emptyRuntime) Logs(service *Service, option ...LogsOption) (LogStream, error) {
+	return nil, nil
+}
+
+func (e emptyRuntime) Start() error {
+	return nil
+}
+
+func (e emptyRuntime) Stop() error {
+	return nil
+}
+
+func (e emptyRuntime) String() string {
+	return "empty"
+}
+
+func NewRuntime(opts ...Option) Runtime {
+	return new(emptyRuntime)
 }

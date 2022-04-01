@@ -3,7 +3,9 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"math/rand"
+	"os"
 	"strings"
 	"time"
 
@@ -53,8 +55,6 @@ import (
 	regSrv "c-z.dev/go-micro/registry/service"
 
 	// runtimes
-	kRuntime "c-z.dev/go-micro/runtime/kubernetes"
-	lRuntime "c-z.dev/go-micro/runtime/local"
 	srvRuntime "c-z.dev/go-micro/runtime/service"
 
 	// selectors
@@ -207,7 +207,7 @@ var (
 			Name:    "runtime",
 			Usage:   "Runtime for building and running services e.g local, kubernetes",
 			EnvVars: []string{"MICRO_RUNTIME"},
-			Value:   "local",
+			Value:   "empty",
 		},
 		&cli.StringFlag{
 			Name:    "runtime_source",
@@ -364,9 +364,8 @@ var (
 	}
 
 	DefaultRuntimes = map[string]func(...runtime.Option) runtime.Runtime{
-		"local":      lRuntime.NewRuntime,
-		"service":    srvRuntime.NewRuntime,
-		"kubernetes": kRuntime.NewRuntime,
+		"service": srvRuntime.NewRuntime,
+		"empty":   runtime.NewRuntime,
 	}
 
 	DefaultStores = map[string]func(...store.Option) store.Store{
@@ -484,7 +483,7 @@ func (c *cmd) Before(ctx *cli.Context) error {
 	if name := ctx.String("store"); len(name) > 0 {
 		s, ok := c.opts.Stores[name]
 		if !ok {
-			return fmt.Errorf("Unsupported store: %s", name)
+			return fmt.Errorf("unsupported store: %s", name)
 		}
 
 		*c.opts.Store = s(store.WithClient(microClient))
@@ -494,7 +493,7 @@ func (c *cmd) Before(ctx *cli.Context) error {
 	if name := ctx.String("runtime"); len(name) > 0 {
 		r, ok := c.opts.Runtimes[name]
 		if !ok {
-			return fmt.Errorf("Unsupported runtime: %s", name)
+			return fmt.Errorf("unsupported runtime: %s", name)
 		}
 
 		*c.opts.Runtime = r(runtime.WithClient(microClient))
@@ -504,7 +503,7 @@ func (c *cmd) Before(ctx *cli.Context) error {
 	if name := ctx.String("tracer"); len(name) > 0 {
 		r, ok := c.opts.Tracers[name]
 		if !ok {
-			return fmt.Errorf("Unsupported tracer: %s", name)
+			return fmt.Errorf("unsupported tracer: %s", name)
 		}
 
 		*c.opts.Tracer = r()
@@ -572,7 +571,7 @@ func (c *cmd) Before(ctx *cli.Context) error {
 	if name := ctx.String("auth"); len(name) > 0 {
 		a, ok := c.opts.Auths[name]
 		if !ok {
-			return fmt.Errorf("Unsupported auth: %s", name)
+			return fmt.Errorf("unsupported auth: %s", name)
 		}
 		*c.opts.Auth = a(authOpts...)
 		serverOpts = append(serverOpts, server.Auth(*c.opts.Auth))
@@ -584,7 +583,7 @@ func (c *cmd) Before(ctx *cli.Context) error {
 	if name := ctx.String("registry"); len(name) > 0 && (*c.opts.Registry).String() != name {
 		r, ok := c.opts.Registries[name]
 		if !ok {
-			return fmt.Errorf("Registry %s not found", name)
+			return fmt.Errorf("registry %s not found", name)
 		}
 
 		*c.opts.Registry = r(registrySrv.WithClient(microClient))
@@ -612,7 +611,7 @@ func (c *cmd) Before(ctx *cli.Context) error {
 	if name := ctx.String("profile"); len(name) > 0 {
 		p, ok := c.opts.Profiles[name]
 		if !ok {
-			return fmt.Errorf("Unsupported profile: %s", name)
+			return fmt.Errorf("unsupported profile: %s", name)
 		}
 
 		*c.opts.Profile = p()
@@ -622,7 +621,7 @@ func (c *cmd) Before(ctx *cli.Context) error {
 	if name := ctx.String("broker"); len(name) > 0 && (*c.opts.Broker).String() != name {
 		b, ok := c.opts.Brokers[name]
 		if !ok {
-			return fmt.Errorf("Broker %s not found", name)
+			return fmt.Errorf("broker %s not found", name)
 		}
 
 		*c.opts.Broker = b()
@@ -634,7 +633,7 @@ func (c *cmd) Before(ctx *cli.Context) error {
 	if name := ctx.String("selector"); len(name) > 0 && (*c.opts.Selector).String() != name {
 		s, ok := c.opts.Selectors[name]
 		if !ok {
-			return fmt.Errorf("Selector %s not found", name)
+			return fmt.Errorf("selector %s not found", name)
 		}
 
 		*c.opts.Selector = s(selector.Registry(*c.opts.Registry))
@@ -647,7 +646,7 @@ func (c *cmd) Before(ctx *cli.Context) error {
 	if name := ctx.String("transport"); len(name) > 0 && (*c.opts.Transport).String() != name {
 		t, ok := c.opts.Transports[name]
 		if !ok {
-			return fmt.Errorf("Transport %s not found", name)
+			return fmt.Errorf("transport %s not found", name)
 		}
 
 		*c.opts.Transport = t()
@@ -803,7 +802,9 @@ func (c *cmd) Init(opts ...Option) error {
 	}
 	c.app.HideVersion = len(c.opts.Version) == 0
 	c.app.Usage = c.opts.Description
-	c.app.RunAndExitOnError()
+	if err := c.app.Run(os.Args); err != nil {
+		log.Fatal(err)
+	}
 	return nil
 }
 
