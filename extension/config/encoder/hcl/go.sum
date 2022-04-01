@@ -1,0 +1,6 @@
+c-z.dev/go-micro v0.0.0-20220331184351-30c877cc3979 h1:cQ03oYjesBFuI/MGGuDSym5SCeUN9UlBiEjccB6gwF8=
+c-z.dev/go-micro v0.0.0-20220331184351-30c877cc3979/go.mod h1:AoDea690KsIBWVir3k4ACV3QlQ0m/QB4KvJXsskBqwU=
+github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
+github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/hashicorp/hcl v1.0.0 h1:0Anlzjpi4vEasTeNFn2mLJgTSwt0+6sfsiTG8qcWGx4=
+github.com/hashicorp/hcl v1.0.0/go.mod h1:E5yfLk+7swimpb2L/Alb/PJmXilQ/rhwaUYs4T20WEQ=
