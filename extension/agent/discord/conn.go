@@ -44,7 +44,7 @@ func newConn(master *discordInput) *discordConn {
 		}
 
 		var valid bool
-		m.Message.Content, valid = conn.master.prefixfn(m.Message.Content)
+		m.Message.Content, valid = conn.master.prefixFn(m.Message.Content)
 		if !valid {
 			return
 		}
