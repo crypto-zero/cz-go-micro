@@ -117,7 +117,7 @@ func fileTest(s store.Store, t *testing.T) {
 	time.Sleep(time.Millisecond * 200)
 
 	if results, err := s.Read("foo", store.ReadPrefix()); err != nil {
-		t.Errorf("Couldn't read all \"foo\" keys, got %# v (%s)", spew.Sdump(results), err)
+		t.Errorf("Couldn't read all \"foo\" keys, got %#v (%s)", spew.Sdump(results), err)
 	} else if len(results) != 1 {
 		t.Errorf("Expected 1 item, got %d", len(results))
 		// t.Logf("Table test: %v\n", spew.Sdump(results))
@@ -128,10 +128,10 @@ func fileTest(s store.Store, t *testing.T) {
 	}
 
 	if results, err := s.Read("foo"); err != store.ErrNotFound {
-		t.Errorf("Expected read failure read all \"foo\" keys, got %# v (%s)", spew.Sdump(results), err)
+		t.Errorf("Expected read failure read all \"foo\" keys, got %#v (%s)", spew.Sdump(results), err)
 	} else {
 		if len(results) != 0 {
-			t.Errorf("Expected 0 items, got %d (%# v)", len(results), spew.Sdump(results))
+			t.Errorf("Expected 0 items, got %d (%#v)", len(results), spew.Sdump(results))
 		}
 	}
 
@@ -159,7 +159,7 @@ func fileTest(s store.Store, t *testing.T) {
 		}
 	}
 	if results, err := s.Read("foo", store.ReadSuffix()); err != nil {
-		t.Errorf("Couldn't read all \"foo\" keys, got %# v (%s)", spew.Sdump(results), err)
+		t.Errorf("Couldn't read all \"foo\" keys, got %#v (%s)", spew.Sdump(results), err)
 	} else {
 		if len(results) != 3 {
 			t.Errorf("Expected 3 items, got %d", len(results))
@@ -168,7 +168,7 @@ func fileTest(s store.Store, t *testing.T) {
 	}
 	time.Sleep(time.Millisecond * 100)
 	if results, err := s.Read("foo", store.ReadSuffix()); err != nil {
-		t.Errorf("Couldn't read all \"foo\" keys, got %# v (%s)", spew.Sdump(results), err)
+		t.Errorf("Couldn't read all \"foo\" keys, got %#v (%s)", spew.Sdump(results), err)
 	} else {
 		if len(results) != 2 {
 			t.Errorf("Expected 2 items, got %d", len(results))
@@ -177,7 +177,7 @@ func fileTest(s store.Store, t *testing.T) {
 	}
 	time.Sleep(time.Millisecond * 100)
 	if results, err := s.Read("foo", store.ReadSuffix()); err != nil {
-		t.Errorf("Couldn't read all \"foo\" keys, got %# v (%s)", spew.Sdump(results), err)
+		t.Errorf("Couldn't read all \"foo\" keys, got %#v (%s)", spew.Sdump(results), err)
 	} else {
 		if len(results) != 1 {
 			t.Errorf("Expected 1 item, got %d", len(results))
@@ -188,10 +188,10 @@ func fileTest(s store.Store, t *testing.T) {
 		t.Errorf("Delete failed (%v)", err)
 	}
 	if results, err := s.Read("foo", store.ReadSuffix()); err != nil {
-		t.Errorf("Couldn't read all \"foo\" keys, got %# v (%s)", spew.Sdump(results), err)
+		t.Errorf("Couldn't read all \"foo\" keys, got %#v (%s)", spew.Sdump(results), err)
 	} else {
 		if len(results) != 0 {
-			t.Errorf("Expected 0 items, got %d (%# v)", len(results), spew.Sdump(results))
+			t.Errorf("Expected 0 items, got %d (%#v)", len(results), spew.Sdump(results))
 		}
 	}
 
@@ -220,7 +220,7 @@ func fileTest(s store.Store, t *testing.T) {
 		t.Error(err)
 	} else {
 		if len(results) != 1 {
-			t.Errorf("Expected 1 results, got %d: %# v", len(results), spew.Sdump(results))
+			t.Errorf("Expected 1 results, got %d: %#v", len(results), spew.Sdump(results))
 		}
 	}
 
