@@ -13,12 +13,12 @@ import (
 	"github.com/caddyserver/certmagic"
 )
 
-type certmagicProvider struct {
+type certMagicProvider struct {
 	opts acme.Options
 }
 
 // TODO: set self-contained options
-func (c *certmagicProvider) setup() {
+func (c *certMagicProvider) setup() {
 	certmagic.DefaultACME.CA = c.opts.CA
 	if c.opts.ChallengeProvider != nil {
 		// Enabling DNS Challenge disables the other challenges
@@ -31,24 +31,24 @@ func (c *certmagicProvider) setup() {
 		certmagic.Default.Storage = c.opts.Cache.(certmagic.Storage)
 	}
 	// If multiple instances of the provider are running, inject some
-	// randomness so they don't collide
+	// randomness, so they don't collide
 	// RenewalWindowRatio [0.33 - 0.50)
 	rand.Seed(time.Now().UnixNano())
 	randomRatio := float64(rand.Intn(17)+33) * 0.01
 	certmagic.Default.RenewalWindowRatio = randomRatio
 }
 
-func (c *certmagicProvider) Listen(hosts ...string) (net.Listener, error) {
+func (c *certMagicProvider) Listen(hosts ...string) (net.Listener, error) {
 	c.setup()
 	return certmagic.Listen(hosts)
 }
 
-func (c *certmagicProvider) TLSConfig(hosts ...string) (*tls.Config, error) {
+func (c *certMagicProvider) TLSConfig(hosts ...string) (*tls.Config, error) {
 	c.setup()
 	return certmagic.TLS(hosts)
 }
 
-// NewProvider returns a certmagic provider
+// NewProvider returns a cert-magic provider
 func NewProvider(options ...acme.Option) acme.Provider {
 	opts := acme.DefaultOptions()
 
@@ -62,7 +62,7 @@ func NewProvider(options ...acme.Option) acme.Provider {
 		}
 	}
 
-	return &certmagicProvider{
+	return &certMagicProvider{
 		opts: opts,
 	}
 }

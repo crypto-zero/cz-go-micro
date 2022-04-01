@@ -1,7 +1,5 @@
 package acme
 
-import "github.com/go-acme/lego/v3/challenge"
-
 // Option (or Options) are passed to New() to configure providers
 type Option func(o *Options)
 
@@ -14,7 +12,7 @@ type Options struct {
 	CA string
 	// ChallengeProvider is a go-acme/lego challenge provider. Set this if you
 	// want to use DNS Challenges. Otherwise, tls-alpn-01 will be used
-	ChallengeProvider challenge.Provider
+	ChallengeProvider interface{}
 	// Issue certificates for domains on demand. Otherwise, certs will be
 	// retrieved / issued on start-up.
 	OnDemand bool
@@ -40,7 +38,7 @@ func CA(CA string) Option {
 
 // ChallengeProvider sets the Challenge provider of an acme.Options
 // if set, it enables the DNS challenge, otherwise tls-alpn-01 will be used.
-func ChallengeProvider(p challenge.Provider) Option {
+func ChallengeProvider(p interface{}) Option {
 	return func(o *Options) {
 		o.ChallengeProvider = p
 	}

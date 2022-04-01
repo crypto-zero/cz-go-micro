@@ -4,10 +4,11 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
 )
 
 func homeDir() string {
-	if runtime.GOOS == "windows" {
+	if strings.HasPrefix(runtime.GOOS, "windows") {
 		return os.Getenv("HOMEDRIVE") + os.Getenv("HOMEPATH")
 	}
 	if h := os.Getenv("HOME"); h != "" {

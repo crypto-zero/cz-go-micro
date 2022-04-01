@@ -4,13 +4,11 @@ go 1.18
 
 require (
 	github.com/bitly/go-simplejson v0.5.1-0.20200416141419-39a59b1b2866
-	github.com/caddyserver/certmagic v0.16.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/ef-ds/deque v1.0.4
 	github.com/evanphx/json-patch/v5 v5.6.0
 	github.com/fsnotify/fsnotify v1.5.1
 	github.com/fsouza/go-dockerclient v1.7.10
-	github.com/go-acme/lego/v3 v3.9.0
 	github.com/go-git/go-git/v5 v5.4.2
 	github.com/gobwas/ws v1.1.0
 	github.com/golang-jwt/jwt/v4 v4.4.1
@@ -68,13 +66,10 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
 	github.com/kevinburke/ssh_config v0.0.0-20201106050909-4977a11b4351 // indirect
-	github.com/klauspost/cpuid/v2 v2.0.11 // indirect
 	github.com/kr/text v0.2.0 // indirect
-	github.com/libdns/libdns v0.2.1 // indirect
 	github.com/marten-seemann/qtls-go1-16 v0.1.5 // indirect
 	github.com/marten-seemann/qtls-go1-17 v0.1.1 // indirect
 	github.com/marten-seemann/qtls-go1-18 v0.1.1 // indirect
-	github.com/mholt/acmez v1.0.2 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/moby/sys/mount v0.2.0 // indirect
 	github.com/moby/sys/mountinfo v0.5.0 // indirect
