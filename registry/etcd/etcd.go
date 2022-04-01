@@ -6,6 +6,7 @@ import (
 	"crypto/tls"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net"
 	"path"
 	"sort"
@@ -15,10 +16,8 @@ import (
 
 	"c-z.dev/go-micro/logger"
 	"c-z.dev/go-micro/registry"
-	hash "github.com/mitchellh/hashstructure"
 	"go.etcd.io/etcd/api/v3/v3rpc/rpctypes"
 	"go.etcd.io/etcd/client/v3"
-	"go.uber.org/zap"
 )
 
 var prefix = "/micro/registry/"
@@ -28,14 +27,14 @@ type etcdRegistry struct {
 	options registry.Options
 
 	sync.RWMutex
-	register map[string]uint64
+	register map[string]string
 	leases   map[string]clientv3.LeaseID
 }
 
 func NewRegistry(opts ...registry.Option) registry.Registry {
 	e := &etcdRegistry{
 		options:  registry.Options{},
-		register: make(map[string]uint64),
+		register: make(map[string]string),
 		leases:   make(map[string]clientv3.LeaseID),
 	}
 	configure(e, opts...)
@@ -71,10 +70,6 @@ func configure(e *etcdRegistry, opts ...registry.Option) error {
 		if ok {
 			config.Username = u.Username
 			config.Password = u.Password
-		}
-		cfg, ok := e.options.Context.Value(logConfigKey{}).(*zap.Config)
-		if ok && cfg != nil {
-			config.LogConfig = cfg
 		}
 	}
 
@@ -136,9 +131,9 @@ func (e *etcdRegistry) Options() registry.Options {
 	return e.options
 }
 
-func (e *etcdRegistry) registerNode(s *registry.Service, node *registry.Node, opts ...registry.RegisterOption) error {
+func (e *etcdRegistry) registerNode(s *registry.Service, node *registry.Node, opts ...registry.RegisterOption) (err error) {
 	if len(s.Nodes) == 0 {
-		return errors.New("Require at least one node")
+		return errors.New("require at least one node")
 	}
 
 	// check existing lease cache
@@ -169,10 +164,8 @@ func (e *etcdRegistry) registerNode(s *registry.Service, node *registry.Node, op
 				}
 
 				// create hash of service; uint64
-				h, err := hash.Hash(srv.Nodes[0], nil)
-				if err != nil {
-					continue
-				}
+				d, _ := json.Marshal(srv.Nodes[0])
+				h := fmt.Sprintf("%x", d)
 
 				// save the info
 				e.Lock()
@@ -206,10 +199,8 @@ func (e *etcdRegistry) registerNode(s *registry.Service, node *registry.Node, op
 	}
 
 	// create hash of service; uint64
-	h, err := hash.Hash(node, nil)
-	if err != nil {
-		return err
-	}
+	d, _ := json.Marshal(node)
+	h := fmt.Sprintf("%x", d)
 
 	// get existing hash for the service node
 	e.Lock()
