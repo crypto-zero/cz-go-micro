@@ -12,17 +12,17 @@ import (
 
 // Config is an interface abstraction for dynamic configuration
 type Config interface {
-	// provide the reader.Values interface
+	// Values provide the reader.Values interface
 	reader.Values
 	// Init the config
 	Init(opts ...Option) error
 	// Options in the config
 	Options() Options
-	// Stop the config loader/watcher
+	// Close stop the config loader/watcher
 	Close() error
 	// Load config sources
 	Load(source ...source.Source) error
-	// Force a source changeset sync
+	// Sync force a source change-set sync
 	Sync() error
 	// Watch a value for changes
 	Watch(path ...string) (Watcher, error)
@@ -53,12 +53,12 @@ func NewConfig(opts ...Option) (Config, error) {
 	return newConfig(opts...)
 }
 
-// Return config as raw json
+// Bytes return config as raw json
 func Bytes() []byte {
 	return DefaultConfig.Bytes()
 }
 
-// Return config as a map
+// Map return config as a map
 func Map() map[string]interface{} {
 	return DefaultConfig.Map()
 }
@@ -68,7 +68,7 @@ func Scan(v interface{}) error {
 	return DefaultConfig.Scan(v)
 }
 
-// Force a source changeset sync
+// Sync force a source changeset sync
 func Sync() error {
 	return DefaultConfig.Sync()
 }
@@ -88,7 +88,7 @@ func Watch(path ...string) (Watcher, error) {
 	return DefaultConfig.Watch(path...)
 }
 
-// LoadFile is short hand for creating a file source and loading it
+// LoadFile is shorthand for creating a file source and loading it
 func LoadFile(path string) error {
 	return Load(file.NewSource(
 		file.WithPath(path),

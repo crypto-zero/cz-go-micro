@@ -11,7 +11,7 @@ import (
 	"github.com/imdario/mergo"
 )
 
-var DefaultPrefixes = []string{}
+var DefaultPrefixes []string
 
 type env struct {
 	prefixes         []string

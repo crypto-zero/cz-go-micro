@@ -56,7 +56,7 @@ func (s *memory) Update(c *source.ChangeSet) {
 
 	// hash the file
 	s.Lock()
-	// update changeset
+	// update change-set
 	s.ChangeSet = &source.ChangeSet{
 		Data:      c.Data,
 		Format:    c.Format,
