@@ -14,9 +14,9 @@ import (
 
 // Sync implements a sync in for stores
 type Sync interface {
-	// Implements the store interface
+	// Store Implements the store interface
 	store.Store
-	// Force a full sync
+	// Sync Force a full sync
 	Sync() error
 }
 

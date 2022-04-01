@@ -8,7 +8,7 @@ import (
 
 var (
 	// DefaultRuntime is default micro runtime
-	DefaultRuntime Runtime = NewRuntime()
+	DefaultRuntime = NewRuntime()
 	// DefaultName is default runtime service name
 	DefaultName = "go.micro.runtime"
 
@@ -25,7 +25,7 @@ type Runtime interface {
 	Read(...ReadOption) ([]*Service, error)
 	// Update the service in place
 	Update(*Service, ...UpdateOption) error
-	// Remove a service
+	// Delete remove a service
 	Delete(*Service, ...DeleteOption) error
 	// Logs returns the logs for a service
 	Logs(*Service, ...LogsOption) (LogStream, error)
