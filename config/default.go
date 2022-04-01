@@ -78,7 +78,7 @@ func (c *config) Options() Options {
 func (c *config) run() {
 	watch := func(w loader.Watcher) error {
 		for {
-			// get changeset
+			// get change-set
 			snap, err := w.Next()
 			if err != nil {
 				return err

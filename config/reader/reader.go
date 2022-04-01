@@ -7,7 +7,7 @@ import (
 	"c-z.dev/go-micro/config/source"
 )
 
-// Reader is an interface for merging changesets
+// Reader is an interface for merging change-sets
 type Reader interface {
 	Merge(...*source.ChangeSet) (*source.ChangeSet, error)
 	Values(*source.ChangeSet) (Values, error)

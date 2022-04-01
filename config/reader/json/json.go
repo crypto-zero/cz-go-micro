@@ -62,7 +62,7 @@ func (j *jsonReader) Merge(changes ...*source.ChangeSet) (*source.ChangeSet, err
 
 func (j *jsonReader) Values(ch *source.ChangeSet) (reader.Values, error) {
 	if ch == nil {
-		return nil, errors.New("changeset is nil")
+		return nil, errors.New("change-set is nil")
 	}
 	if ch.Format != "json" {
 		return nil, errors.New("unsupported format")

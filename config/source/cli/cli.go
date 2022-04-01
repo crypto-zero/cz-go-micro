@@ -7,11 +7,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/imdario/mergo"
-	"github.com/urfave/cli/v2"
-
 	"c-z.dev/go-micro/config/cmd"
 	"c-z.dev/go-micro/config/source"
+
+	"github.com/imdario/mergo"
+	"github.com/urfave/cli/v2"
 )
 
 type cliSource struct {

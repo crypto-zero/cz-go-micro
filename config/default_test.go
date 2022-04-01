@@ -137,7 +137,7 @@ func equalS(t *testing.T, actual, expect string) {
 	}
 }
 
-func TestConfigWatcherDirtyOverrite(t *testing.T) {
+func TestConfigWatcherDirtyOverride(t *testing.T) {
 	n := runtime.GOMAXPROCS(0)
 	defer runtime.GOMAXPROCS(n)
 

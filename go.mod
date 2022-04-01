@@ -3,7 +3,6 @@ module c-z.dev/go-micro
 go 1.18
 
 require (
-	github.com/BurntSushi/toml v1.0.0
 	github.com/bitly/go-simplejson v0.5.1-0.20200416141419-39a59b1b2866
 	github.com/caddyserver/certmagic v0.16.0
 	github.com/davecgh/go-spew v1.1.1
@@ -11,14 +10,12 @@ require (
 	github.com/evanphx/json-patch/v5 v5.6.0
 	github.com/fsnotify/fsnotify v1.5.1
 	github.com/fsouza/go-dockerclient v1.7.10
-	github.com/ghodss/yaml v1.0.0
 	github.com/go-acme/lego/v3 v3.9.0
 	github.com/go-git/go-git/v5 v5.4.2
 	github.com/gobwas/ws v1.1.0
 	github.com/golang-jwt/jwt/v4 v4.4.1
 	github.com/google/uuid v1.3.0
 	github.com/gorilla/handlers v1.5.1
-	github.com/hashicorp/hcl v1.0.0
 	github.com/hpcloud/tail v1.0.0
 	github.com/imdario/mergo v0.3.12
 	github.com/kr/pretty v0.3.0
@@ -109,6 +106,5 @@ require (
 	gopkg.in/fsnotify.v1 v1.4.7 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
-	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
