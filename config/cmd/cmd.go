@@ -74,8 +74,6 @@ import (
 	// jTracer "c-z.dev/go-micro/debug/trace/jaeger"
 	memTracer "c-z.dev/go-micro/debug/trace/memory"
 
-	// auth
-	jwtAuth "c-z.dev/go-micro/auth/jwt"
 	svcAuth "c-z.dev/go-micro/auth/service"
 
 	// auth providers
@@ -380,7 +378,6 @@ var (
 
 	DefaultAuths = map[string]func(...auth.Option) auth.Auth{
 		"service": svcAuth.NewAuth,
-		"jwt":     jwtAuth.NewAuth,
 	}
 
 	DefaultAuthProviders = map[string]func(...provider.Option) provider.Provider{

@@ -9,7 +9,6 @@ import (
 	"c-z.dev/go-micro/auth/rules"
 	pb "c-z.dev/go-micro/auth/service/proto"
 	"c-z.dev/go-micro/auth/token"
-	"c-z.dev/go-micro/auth/token/jwt"
 	"c-z.dev/go-micro/client"
 )
 
@@ -36,13 +35,6 @@ func (s *svc) Init(opts ...auth.Option) {
 
 	s.auth = pb.NewAuthService("go.micro.auth", s.options.Client)
 	s.rules = pb.NewRulesService("go.micro.auth", s.options.Client)
-
-	// if we have a JWT public key passed as an option,
-	// we can decode tokens with the type "JWT" locally
-	// and not have to make an RPC call
-	if key := s.options.PublicKey; len(key) > 0 {
-		s.jwt = jwt.NewTokenProvider(token.WithPublicKey(key))
-	}
 }
 
 func (s *svc) Options() auth.Options {

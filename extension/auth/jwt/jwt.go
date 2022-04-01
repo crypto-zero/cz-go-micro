@@ -7,17 +7,16 @@ import (
 	"c-z.dev/go-micro/auth"
 	"c-z.dev/go-micro/auth/rules"
 	"c-z.dev/go-micro/auth/token"
-	jwtToken "c-z.dev/go-micro/auth/token/jwt"
 )
 
 // NewAuth returns a new instance of the Auth service
 func NewAuth(opts ...auth.Option) auth.Auth {
-	j := new(jwt)
+	j := new(jwtAuth)
 	j.Init(opts...)
 	return j
 }
 
-type jwt struct {
+type jwtAuth struct {
 	options auth.Options
 	jwt     token.Provider
 	rules   []*auth.Rule
@@ -25,11 +24,11 @@ type jwt struct {
 	sync.Mutex
 }
 
-func (j *jwt) String() string {
+func (j *jwtAuth) String() string {
 	return "jwt"
 }
 
-func (j *jwt) Init(opts ...auth.Option) {
+func (j *jwtAuth) Init(opts ...auth.Option) {
 	j.Lock()
 	defer j.Unlock()
 
@@ -37,19 +36,19 @@ func (j *jwt) Init(opts ...auth.Option) {
 		o(&j.options)
 	}
 
-	j.jwt = jwtToken.NewTokenProvider(
+	j.jwt = NewTokenProvider(
 		token.WithPrivateKey(j.options.PrivateKey),
 		token.WithPublicKey(j.options.PublicKey),
 	)
 }
 
-func (j *jwt) Options() auth.Options {
+func (j *jwtAuth) Options() auth.Options {
 	j.Lock()
 	defer j.Unlock()
 	return j.options
 }
 
-func (j *jwt) Generate(id string, opts ...auth.GenerateOption) (*auth.Account, error) {
+func (j *jwtAuth) Generate(id string, opts ...auth.GenerateOption) (*auth.Account, error) {
 	options := auth.NewGenerateOptions(opts...)
 	account := &auth.Account{
 		ID:       id,
@@ -59,7 +58,7 @@ func (j *jwt) Generate(id string, opts ...auth.GenerateOption) (*auth.Account, e
 		Issuer:   j.Options().Namespace,
 	}
 
-	// generate a JWT secret which can be provided to the Token() method
+	// generate a jwtTokenProvider secret which can be provided to the Token() method
 	// and exchanged for an access token
 	secret, err := j.jwt.Generate(account)
 	if err != nil {
@@ -71,14 +70,14 @@ func (j *jwt) Generate(id string, opts ...auth.GenerateOption) (*auth.Account, e
 	return account, nil
 }
 
-func (j *jwt) Grant(rule *auth.Rule) error {
+func (j *jwtAuth) Grant(rule *auth.Rule) error {
 	j.Lock()
 	defer j.Unlock()
 	j.rules = append(j.rules, rule)
 	return nil
 }
 
-func (j *jwt) Revoke(rule *auth.Rule) error {
+func (j *jwtAuth) Revoke(rule *auth.Rule) error {
 	j.Lock()
 	defer j.Unlock()
 
@@ -93,7 +92,7 @@ func (j *jwt) Revoke(rule *auth.Rule) error {
 	return nil
 }
 
-func (j *jwt) Verify(acc *auth.Account, res *auth.Resource, opts ...auth.VerifyOption) error {
+func (j *jwtAuth) Verify(acc *auth.Account, res *auth.Resource, opts ...auth.VerifyOption) error {
 	j.Lock()
 	defer j.Unlock()
 
@@ -105,17 +104,17 @@ func (j *jwt) Verify(acc *auth.Account, res *auth.Resource, opts ...auth.VerifyO
 	return rules.Verify(j.rules, acc, res)
 }
 
-func (j *jwt) Rules(opts ...auth.RulesOption) ([]*auth.Rule, error) {
+func (j *jwtAuth) Rules(opts ...auth.RulesOption) ([]*auth.Rule, error) {
 	j.Lock()
 	defer j.Unlock()
 	return j.rules, nil
 }
 
-func (j *jwt) Inspect(token string) (*auth.Account, error) {
+func (j *jwtAuth) Inspect(token string) (*auth.Account, error) {
 	return j.jwt.Inspect(token)
 }
 
-func (j *jwt) Token(opts ...auth.TokenOption) (*auth.Token, error) {
+func (j *jwtAuth) Token(opts ...auth.TokenOption) (*auth.Token, error) {
 	options := auth.NewTokenOptions(opts...)
 
 	secret := options.RefreshToken

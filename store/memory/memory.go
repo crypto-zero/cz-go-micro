@@ -1,4 +1,4 @@
-// Package memory is a in-memory store store
+// Package memory is an in-memory store store
 package memory
 
 import (
