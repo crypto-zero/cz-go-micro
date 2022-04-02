@@ -6,7 +6,7 @@ import (
 
 	"c-z.dev/go-micro/broker"
 
-	nats "github.com/nats-io/nats.go"
+	"github.com/nats-io/nats.go"
 )
 
 var addrTestCases = []struct {
