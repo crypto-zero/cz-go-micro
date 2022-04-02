@@ -134,7 +134,7 @@ func (h *httpTransportClient) Recv(m *Message) error {
 		r = rc
 	}
 
-	// set timeout if its greater than 0
+	// set timeout if it's greater than 0
 	if h.ht.opts.Timeout > time.Duration(0) {
 		h.conn.SetDeadline(time.Now().Add(h.ht.opts.Timeout))
 	}
@@ -410,7 +410,7 @@ func (h *httpTransportListener) Accept(fn func(Socket)) error {
 				return
 			}
 			r.Body = ioutil.NopCloser(bytes.NewReader(b))
-			// hijack the conn
+			// hijack to conn
 			hj, ok := w.(http.Hijacker)
 			if !ok {
 				// we're screwed
@@ -435,7 +435,7 @@ func (h *httpTransportListener) Accept(fn func(Socket)) error {
 		ch := make(chan *http.Request, 1)
 		ch <- r
 
-		// create a new transport socket
+		// create new transport socket
 		sock := &httpTransportSocket{
 			ht:     h.ht,
 			w:      w,
@@ -540,7 +540,7 @@ func (h *httpTransport) Listen(addr string, opts ...ListenOption) (Listener, err
 			if config == nil {
 				hosts := []string{addr}
 
-				// check if its a valid host:port
+				// check if it's a valid host:port
 				if host, _, err := net.SplitHostPort(addr); err == nil {
 					if len(host) == 0 {
 						hosts = maddr.IPs()
