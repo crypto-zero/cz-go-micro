@@ -13,7 +13,6 @@ require (
 	github.com/gorilla/handlers v1.5.1
 	github.com/imdario/mergo v0.3.12
 	github.com/miekg/dns v1.1.47
-	github.com/oxtoacart/bpool v0.0.0-20190530202638-03653db5a59c
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/stretchr/testify v1.7.1
 	github.com/urfave/cli/v2 v2.4.0

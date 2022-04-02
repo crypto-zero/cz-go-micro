@@ -4,6 +4,7 @@ package event
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"path"
 	"regexp"
@@ -11,14 +12,11 @@ import (
 	"time"
 
 	"c-z.dev/go-micro/api/handler"
-	proto "c-z.dev/go-micro/api/proto"
+	"c-z.dev/go-micro/api/proto"
 	"c-z.dev/go-micro/util/ctx"
 
 	"github.com/google/uuid"
-	"github.com/oxtoacart/bpool"
 )
-
-var bufferPool = bpool.NewSizedBufferPool(1024, 8)
 
 type event struct {
 	opts handler.Options
@@ -107,13 +105,12 @@ func (e *event) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		ev.Data = string(bytes)
 	} else {
 		// Read body
-		buf := bufferPool.Get()
-		defer bufferPool.Put(buf)
-		if _, err := buf.ReadFrom(r.Body); err != nil {
+		data, err := ioutil.ReadAll(r.Body)
+		if err != nil {
 			http.Error(w, err.Error(), 500)
 			return
 		}
-		ev.Data = buf.String()
+		ev.Data = string(data)
 	}
 
 	// get client
