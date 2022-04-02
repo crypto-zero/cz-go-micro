@@ -45,7 +45,6 @@ import (
 	// brokers
 	brokerHttp "c-z.dev/go-micro/broker/http"
 	"c-z.dev/go-micro/broker/memory"
-	"c-z.dev/go-micro/broker/nats"
 	brokerSrv "c-z.dev/go-micro/broker/service"
 
 	// registries
@@ -179,7 +178,7 @@ var (
 		&cli.StringFlag{
 			Name:    "broker",
 			EnvVars: []string{"MICRO_BROKER"},
-			Usage:   "Broker for pub/sub. http, nats, rabbitmq",
+			Usage:   "Broker for pub/sub. http, rabbitmq",
 		},
 		&cli.StringFlag{
 			Name:    "broker_address",
@@ -329,7 +328,6 @@ var (
 	DefaultBrokers = map[string]func(...broker.Option) broker.Broker{
 		"service": brokerSrv.NewBroker,
 		"memory":  memory.NewBroker,
-		"nats":    nats.NewBroker,
 		"http":    brokerHttp.NewBroker,
 	}
 
