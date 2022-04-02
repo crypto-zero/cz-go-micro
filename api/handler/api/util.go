@@ -2,6 +2,7 @@ package api
 
 import (
 	"fmt"
+	"io/ioutil"
 	"mime"
 	"net"
 	"net/http"
@@ -10,12 +11,7 @@ import (
 	api "c-z.dev/go-micro/api/proto"
 	"c-z.dev/go-micro/client/selector"
 	"c-z.dev/go-micro/registry"
-
-	"github.com/oxtoacart/bpool"
 )
-
-// need to calculate later to specify useful defaults
-var bufferPool = bpool.NewSizedBufferPool(1024, 8)
 
 func requestToProto(r *http.Request) (*api.Request, error) {
 	if err := r.ParseForm(); err != nil {
@@ -43,12 +39,11 @@ func requestToProto(r *http.Request) (*api.Request, error) {
 		case "application/x-www-form-urlencoded":
 			// expect form vals in Post data
 		default:
-			buf := bufferPool.Get()
-			defer bufferPool.Put(buf)
-			if _, err = buf.ReadFrom(r.Body); err != nil {
+			data, err := ioutil.ReadAll(r.Body)
+			if err != nil {
 				return nil, err
 			}
-			req.Body = buf.String()
+			req.Body = string(data)
 		}
 	}
 

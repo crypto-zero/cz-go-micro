@@ -4,6 +4,7 @@ package rpc
 import (
 	"encoding/json"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"net/textproto"
 	"strconv"
@@ -25,7 +26,6 @@ import (
 	"c-z.dev/go-micro/util/qson"
 
 	jsonpatch "github.com/evanphx/json-patch/v5"
-	"github.com/oxtoacart/bpool"
 )
 
 const (
@@ -49,8 +49,6 @@ var (
 		"application/proto-rpc",
 		"application/octet-stream",
 	}
-
-	bufferPool = bpool.NewSizedBufferPool(1024, 8)
 )
 
 type rpcHandler struct {
@@ -385,12 +383,11 @@ func requestPayload(r *http.Request) ([]byte, error) {
 		return out, nil
 	case "PATCH", "POST", "PUT", "DELETE":
 		bodybuf := []byte("{}")
-		buf := bufferPool.Get()
-		defer bufferPool.Put(buf)
-		if _, err := buf.ReadFrom(r.Body); err != nil {
+		b, err := ioutil.ReadAll(r.Body)
+		if err != nil {
 			return nil, err
 		}
-		if b := buf.Bytes(); len(b) > 0 {
+		if len(b) > 0 {
 			bodybuf = b
 		}
 		if bodydst == "" || bodydst == "*" {

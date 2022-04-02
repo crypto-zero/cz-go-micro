@@ -13,8 +13,6 @@ import (
 	"c-z.dev/go-micro/codec/proto"
 	"c-z.dev/go-micro/codec/protorpc"
 	"c-z.dev/go-micro/transport"
-
-	"github.com/oxtoacart/bpool"
 )
 
 type rpcCodec struct {
@@ -58,9 +56,6 @@ var (
 		"application/proto-rpc":    protorpc.NewCodec,
 		"application/octet-stream": protorpc.NewCodec,
 	}
-
-	// the local buffer pool
-	bufferPool = bpool.NewSizedBufferPool(32, 1)
 )
 
 func (rwc *readWriteCloser) Read(p []byte) (n int, err error) {
@@ -167,8 +162,8 @@ func setupProtocol(msg *transport.Message) codec.NewCodec {
 
 func newRpcCodec(req *transport.Message, socket transport.Socket, c codec.NewCodec) codec.Codec {
 	rwc := &readWriteCloser{
-		rbuf: bufferPool.Get(),
-		wbuf: bufferPool.Get(),
+		rbuf: new(bytes.Buffer),
+		wbuf: new(bytes.Buffer),
 	}
 
 	r := &rpcCodec{
@@ -343,9 +338,6 @@ func (c *rpcCodec) Close() error {
 	c.codec.Close()
 	// close the socket
 	err := c.socket.Close()
-	// put back the buffers
-	bufferPool.Put(c.buf.rbuf)
-	bufferPool.Put(c.buf.wbuf)
 	// return the error
 	return err
 }
