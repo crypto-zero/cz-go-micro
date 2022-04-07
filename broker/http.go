@@ -378,7 +378,7 @@ func (h *httpBroker) Connect() error {
 				// check if its a valid host:port
 				if host, _, err := net.SplitHostPort(addr); err == nil {
 					if len(host) == 0 {
-						hosts = maddr.IPs()
+						hosts = maddr.LocalIPs()
 					} else {
 						hosts = []string{host}
 					}

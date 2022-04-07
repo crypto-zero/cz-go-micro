@@ -543,7 +543,7 @@ func (h *httpTransport) Listen(addr string, opts ...ListenOption) (Listener, err
 				// check if it's a valid host:port
 				if host, _, err := net.SplitHostPort(addr); err == nil {
 					if len(host) == 0 {
-						hosts = maddr.IPs()
+						hosts = maddr.LocalIPs()
 					} else {
 						hosts = []string{host}
 					}
