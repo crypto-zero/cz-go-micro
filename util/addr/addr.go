@@ -46,15 +46,20 @@ func Extract(addr string) (string, error) {
 		return "", fmt.Errorf("failed to get interfaces err: %w", err)
 	}
 
-	var addresses []net.Addr
+	var addresses, loAddresses []net.Addr
 	for _, iface := range interfaces {
 		interfaceAddresses, err := iface.Addrs()
 		// ignore error, interface can disappear from system
 		if err != nil {
 			continue
 		}
+		if iface.Flags&net.FlagLoopback != 0 {
+			loAddresses = append(loAddresses, interfaceAddresses...)
+			continue
+		}
 		addresses = append(addresses, interfaceAddresses...)
 	}
+	addresses = append(addresses, loAddresses...)
 
 	var localAddr, publicIP string
 	for _, rawAddr := range addresses {
