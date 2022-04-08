@@ -10,6 +10,8 @@ import (
 
 	"c-z.dev/go-micro/codec"
 
+	"google.golang.org/grpc/encoding"
+	gep "google.golang.org/grpc/encoding/proto"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -57,15 +59,13 @@ func (c *protoCodec) Write(m *codec.Message, b interface{}) error {
 		if err != nil {
 			return err
 		}
-		// dont trust or incoming message
-		m, ok := b.(proto.Message)
-		if !ok {
-			return codec.ErrInvalidMessage
-		}
-		data, err = proto.Marshal(m)
+
+		cc := encoding.GetCodec(gep.Name)
+		data, err = cc.Marshal(b)
 		if err != nil {
 			return err
 		}
+
 		_, err = WriteNetString(c.rwc, data)
 		if err != nil {
 			return err
@@ -87,14 +87,14 @@ func (c *protoCodec) Write(m *codec.Message, b interface{}) error {
 		if err != nil {
 			return err
 		}
-		if pb, ok := b.(proto.Message); ok {
-			data, err = proto.Marshal(pb)
-			if err != nil {
-				return err
-			}
+
+		cc := encoding.GetCodec(gep.Name)
+		if x, er := cc.Marshal(b); er == nil {
+			data = x
 		} else {
 			data = nil
 		}
+
 		_, err = WriteNetString(c.rwc, data)
 		if err != nil {
 			return err
@@ -105,11 +105,8 @@ func (c *protoCodec) Write(m *codec.Message, b interface{}) error {
 			}
 		}
 	case codec.Event:
-		m, ok := b.(proto.Message)
-		if !ok {
-			return codec.ErrInvalidMessage
-		}
-		data, err := proto.Marshal(m)
+		cc := encoding.GetCodec(gep.Name)
+		data, err := cc.Marshal(b)
 		if err != nil {
 			return err
 		}

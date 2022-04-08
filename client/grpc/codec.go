@@ -11,13 +11,13 @@ import (
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/encoding"
+	gep "google.golang.org/grpc/encoding/proto"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )
 
 type (
 	jsonCodec  struct{}
-	protoCodec struct{}
 	bytesCodec struct{}
 	wrapCodec  struct{ encoding.Codec }
 )
@@ -26,12 +26,12 @@ var useNumber bool
 
 var defaultGRPCCodecs = map[string]encoding.Codec{
 	"application/json":         jsonCodec{},
-	"application/proto":        protoCodec{},
-	"application/protobuf":     protoCodec{},
-	"application/octet-stream": protoCodec{},
-	"application/grpc":         protoCodec{},
+	"application/proto":        encoding.GetCodec(gep.Name),
+	"application/protobuf":     encoding.GetCodec(gep.Name),
+	"application/octet-stream": encoding.GetCodec(gep.Name),
+	"application/grpc":         encoding.GetCodec(gep.Name),
 	"application/grpc+json":    jsonCodec{},
-	"application/grpc+proto":   protoCodec{},
+	"application/grpc+proto":   encoding.GetCodec(gep.Name),
 	"application/grpc+bytes":   bytesCodec{},
 }
 
@@ -59,28 +59,6 @@ func (w wrapCodec) Unmarshal(data []byte, v interface{}) error {
 		return nil
 	}
 	return w.Codec.Unmarshal(data, v)
-}
-
-func (protoCodec) Marshal(v interface{}) ([]byte, error) {
-	switch m := v.(type) {
-	case *bytes.Frame:
-		return m.Data, nil
-	case proto.Message:
-		return proto.Marshal(m)
-	}
-	return nil, fmt.Errorf("failed to marshal: %v is not type of *bytes.Frame or proto.Message", v)
-}
-
-func (protoCodec) Unmarshal(data []byte, v interface{}) error {
-	m, ok := v.(proto.Message)
-	if !ok {
-		return fmt.Errorf("failed to unmarshal: %v is not type of proto.Message", v)
-	}
-	return proto.Unmarshal(data, m)
-}
-
-func (protoCodec) Name() string {
-	return "proto"
 }
 
 func (bytesCodec) Marshal(v interface{}) ([]byte, error) {

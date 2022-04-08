@@ -34,7 +34,6 @@ type grpcClient struct {
 
 func init() {
 	encoding.RegisterCodec(wrapCodec{jsonCodec{}})
-	encoding.RegisterCodec(wrapCodec{protoCodec{}})
 	encoding.RegisterCodec(wrapCodec{bytesCodec{}})
 }
 

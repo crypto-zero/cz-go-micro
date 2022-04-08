@@ -7,7 +7,8 @@ import (
 
 	"c-z.dev/go-micro/codec"
 
-	"google.golang.org/protobuf/proto"
+	"google.golang.org/grpc/encoding"
+	gep "google.golang.org/grpc/encoding/proto"
 )
 
 type Codec struct {
@@ -26,19 +27,13 @@ func (c *Codec) ReadBody(b interface{}) error {
 	if err != nil {
 		return err
 	}
-	m, ok := b.(proto.Message)
-	if !ok {
-		return codec.ErrInvalidMessage
-	}
-	return proto.Unmarshal(buf, m)
+	cc := encoding.GetCodec(gep.Name)
+	return cc.Unmarshal(buf, b)
 }
 
 func (c *Codec) Write(m *codec.Message, b interface{}) error {
-	p, ok := b.(proto.Message)
-	if !ok {
-		return codec.ErrInvalidMessage
-	}
-	buf, err := proto.Marshal(p)
+	cc := encoding.GetCodec(gep.Name)
+	buf, err := cc.Marshal(b)
 	if err != nil {
 		return err
 	}

@@ -2,6 +2,7 @@ package grpc
 
 import (
 	"encoding/json"
+	"errors"
 	"strings"
 
 	"c-z.dev/go-micro/codec"
@@ -9,15 +10,17 @@ import (
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/encoding"
+	gep "google.golang.org/grpc/encoding/proto"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )
 
+var ErrInvalidMessage = errors.New("invalid message")
+
 type (
 	jsonCodec  struct{}
 	bytesCodec struct{}
-	protoCodec struct{}
 	wrapCodec  struct{ encoding.Codec }
 )
 
@@ -29,12 +32,12 @@ var jsonpbMarshaler = &protojson.MarshalOptions{
 
 var defaultGRPCCodecs = map[string]encoding.Codec{
 	"application/json":         jsonCodec{},
-	"application/proto":        protoCodec{},
-	"application/protobuf":     protoCodec{},
-	"application/octet-stream": protoCodec{},
-	"application/grpc":         protoCodec{},
+	"application/proto":        encoding.GetCodec(gep.Name),
+	"application/protobuf":     encoding.GetCodec(gep.Name),
+	"application/octet-stream": encoding.GetCodec(gep.Name),
+	"application/grpc":         encoding.GetCodec(gep.Name),
 	"application/grpc+json":    jsonCodec{},
-	"application/grpc+proto":   protoCodec{},
+	"application/grpc+proto":   encoding.GetCodec(gep.Name),
 	"application/grpc+bytes":   bytesCodec{},
 }
 
@@ -62,26 +65,6 @@ func (w wrapCodec) Unmarshal(data []byte, v interface{}) error {
 	return w.Codec.Unmarshal(data, v)
 }
 
-func (protoCodec) Marshal(v interface{}) ([]byte, error) {
-	m, ok := v.(proto.Message)
-	if !ok {
-		return nil, codec.ErrInvalidMessage
-	}
-	return proto.Marshal(m)
-}
-
-func (protoCodec) Unmarshal(data []byte, v interface{}) error {
-	m, ok := v.(proto.Message)
-	if !ok {
-		return codec.ErrInvalidMessage
-	}
-	return proto.Unmarshal(data, m)
-}
-
-func (protoCodec) Name() string {
-	return "proto"
-}
-
 func (jsonCodec) Marshal(v interface{}) ([]byte, error) {
 	if pb, ok := v.(proto.Message); ok {
 		return jsonpbMarshaler.Marshal(pb)
@@ -107,7 +90,7 @@ func (jsonCodec) Name() string {
 func (bytesCodec) Marshal(v interface{}) ([]byte, error) {
 	b, ok := v.(*[]byte)
 	if !ok {
-		return nil, codec.ErrInvalidMessage
+		return nil, ErrInvalidMessage
 	}
 	return *b, nil
 }
@@ -115,7 +98,7 @@ func (bytesCodec) Marshal(v interface{}) ([]byte, error) {
 func (bytesCodec) Unmarshal(data []byte, v interface{}) error {
 	b, ok := v.(*[]byte)
 	if !ok {
-		return codec.ErrInvalidMessage
+		return ErrInvalidMessage
 	}
 	*b = data
 	return nil

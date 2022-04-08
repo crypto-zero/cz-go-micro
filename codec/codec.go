@@ -2,7 +2,6 @@
 package codec
 
 import (
-	"errors"
 	"io"
 )
 
@@ -12,8 +11,6 @@ const (
 	Response
 	Event
 )
-
-var ErrInvalidMessage = errors.New("invalid message")
 
 type MessageType int
 
