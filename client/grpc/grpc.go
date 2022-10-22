@@ -37,9 +37,9 @@ func init() {
 	encoding.RegisterCodec(wrapCodec{bytesCodec{}})
 }
 
-// secure returns the dial option for whether its a secure or insecure connection
+// secure returns the dial option for whether it's a secure or insecure connection
 func (g *grpcClient) secure(addr string) grpc.DialOption {
-	// first we check if theres'a  tls config
+	// first we check if there's a tls config
 	if g.opts.Context != nil {
 		if v := g.opts.Context.Value(tlsAuth{}); v != nil {
 			tls := v.(*tls.Config)
@@ -114,6 +114,9 @@ func (g *grpcClient) call(ctx context.Context, node *registry.Node, req client.R
 	header["timeout"] = fmt.Sprintf("%d", opts.RequestTimeout)
 	// set the content type for the request
 	header["x-content-type"] = req.ContentType()
+
+	// fix : grpc error "stream terminated by RST_STREAM with error code: PROTOCOL_ERROR"
+	delete(header, "connection")
 
 	md := gmetadata.New(header)
 	ctx = gmetadata.NewOutgoingContext(ctx, md)
