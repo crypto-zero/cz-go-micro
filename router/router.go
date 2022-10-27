@@ -122,7 +122,7 @@ const (
 	AdvertiseNone
 )
 
-// String returns human readable Strategy
+// String returns human-readable Strategy
 func (s Strategy) String() string {
 	switch s {
 	case AdvertiseAll:
