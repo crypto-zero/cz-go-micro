@@ -2,26 +2,22 @@
 // versions:
 // - protoc-gen-go-micro 973dae118bcd8a11be9947a7dfc7f88de33578cc
 // - protoc              v3.21.8
-// source: example/example.proto
+// source: example.proto
 
 package proto
 
 import (
-	context "context"
-
 	api "c-z.dev/go-micro/api"
 	client "c-z.dev/go-micro/client"
 	server "c-z.dev/go-micro/server"
+	context "context"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ api.Endpoint
-
-var (
-	_ context.Context
-	_ client.Option
-	_ server.Option
-)
+var _ context.Context
+var _ client.Option
+var _ server.Option
 
 // NewExampleSrvEndpoints API Endpoints for ExampleSrv service
 func NewExampleSrvEndpoints() []*api.Endpoint {
