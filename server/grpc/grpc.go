@@ -31,6 +31,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/encoding"
+	gep "google.golang.org/grpc/encoding/proto"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
@@ -67,6 +68,10 @@ type grpcServer struct {
 func init() {
 	encoding.RegisterCodec(wrapCodec{jsonCodec{}})
 	encoding.RegisterCodec(wrapCodec{bytesCodec{}})
+	// the commit: 1626fef0b8ad9120a8237dd7b87ad81863fcc0fe for fix proto.Message type import path change.
+	// use wrapCodec to wrap default proto encoding for support read data directly without marshal/unmarshal.
+	// the proxy/much need read data directly.
+	encoding.RegisterCodec(wrapCodec{encoding.GetCodec(gep.Name)})
 }
 
 func newGRPCServer(opts ...server.Option) server.Server {

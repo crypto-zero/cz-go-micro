@@ -7,7 +7,8 @@ import (
 	"time"
 
 	"c-z.dev/go-micro/client"
-	"c-z.dev/go-micro/client/grpc"
+	cgrpc "c-z.dev/go-micro/client/grpc"
+	"c-z.dev/go-micro/client/selector"
 	"c-z.dev/go-micro/metadata"
 	"c-z.dev/go-micro/registry"
 	memregistry "c-z.dev/go-micro/registry/memory"
@@ -82,20 +83,32 @@ type GRPCTestSuite struct {
 	serverName string
 }
 
-func (gs *GRPCTestSuite) SetupTest() {
+func (gs *GRPCTestSuite) SetupSuite() {
+	gs.SetupContext()
+	gs.SetupRegistry()
+	gs.SetupGRPCServerClient()
+	gs.StartGRPCServer()
+}
+
+func (gs *GRPCTestSuite) TearDownSuite() {
+	gs.StopGRPCServer()
+}
+
+func (gs *GRPCTestSuite) SetupContext() {
 	gs.testContext = context.Background()
+}
+
+func (gs *GRPCTestSuite) SetupRegistry() {
 	gs.registry = memregistry.NewRegistry()
 	err := gs.registry.Init()
 	gs.NoError(err, "initial memory registry failed")
-
-	gs.SetupGRPCServerClient()
 }
 
 func (gs *GRPCTestSuite) SetupGRPCServerClient() {
 	gs.serverName = "grpc-server-test"
 
 	gs.server = sgrpc.NewServer()
-	gs.client = grpc.NewClient()
+	gs.client = cgrpc.NewClient()
 
 	err := gs.server.Init(
 		server.Name(gs.serverName),
@@ -107,13 +120,21 @@ func (gs *GRPCTestSuite) SetupGRPCServerClient() {
 	err = proto.RegisterExampleSrvHandler(gs.server, new(GRPCExampleHandler))
 	gs.NoError(err, "set grpc server handler failed")
 
-	err = gs.server.Start()
-	gs.NoError(err, "start grpc server failed")
-
 	err = gs.client.Init(
 		client.Registry(gs.registry),
+		client.Selector(selector.NewSelector(selector.Registry(gs.registry))),
 	)
 	gs.NoError(err, "initial grpc client failed")
+}
+
+func (gs *GRPCTestSuite) StartGRPCServer() {
+	err := gs.server.Start()
+	gs.NoError(err, "start grpc server failed")
+}
+
+func (gs *GRPCTestSuite) StopGRPCServer() {
+	err := gs.server.Stop()
+	gs.NoError(err, "stop grpc server failed")
 }
 
 func (gs *GRPCTestSuite) TestBasicRequest() {
