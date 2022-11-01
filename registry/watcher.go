@@ -10,11 +10,29 @@ type Watcher interface {
 	Stop()
 }
 
+const (
+	ResultActionCreate = "create"
+	ResultActionUpdate = "update"
+	ResultActionDelete = "delete"
+)
+
 // Result is returned by a call to Next on
-// the watcher. Actions can be create, update, delete
+// the watcher. Actions can be created, update, delete
 type Result struct {
 	Action  string
 	Service *Service
+}
+
+func (r *Result) IsCreate() bool {
+	return r.Action == ResultActionCreate
+}
+
+func (r *Result) IsUpdate() bool {
+	return r.Action == ResultActionUpdate
+}
+
+func (r *Result) IsDelete() bool {
+	return r.Action == ResultActionDelete
 }
 
 // EventType defines registry event type

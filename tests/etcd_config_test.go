@@ -19,7 +19,7 @@ type EtcdConfigTestSuite struct {
 }
 
 func (ect *EtcdConfigTestSuite) SetupSuite() {
-	ect.EtcdClusterTestSuite.SetupSuite()
+	ect.EtcdClusterTestSuite.SetupSuite(5)
 	ect.SetupConfig()
 }
 

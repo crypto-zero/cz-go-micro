@@ -27,8 +27,8 @@ type EtcdClusterTestSuite struct {
 	testKey, testContent string
 }
 
-func (ect *EtcdClusterTestSuite) SetupSuite() {
-	ect.etcdClusterSize = 5
+func (ect *EtcdClusterTestSuite) SetupSuite(etcdClusterSize int) {
+	ect.etcdClusterSize = etcdClusterSize
 
 	pool, err := dt.NewPool("")
 	ect.NoError(err, "docker test build pool failed")

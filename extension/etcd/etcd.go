@@ -2,6 +2,8 @@ package etcd
 
 import (
 	"context"
+	"fmt"
+	"net"
 	"time"
 
 	"c-z.dev/go-micro/logger"
@@ -59,9 +61,35 @@ func New(config clientv3.Config) (Client, error) {
 	}
 }
 
-func NewMaybeClient(config clientv3.Config) func() (Client, error) {
+type MaybeClient func() (Client, error)
+
+func (mc MaybeClient) Client() Client {
+	c, _ := mc()
+	return c
+}
+
+func (mc MaybeClient) Error() error {
+	_, err := mc()
+	return err
+}
+
+func NewMaybeClient(config clientv3.Config) MaybeClient {
 	c, err := New(config)
 	return func() (Client, error) {
 		return c, err
 	}
+}
+
+func FillAddressesPort(addresses []string) (out []string) {
+	for _, address := range addresses {
+		addr, port, err := net.SplitHostPort(address)
+		if ae, ok := err.(*net.AddrError); ok && ae.Err == "missing port in address" {
+			port = "2379"
+			addr = address
+			out = append(out, fmt.Sprintf("%s:%s", addr, port))
+			return
+		}
+		out = append(out, address)
+	}
+	return
 }

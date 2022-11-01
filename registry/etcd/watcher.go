@@ -3,7 +3,8 @@ package etcd
 import (
 	"context"
 	"errors"
-	"time"
+
+	eetcd "c-z.dev/go-micro/extension/etcd"
 
 	"c-z.dev/go-micro/registry"
 
@@ -11,37 +12,41 @@ import (
 )
 
 type etcdWatcher struct {
-	stop    chan bool
-	w       clientv3.WatchChan
-	client  *clientv3.Client
-	timeout time.Duration
+	baseEtcd
+	cancel context.CancelFunc
+
+	w clientv3.WatchChan
 }
 
-func newEtcdWatcher(r *etcdRegistry, timeout time.Duration, opts ...registry.WatchOption) (registry.Watcher, error) {
+func newEtcdWatcher(be *baseEtcd, opts ...registry.WatchOption) (out registry.Watcher, err error) {
 	var wo registry.WatchOptions
 	for _, o := range opts {
 		o(&wo)
 	}
 
-	ctx, cancel := context.WithCancel(context.Background())
-	stop := make(chan bool, 1)
-
-	go func() {
-		<-stop
-		cancel()
-	}()
+	ctx := be.ctx
+	if wo.Context != nil {
+		ctx = wo.Context
+	}
+	ctx, cancel := context.WithCancel(ctx)
 
 	watchPath := prefix
 	if len(wo.Service) > 0 {
-		watchPath = servicePath(wo.Service) + "/"
+		watchPath = be.servicePath(wo.Service) + "/"
 	}
 
-	return &etcdWatcher{
-		stop:    stop,
-		w:       r.client.Watch(ctx, watchPath, clientv3.WithPrefix(), clientv3.WithPrevKV()),
-		client:  r.client,
-		timeout: timeout,
-	}, nil
+	var wc clientv3.WatchChan
+	err = be.call(ctx, func(_ context.Context, c eetcd.Client) (err error) {
+		wc = c.Watcher.Watch(ctx, watchPath, clientv3.WithPrefix(), clientv3.WithPrevKV())
+		return nil
+	})
+	ew := &etcdWatcher{
+		baseEtcd: *be,
+		cancel:   cancel,
+		w:        wc,
+	}
+	ew.baseEtcd.ctx = ctx
+	return ew, nil
 }
 
 func (ew *etcdWatcher) Next() (*registry.Result, error) {
@@ -50,43 +55,35 @@ func (ew *etcdWatcher) Next() (*registry.Result, error) {
 			return nil, wresp.Err()
 		}
 		if wresp.Canceled {
-			return nil, errors.New("could not get next")
+			return nil, errors.New("could not get next because canceled")
 		}
 		for _, ev := range wresp.Events {
-			service := decode(ev.Kv.Value)
+			var err error
 			var action string
+			var service *registry.Service
 
 			switch ev.Type {
 			case clientv3.EventTypePut:
 				if ev.IsCreate() {
-					action = "create"
+					action = registry.ResultActionCreate
 				} else if ev.IsModify() {
-					action = "update"
+					action = registry.ResultActionUpdate
 				}
+				service, err = ew.decodeService(ev.Kv.Value)
 			case clientv3.EventTypeDelete:
-				action = "delete"
-
 				// get service from prevKv
-				service = decode(ev.PrevKv.Value)
+				action = registry.ResultActionDelete
+				service, err = ew.decodeService(ev.PrevKv.Value)
 			}
-
-			if service == nil {
+			if err != nil {
 				continue
 			}
-			return &registry.Result{
-				Action:  action,
-				Service: service,
-			}, nil
+			return &registry.Result{Action: action, Service: service}, nil
 		}
 	}
 	return nil, errors.New("could not get next")
 }
 
 func (ew *etcdWatcher) Stop() {
-	select {
-	case <-ew.stop:
-		return
-	default:
-		close(ew.stop)
-	}
+	ew.cancel()
 }

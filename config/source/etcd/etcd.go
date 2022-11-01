@@ -3,7 +3,6 @@ package etcd
 import (
 	"context"
 	"fmt"
-	"net"
 	"time"
 
 	"c-z.dev/go-micro/config/source"
@@ -16,7 +15,7 @@ import (
 // Currently a single etcd reader
 type etcd struct {
 	ctx         context.Context
-	maybeClient func() (eetcd.Client, error)
+	maybeClient eetcd.MaybeClient
 
 	prefix      string
 	stripPrefix string
@@ -91,16 +90,7 @@ func NewSource(opts ...source.Option) source.Source {
 	// check if there are any addrs
 	addrs, ok := options.Context.Value(addressKey{}).([]string)
 	if ok {
-		for _, a := range addrs {
-			addr, port, err := net.SplitHostPort(a)
-			if ae, ok := err.(*net.AddrError); ok && ae.Err == "missing port in address" {
-				port = "2379"
-				addr = a
-				endpoints = append(endpoints, fmt.Sprintf("%s:%s", addr, port))
-			} else if err == nil {
-				endpoints = append(endpoints, fmt.Sprintf("%s:%s", addr, port))
-			}
-		}
+		endpoints = eetcd.FillAddressesPort(addrs)
 	}
 
 	if len(endpoints) == 0 {
