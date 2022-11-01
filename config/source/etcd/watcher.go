@@ -3,47 +3,64 @@ package etcd
 import (
 	"context"
 	"errors"
-	"sync"
 	"time"
 
 	"c-z.dev/go-micro/config/source"
-
+	eetcd "c-z.dev/go-micro/extension/etcd"
+	"c-z.dev/go-micro/logger"
 	cetcd "go.etcd.io/etcd/client/v3"
 )
 
+type changeSetReader interface {
+	Read() (*source.ChangeSet, error)
+}
+
 type watcher struct {
+	ctx    context.Context
+	cancel context.CancelFunc
+
 	opts        source.Options
 	name        string
 	stripPrefix string
 
-	sync.RWMutex
 	cs *source.ChangeSet
-
-	ch   chan *source.ChangeSet
-	exit chan bool
+	ch chan *source.ChangeSet
 }
 
-func newWatcher(key, strip string, wc cetcd.Watcher, cs *source.ChangeSet, opts source.Options) (source.Watcher, error) {
+func newWatcher(ctx context.Context, reader changeSetReader, key, strip string, c eetcd.Client,
+	cs *source.ChangeSet, opts source.Options,
+) (source.Watcher, error) {
+	ctx, cancel := context.WithCancel(ctx)
 	w := &watcher{
+		ctx:         ctx,
+		cancel:      cancel,
 		opts:        opts,
 		name:        "etcd",
 		stripPrefix: strip,
 		cs:          cs,
 		ch:          make(chan *source.ChangeSet),
-		exit:        make(chan bool),
 	}
-
-	ch := wc.Watch(context.Background(), key, cetcd.WithPrefix())
-
-	go w.run(wc, ch)
-
+	c.Watch(ctx, key, func(events []*cetcd.Event, err error) {
+		if events != nil {
+			w.handle(events)
+		}
+		if err == nil {
+			return
+		}
+		cs, xerr := reader.Read()
+		if xerr == nil {
+			w.cs = cs
+			w.ch <- cs
+		}
+		if xerr != nil && logger.V(logger.ErrorLevel, logger.DefaultLogger) {
+			logger.Errorf("etcd watcher key: %s reload change set error: %v", key, xerr)
+		}
+	}, cetcd.WithPrefix())
 	return w, nil
 }
 
 func (w *watcher) handle(evs []*cetcd.Event) {
-	w.RLock()
 	data := w.cs.Data
-	w.RUnlock()
 
 	var vals map[string]interface{}
 
@@ -71,44 +88,22 @@ func (w *watcher) handle(evs []*cetcd.Event) {
 	cs.Checksum = cs.Sum()
 
 	// set base change set
-	w.Lock()
 	w.cs = cs
-	w.Unlock()
 
 	// send update
 	w.ch <- cs
-}
-
-func (w *watcher) run(wc cetcd.Watcher, ch cetcd.WatchChan) {
-	for {
-		select {
-		case rsp, ok := <-ch:
-			if !ok {
-				return
-			}
-			w.handle(rsp.Events)
-		case <-w.exit:
-			wc.Close()
-			return
-		}
-	}
 }
 
 func (w *watcher) Next() (*source.ChangeSet, error) {
 	select {
 	case cs := <-w.ch:
 		return cs, nil
-	case <-w.exit:
+	case <-w.ctx.Done():
 		return nil, errors.New("watcher stopped")
 	}
 }
 
 func (w *watcher) Stop() error {
-	select {
-	case <-w.exit:
-		return nil
-	default:
-		close(w.exit)
-	}
+	w.cancel()
 	return nil
 }

@@ -7,28 +7,31 @@ import (
 	"time"
 
 	"c-z.dev/go-micro/config/source"
+	eetcd "c-z.dev/go-micro/extension/etcd"
 
 	"go.etcd.io/etcd/api/v3/mvccpb"
-	cetcd "go.etcd.io/etcd/client/v3"
+	"go.etcd.io/etcd/client/v3"
 )
 
 // Currently a single etcd reader
 type etcd struct {
+	ctx         context.Context
+	maybeClient func() (eetcd.Client, error)
+
 	prefix      string
 	stripPrefix string
 	opts        source.Options
-	client      *cetcd.Client
-	cerr        error
 }
 
 var DefaultPrefix = "/micro/config/"
 
 func (c *etcd) Read() (*source.ChangeSet, error) {
-	if c.cerr != nil {
-		return nil, c.cerr
+	cc, err := c.maybeClient()
+	if err != nil {
+		return nil, err
 	}
 
-	rsp, err := c.client.Get(context.Background(), c.prefix, cetcd.WithPrefix())
+	rsp, err := cc.Get(context.Background(), c.prefix, clientv3.WithPrefix())
 	if err != nil {
 		return nil, err
 	}
@@ -65,14 +68,15 @@ func (c *etcd) String() string {
 }
 
 func (c *etcd) Watch() (source.Watcher, error) {
-	if c.cerr != nil {
-		return nil, c.cerr
+	cc, err := c.maybeClient()
+	if err != nil {
+		return nil, err
 	}
 	cs, err := c.Read()
 	if err != nil {
 		return nil, err
 	}
-	return newWatcher(c.prefix, c.stripPrefix, c.client.Watcher, cs, c.opts)
+	return newWatcher(c.ctx, c, c.prefix, c.stripPrefix, cc, cs, c.opts)
 }
 
 func (c *etcd) Write(cs *source.ChangeSet) error {
@@ -109,7 +113,7 @@ func NewSource(opts ...source.Option) source.Source {
 		dialTimeout = 3 * time.Second // default dial timeout
 	}
 
-	config := cetcd.Config{
+	config := clientv3.Config{
 		Endpoints:   endpoints,
 		DialTimeout: dialTimeout,
 	}
@@ -119,9 +123,6 @@ func NewSource(opts ...source.Option) source.Source {
 		config.Username = u.Username
 		config.Password = u.Password
 	}
-
-	// use default config
-	client, err := cetcd.New(config)
 
 	prefix := DefaultPrefix
 	sp := ""
@@ -138,7 +139,7 @@ func NewSource(opts ...source.Option) source.Source {
 		prefix:      prefix,
 		stripPrefix: sp,
 		opts:        options,
-		client:      client,
-		cerr:        err,
+		ctx:         context.Background(),
+		maybeClient: eetcd.NewMaybeClient(config),
 	}
 }
