@@ -52,7 +52,7 @@ func (ect *EtcdConfigTestSuite) TestConfigSource() {
 	for j := 0; j < 100; j++ {
 		newValue := fmt.Sprintf(`{"name": "hello1%d"}`, j)
 		rsp, err := ect.etcd2.Put(ctx, ect.testKey, newValue)
-		if errors.Is(err, rpctypes.ErrGRPCTimeout) {
+		if errors.Is(err, rpctypes.ErrTimeout) {
 			j--
 			continue
 		}
