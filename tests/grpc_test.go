@@ -147,6 +147,23 @@ func (gs *GRPCTestSuite) TestBasicRequest() {
 	gs.Equal("welcome: TestBasicRequest", out.Welcome, "call hello reply not equal")
 }
 
+func (gs *GRPCTestSuite) TestStreamRequest() {
+	ctx := metadata.NewContext(gs.testContext, map[string]string{"Connection": "keep-alive"})
+	in := &proto.HelloStreamRequest{Content: "TestStreamRequest", Time: 1}
+	req := gs.client.NewRequest(gs.serverName, "ExampleSrv.HelloStreamRequestX", in)
+	out := new(proto.HelloStreamReply)
+	s, err := gs.client.Stream(ctx, req)
+	gs.NoError(err, "client stream failed")
+	err = s.Send(in)
+	gs.NoError(err, "client stream send failed")
+	err = s.Recv(out)
+	gs.NoError(err, "client stream read failed")
+	err = s.Close()
+	gs.NoError(err, "client stream close failed")
+	gs.Equal(fmt.Sprintf("hello stream request x: %s", in.Content), out.Content,
+		"stream in content not equal out content")
+}
+
 func (gs *GRPCTestSuite) TestBasicRequestContentType() {
 	ctx := metadata.NewContext(gs.testContext, map[string]string{"Connection": "keep-alive"})
 	in := &proto.HelloRequest{Name: "TestBasicRequest"}

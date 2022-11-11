@@ -96,18 +96,14 @@ func (g *grpcClient) next(request client.Request, opts client.CallOptions) (sele
 }
 
 func (g *grpcClient) call(ctx context.Context, node *registry.Node, req client.Request, rsp interface{}, opts client.CallOptions) error {
-	var header map[string]string
-
 	address := node.Address
 
-	header = make(map[string]string)
+	header := make(map[string]string)
 	if md, ok := metadata.FromContext(ctx); ok {
 		header = make(map[string]string, len(md))
 		for k, v := range md {
 			header[strings.ToLower(k)] = v
 		}
-	} else {
-		header = make(map[string]string)
 	}
 
 	// set timeout in nanoseconds
@@ -178,17 +174,13 @@ func (g *grpcClient) call(ctx context.Context, node *registry.Node, req client.R
 }
 
 func (g *grpcClient) stream(ctx context.Context, node *registry.Node, req client.Request, rsp interface{}, opts client.CallOptions) error {
-	var header map[string]string
-
 	address := node.Address
-
+	header := make(map[string]string)
 	if md, ok := metadata.FromContext(ctx); ok {
 		header = make(map[string]string, len(md))
 		for k, v := range md {
-			header[k] = v
+			header[strings.ToLower(k)] = v
 		}
-	} else {
-		header = make(map[string]string)
 	}
 
 	// set timeout in nanoseconds
@@ -197,6 +189,9 @@ func (g *grpcClient) stream(ctx context.Context, node *registry.Node, req client
 	}
 	// set the content type for the request
 	header["x-content-type"] = req.ContentType()
+
+	// fix : grpc error "stream terminated by RST_STREAM with error code: PROTOCOL_ERROR"
+	delete(header, "connection")
 
 	md := gmetadata.New(header)
 	ctx = gmetadata.NewOutgoingContext(ctx, md)
