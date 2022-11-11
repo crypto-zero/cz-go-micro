@@ -2,15 +2,17 @@ package tests
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"os"
 	"testing"
 	"time"
 
+	"github.com/stretchr/testify/suite"
+	"go.etcd.io/etcd/api/v3/v3rpc/rpctypes"
+
 	"c-z.dev/go-micro/config"
 	"c-z.dev/go-micro/config/source/etcd"
-
-	"github.com/stretchr/testify/suite"
 )
 
 type EtcdConfigTestSuite struct {
@@ -50,6 +52,10 @@ func (ect *EtcdConfigTestSuite) TestConfigSource() {
 	for j := 0; j < 100; j++ {
 		newValue := fmt.Sprintf(`{"name": "hello1%d"}`, j)
 		rsp, err := ect.etcd2.Put(ctx, ect.testKey, newValue)
+		if errors.Is(err, rpctypes.ErrGRPCTimeout) {
+			j--
+			continue
+		}
 		ect.NoError(err, "write value to etcd2 failed")
 		revision = rsp.Header.Revision
 	}
