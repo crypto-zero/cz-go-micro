@@ -55,7 +55,7 @@ func serveWebsocket(ctx context.Context, w http.ResponseWriter, r *http.Request,
 			}
 		}
 	}
-	payload, err := requestPayload(r)
+	payload, err := requestPayload(r, ct)
 	if err != nil {
 		if logger.V(logger.ErrorLevel, logger.DefaultLogger) {
 			logger.Error(err)

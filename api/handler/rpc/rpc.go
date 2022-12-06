@@ -145,7 +145,7 @@ func (h *rpcHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	// walk the standard call path
 	// get payload
-	br, err := requestPayload(r)
+	br, err := requestPayload(r, ct)
 	if err != nil {
 		writeError(w, r, err)
 		return
@@ -241,13 +241,13 @@ func hasCodec(ct string, codecs []string) bool {
 // requestPayload takes a *http.Request.
 // If the request is a GET the query string parameters are extracted and marshaled to JSON and the raw bytes are returned.
 // If the request method is a POST the request body is read and returned
-func requestPayload(r *http.Request) ([]byte, error) {
+func requestPayload(r *http.Request, contentType string) ([]byte, error) {
 	var err error
 
 	// we have to decode json-rpc and proto-rpc because we suck
 	// well actually because there's no proxy codec right now
 
-	ct := r.Header.Get("Content-Type")
+	ct := contentType
 	switch {
 	case strings.Contains(ct, "application/json-rpc"):
 		msg := codec.Message{
