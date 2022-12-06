@@ -32,6 +32,11 @@ func serveWebsocket(ctx context.Context, w http.ResponseWriter, r *http.Request,
 		ct = ct[:idx]
 	}
 
+	// we always need to set content type for message
+	if ct == "" {
+		ct = "application/json"
+	}
+
 	// check proto from request
 	switch ct {
 	case "application/json":
@@ -108,10 +113,6 @@ func serveWebsocket(ctx context.Context, w http.ResponseWriter, r *http.Request,
 		}
 	}
 
-	// we always need to set content type for message
-	if ct == "" {
-		ct = "application/json"
-	}
 	req := c.NewRequest(
 		service.Name,
 		service.Endpoint.Name,
