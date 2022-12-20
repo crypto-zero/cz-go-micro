@@ -91,7 +91,7 @@ func serveWebsocket(ctx context.Context, w http.ResponseWriter, r *http.Request,
 		return
 	}
 
-	_, compression := e.Accepted()
+	// _, compression := e.Accepted()
 
 	defer func() {
 		if err := conn.Close(); err != nil {
@@ -172,15 +172,16 @@ func serveWebsocket(ctx context.Context, w http.ResponseWriter, r *http.Request,
 			} else {
 				frame = ws.NewBinaryFrame(buf)
 			}
-			if compression {
-				frame, err = wsflate.CompressFrame(frame)
-				if err != nil {
-					if logger.V(logger.ErrorLevel, logger.DefaultLogger) {
-						logger.Error(err)
-					}
-					return
-				}
-			}
+			// NOTE: Safari does not support compression.
+			// if compression {
+			// 	frame, err = wsflate.CompressFrame(frame)
+			// 	if err != nil {
+			// 		if logger.V(logger.ErrorLevel, logger.DefaultLogger) {
+			// 			logger.Error(err)
+			// 		}
+			// 		return
+			// 	}
+			// }
 
 			// write the response
 			writeLock.Lock()
