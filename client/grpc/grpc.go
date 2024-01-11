@@ -114,6 +114,9 @@ func (g *grpcClient) call(ctx context.Context, node *registry.Node, req client.R
 	// fix : grpc error "stream terminated by RST_STREAM with error code: PROTOCOL_ERROR"
 	delete(header, "connection")
 
+	fmt.Printf("grpcClient.call: header: %v\n", header)
+	header = map[string]string{}
+
 	md := gmetadata.New(header)
 	ctx = gmetadata.NewOutgoingContext(ctx, md)
 

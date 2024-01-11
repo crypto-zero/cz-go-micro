@@ -127,8 +127,6 @@ func (h *rpcHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		md[textproto.CanonicalMIMEHeaderKey(k)] = r.Header.Get(k)
 	}
 
-	fmt.Printf("md: %v\n", md)
-
 	// merge context with overwrite
 	cx = metadata.MergeContext(cx, md, true)
 
