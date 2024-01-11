@@ -9,7 +9,7 @@ import (
 	"c-z.dev/go-micro/config/reader"
 	"c-z.dev/go-micro/config/source"
 
-	"github.com/imdario/mergo"
+	"dario.cat/mergo"
 )
 
 type jsonReader struct {
