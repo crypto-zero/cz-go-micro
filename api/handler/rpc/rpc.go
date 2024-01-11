@@ -3,6 +3,7 @@ package rpc
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -125,6 +126,8 @@ func (h *rpcHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		// may be need to get all values for key like r.Header.Values() provide in go 1.14
 		md[textproto.CanonicalMIMEHeaderKey(k)] = r.Header.Get(k)
 	}
+
+	fmt.Printf("md: %v\n", md)
 
 	// merge context with overwrite
 	cx = metadata.MergeContext(cx, md, true)
