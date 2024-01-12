@@ -4,12 +4,16 @@ package grpc
 import (
 	"context"
 	"crypto/tls"
+	"encoding/base64"
 	"fmt"
 	"net"
 	"reflect"
 	"strings"
 	"sync/atomic"
 	"time"
+
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/structpb"
 
 	"c-z.dev/go-micro/broker"
 	"c-z.dev/go-micro/client"
@@ -111,13 +115,21 @@ func (g *grpcClient) call(ctx context.Context, node *registry.Node, req client.R
 	// set the content type for the request
 	header["x-content-type"] = req.ContentType()
 
-	// fix : grpc error "stream terminated by RST_STREAM with error code: PROTOCOL_ERROR"
-	delete(header, "connection")
+	headersInterface := make(map[string]interface{})
+	for k, v := range header {
+		headersInterface[k] = v
+	}
+	headerProto, err := structpb.NewStruct(headersInterface)
+	if err != nil {
+		return errors.InternalServerError("go.micro.client", err.Error())
+	}
+	headerData, err := proto.Marshal(headerProto)
+	if err != nil {
+		return errors.InternalServerError("go.micro.client", err.Error())
+	}
+	embeddedHeader := base64.StdEncoding.EncodeToString(headerData)
 
-	fmt.Printf("grpcClient.call: header: %v\n", header)
-	header = map[string]string{}
-
-	md := gmetadata.New(header)
+	md := gmetadata.New(map[string]string{"X-Micro-Metadata": embeddedHeader})
 	ctx = gmetadata.NewOutgoingContext(ctx, md)
 
 	cf, err := g.newGRPCCodec(req.ContentType())
@@ -193,10 +205,21 @@ func (g *grpcClient) stream(ctx context.Context, node *registry.Node, req client
 	// set the content type for the request
 	header["x-content-type"] = req.ContentType()
 
-	// fix : grpc error "stream terminated by RST_STREAM with error code: PROTOCOL_ERROR"
-	delete(header, "connection")
+	headersInterface := make(map[string]interface{})
+	for k, v := range header {
+		headersInterface[k] = v
+	}
+	headerProto, err := structpb.NewStruct(headersInterface)
+	if err != nil {
+		return errors.InternalServerError("go.micro.client", err.Error())
+	}
+	headerData, err := proto.Marshal(headerProto)
+	if err != nil {
+		return errors.InternalServerError("go.micro.client", err.Error())
+	}
+	embeddedHeader := base64.StdEncoding.EncodeToString(headerData)
 
-	md := gmetadata.New(header)
+	md := gmetadata.New(map[string]string{"X-Micro-Metadata": embeddedHeader})
 	ctx = gmetadata.NewOutgoingContext(ctx, md)
 
 	cf, err := g.newGRPCCodec(req.ContentType())

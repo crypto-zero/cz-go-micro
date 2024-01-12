@@ -4,6 +4,7 @@ package grpc
 import (
 	"context"
 	"crypto/tls"
+	"encoding/base64"
 	"fmt"
 	"net"
 	"reflect"
@@ -13,6 +14,9 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/structpb"
 
 	"c-z.dev/go-micro/broker"
 	"c-z.dev/go-micro/errors"
@@ -208,10 +212,26 @@ func (g *grpcServer) handler(srv interface{}, stream grpc.ServerStream) error {
 		gmd = metadata.MD{}
 	}
 
+	// extract embedded metadata
+	embeddedHeader := ""
+	if embeddedHeaders := gmd.Get("X-Micro-Metadata"); len(embeddedHeaders) > 0 {
+		embeddedHeader = embeddedHeaders[0]
+	}
+
 	// copy the metadata to go-micro.metadata
 	md := meta.Metadata{}
-	for k, v := range gmd {
-		md[k] = strings.Join(v, ", ")
+	if embeddedHeader != "" {
+		headerData, err := base64.StdEncoding.DecodeString(embeddedHeader)
+		if err != nil {
+			return status.New(codes.InvalidArgument, err.Error()).Err()
+		}
+		var s structpb.Struct
+		if err = proto.Unmarshal(headerData, &s); err != nil {
+			return status.New(codes.InvalidArgument, err.Error()).Err()
+		}
+		for k, v := range s.Fields {
+			md[k] = v.GetStringValue()
+		}
 	}
 
 	// timeout for server deadline
