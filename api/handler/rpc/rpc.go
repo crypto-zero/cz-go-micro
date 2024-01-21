@@ -3,6 +3,7 @@ package rpc
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -102,10 +103,14 @@ func (h *rpcHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	ct := r.Header.Get("Content-Type")
 
+	fmt.Println("Content-Type: ", ct)
+
 	// Strip charset from Content-Type (like `application/json; charset=UTF-8`)
 	if idx := strings.IndexRune(ct, ';'); idx >= 0 {
 		ct = ct[:idx]
 	}
+
+	fmt.Println("Content-Type: ", ct)
 
 	// micro client
 	c := h.opts.Client
