@@ -3,7 +3,6 @@ package rpc
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -103,15 +102,10 @@ func (h *rpcHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	ct := r.Header.Get("Content-Type")
 
-	fmt.Println("Content-Type: ", ct)
-
 	// Strip charset from Content-Type (like `application/json; charset=UTF-8`)
 	if idx := strings.IndexRune(ct, ';'); idx >= 0 {
 		ct = ct[:idx]
 	}
-
-	fmt.Println("Content-Type: ", ct)
-	fmt.Println(ct, hasCodec(ct, protoCodecs), hasCodec(ct, jsonCodecs))
 
 	// micro client
 	c := h.opts.Client
@@ -201,7 +195,7 @@ func (h *rpcHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		var request json.RawMessage
 		// if the extracted payload isn't empty lets use it
 		if len(br) > 0 {
-			request = json.RawMessage(br)
+			request = br
 		}
 
 		// create request/response
@@ -213,8 +207,6 @@ func (h *rpcHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			&request,
 			client.WithContentType(ct),
 		)
-
-		fmt.Println("default request", ct, req.ContentType())
 
 		// make the call
 		if err := c.Call(cx, req, &response, client.WithSelectOption(so)); err != nil {

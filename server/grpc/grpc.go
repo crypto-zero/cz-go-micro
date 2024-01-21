@@ -239,11 +239,10 @@ func (g *grpcServer) handler(srv interface{}, stream grpc.ServerStream) error {
 
 	// get content type
 	ct := defaultContentType
-
-	if ctype, ok := md["x-content-type"]; ok {
+	if ctype, ok := md["content-type"]; ok {
 		ct = ctype
 	}
-	if ctype, ok := md["content-type"]; ok {
+	if ctype, ok := md["x-content-type"]; ok {
 		ct = ctype
 	}
 
@@ -342,7 +341,9 @@ func (g *grpcServer) handler(srv interface{}, stream grpc.ServerStream) error {
 	return g.processStream(stream, service, mtype, ct, ctx)
 }
 
-func (g *grpcServer) processRequest(stream grpc.ServerStream, service *service, mtype *methodType, ct string, ctx context.Context) error {
+func (g *grpcServer) processRequest(
+	stream grpc.ServerStream, service *service, mtype *methodType, ct string, ctx context.Context,
+) error {
 	for {
 		var argv, replyv reflect.Value
 
@@ -399,7 +400,11 @@ func (g *grpcServer) processRequest(stream grpc.ServerStream, service *service, 
 					err = errors.InternalServerError("go.micro.server", "panic recovered: %v", r)
 				}
 			}()
-			returnValues = function.Call([]reflect.Value{service.rcvr, mtype.prepareContext(ctx), reflect.ValueOf(argv.Interface()), reflect.ValueOf(rsp)})
+			returnValues = function.Call(
+				[]reflect.Value{
+					service.rcvr, mtype.prepareContext(ctx), reflect.ValueOf(argv.Interface()), reflect.ValueOf(rsp),
+				},
+			)
 
 			// The return value for the method is an error.
 			if rerr := returnValues[0].Interface(); rerr != nil {
@@ -452,7 +457,9 @@ func (g *grpcServer) processRequest(stream grpc.ServerStream, service *service, 
 	}
 }
 
-func (g *grpcServer) processStream(stream grpc.ServerStream, service *service, mtype *methodType, ct string, ctx context.Context) error {
+func (g *grpcServer) processStream(
+	stream grpc.ServerStream, service *service, mtype *methodType, ct string, ctx context.Context,
+) error {
 	opts := g.opts
 
 	r := &rpcRequest{
@@ -691,9 +698,11 @@ func (g *grpcServer) Register() error {
 			subscriberList = append(subscriberList, e)
 		}
 	}
-	sort.Slice(subscriberList, func(i, j int) bool {
-		return subscriberList[i].topic > subscriberList[j].topic
-	})
+	sort.Slice(
+		subscriberList, func(i, j int) bool {
+			return subscriberList[i].topic > subscriberList[j].topic
+		},
+	)
 
 	endpoints := make([]*registry.Endpoint, 0, len(handlerList)+len(subscriberList))
 	for _, n := range handlerList {

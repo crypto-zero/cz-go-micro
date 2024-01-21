@@ -99,7 +99,10 @@ func (g *grpcClient) next(request client.Request, opts client.CallOptions) (sele
 	return next, nil
 }
 
-func (g *grpcClient) call(ctx context.Context, node *registry.Node, req client.Request, rsp interface{}, opts client.CallOptions) error {
+func (g *grpcClient) call(
+	ctx context.Context, node *registry.Node, req client.Request, rsp interface{},
+	opts client.CallOptions,
+) error {
 	address := node.Address
 
 	header := make(map[string]string)
@@ -114,12 +117,11 @@ func (g *grpcClient) call(ctx context.Context, node *registry.Node, req client.R
 	header["timeout"] = fmt.Sprintf("%d", opts.RequestTimeout)
 	// set the content type for the request
 	header["x-content-type"] = req.ContentType()
-
-	headersInterface := make(map[string]interface{})
+	headerInterface := make(map[string]interface{})
 	for k, v := range header {
-		headersInterface[k] = v
+		headerInterface[k] = v
 	}
-	headerProto, err := structpb.NewStruct(headersInterface)
+	headerProto, err := structpb.NewStruct(headerInterface)
 	if err != nil {
 		return errors.InternalServerError("go.micro.client", err.Error())
 	}
@@ -188,7 +190,10 @@ func (g *grpcClient) call(ctx context.Context, node *registry.Node, req client.R
 	return grr
 }
 
-func (g *grpcClient) stream(ctx context.Context, node *registry.Node, req client.Request, rsp interface{}, opts client.CallOptions) error {
+func (g *grpcClient) stream(
+	ctx context.Context, node *registry.Node, req client.Request, rsp interface{},
+	opts client.CallOptions,
+) error {
 	address := node.Address
 	header := make(map[string]string)
 	if md, ok := metadata.FromContext(ctx); ok {
@@ -204,12 +209,11 @@ func (g *grpcClient) stream(ctx context.Context, node *registry.Node, req client
 	}
 	// set the content type for the request
 	header["x-content-type"] = req.ContentType()
-
-	headersInterface := make(map[string]interface{})
+	headerInterface := make(map[string]interface{})
 	for k, v := range header {
-		headersInterface[k] = v
+		headerInterface[k] = v
 	}
-	headerProto, err := structpb.NewStruct(headersInterface)
+	headerProto, err := structpb.NewStruct(headerInterface)
 	if err != nil {
 		return errors.InternalServerError("go.micro.client", err.Error())
 	}
@@ -398,7 +402,9 @@ func (g *grpcClient) NewMessage(topic string, msg interface{}, opts ...client.Me
 	return newGRPCEvent(topic, msg, g.opts.ContentType, opts...)
 }
 
-func (g *grpcClient) NewRequest(service, method string, req interface{}, reqOpts ...client.RequestOption) client.Request {
+func (g *grpcClient) NewRequest(
+	service, method string, req interface{}, reqOpts ...client.RequestOption,
+) client.Request {
 	return newGRPCRequest(service, method, req, g.opts.ContentType, reqOpts...)
 }
 
@@ -561,7 +567,9 @@ func (g *grpcClient) Stream(ctx context.Context, req client.Request, opts ...cli
 			if err == selector.ErrNotFound {
 				return nil, errors.InternalServerError("go.micro.client", "service %s: %s", service, err.Error())
 			}
-			return nil, errors.InternalServerError("go.micro.client", "error selecting %s node: %s", service, err.Error())
+			return nil, errors.InternalServerError(
+				"go.micro.client", "error selecting %s node: %s", service, err.Error(),
+			)
 		}
 
 		// make the call
@@ -657,10 +665,12 @@ func (g *grpcClient) Publish(ctx context.Context, p client.Message, opts ...clie
 		topic = options.Exchange
 	}
 
-	return g.opts.Broker.Publish(topic, &broker.Message{
-		Header: md,
-		Body:   body,
-	}, broker.PublishContext(options.Context))
+	return g.opts.Broker.Publish(
+		topic, &broker.Message{
+			Header: md,
+			Body:   body,
+		}, broker.PublishContext(options.Context),
+	)
 }
 
 func (g *grpcClient) String() string {
