@@ -111,6 +111,7 @@ func (h *rpcHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println("Content-Type: ", ct)
+	fmt.Println(ct, hasCodec(ct, protoCodecs), hasCodec(ct, jsonCodecs))
 
 	// micro client
 	c := h.opts.Client
@@ -212,6 +213,9 @@ func (h *rpcHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			&request,
 			client.WithContentType(ct),
 		)
+
+		fmt.Println("default request", ct, req.ContentType())
+
 		// make the call
 		if err := c.Call(cx, req, &response, client.WithSelectOption(so)); err != nil {
 			writeError(w, r, err)
@@ -235,8 +239,8 @@ func (rh *rpcHandler) String() string {
 }
 
 func hasCodec(ct string, codecs []string) bool {
-	for _, codec := range codecs {
-		if ct == codec {
+	for _, code := range codecs {
+		if ct == code {
 			return true
 		}
 	}
